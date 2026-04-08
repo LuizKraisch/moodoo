@@ -10,7 +10,7 @@ class HomePageFooter extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          top: BorderSide(color: Color(0xFFFFFFFF), width: 1),
+          top: BorderSide(color: Theme.of(context).colorScheme.primary, width: 1),
         ),
       ),
       padding: const EdgeInsets.fromLTRB(30, 16, 30, 40),

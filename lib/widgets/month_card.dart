@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/widgets/grade_card.dart';
 
 class MonthCard extends StatelessWidget {
   const MonthCard({
@@ -10,7 +11,7 @@ class MonthCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.secondary,
+        color: Theme.of(context).colorScheme.primary,
         borderRadius: BorderRadius.circular(22),
       ),
       child: Padding(
@@ -52,15 +53,7 @@ class MonthCard extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Color(0xFF00B050),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Center(child: Text("A", style: Theme.of(context).textTheme.displaySmall)),
-                )
+                GradeCard(grade: "A"),
               ],
             ),
           ],

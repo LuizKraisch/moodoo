@@ -14,7 +14,7 @@ class HomePage extends StatelessWidget {
         children: [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(30, 80, 30, 0),
+              padding: const EdgeInsets.fromLTRB(25, 80, 25, 0),
               child: Column(
                 children: [
                   HomePageHeader(),
