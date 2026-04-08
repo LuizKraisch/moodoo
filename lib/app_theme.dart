@@ -11,8 +11,6 @@ const _darkCard = Color(0xFFFFFFFF);
 const _darkDisabled = Color(0xFF272727);
 const _darkSubtitle = Color(0xFFB8B8B8);
 
-const _moodCardA = Color(0xFF00B050);
-
 // COLORS
 
 final lightTheme = ThemeData(
@@ -27,7 +25,7 @@ final lightTheme = ThemeData(
   ),
   cardColor: _lightCard,
   disabledColor: _lightDisabled,
-  textTheme: _applyColors(_buildTextTheme(), primary: _lightCard, subtitle: _lightSubtitle),
+  textTheme: _applyColors(_buildTextTheme(), primary: _lightCard, subtitle: _lightSubtitle, displaySmall: _lightBackground, tertiary: _lightSubtitle),
 );
 
 final darkTheme = ThemeData(
@@ -42,7 +40,7 @@ final darkTheme = ThemeData(
   ),
   cardColor: _darkCard,
   disabledColor: _darkDisabled,
-  textTheme: _applyColors(_buildTextTheme(), primary: _darkCard, subtitle: _darkSubtitle),
+  textTheme: _applyColors(_buildTextTheme(), primary: _darkCard, subtitle: _darkSubtitle, displaySmall: _darkBackground, tertiary: _darkSubtitle),
 );
 
 extension AppColors on ColorScheme {
@@ -54,7 +52,7 @@ extension AppColors on ColorScheme {
 
 TextTheme _buildTextTheme() => TextTheme(
       displayLarge: GoogleFonts.funnelDisplay(
-        fontSize: 40,
+        fontSize: 30,
         fontWeight: FontWeight.bold,
       ),
       displayMedium: GoogleFonts.funnelDisplay(),
@@ -91,7 +89,12 @@ TextTheme _buildTextTheme() => TextTheme(
       labelSmall: GoogleFonts.funnelDisplay(),
     );
 
-TextTheme _applyColors(TextTheme base, {required Color primary, required Color subtitle}) =>
+TextTheme _applyColors(TextTheme base, {required Color primary, required Color subtitle, required Color displaySmall, required Color tertiary}) =>
     base
         .apply(bodyColor: primary, displayColor: primary, decorationColor: subtitle)
-        .copyWith(titleMedium: base.titleMedium!.copyWith(color: subtitle));
+        .copyWith(
+          titleMedium: base.titleMedium!.copyWith(color: subtitle),
+          titleSmall: base.titleSmall!.copyWith(color: subtitle),
+          displaySmall: base.displaySmall!.copyWith(color: displaySmall),
+          headlineSmall: base.headlineSmall!.copyWith(color: tertiary),
+        );
