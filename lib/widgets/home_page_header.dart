@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/pages/settings_page.dart';
 
 class HomePageHeader extends StatelessWidget {
   const HomePageHeader({
@@ -24,11 +25,17 @@ class HomePageHeader extends StatelessWidget {
             ),
           ],
         ),
-        CircleAvatar(
-          radius: 30,
-          backgroundImage: NetworkImage("https://caricom.org/wp-content/uploads/Floyd-Morris-Remake-1024x879-1.jpg"),
-          onBackgroundImageError: (_, _) {},
-          backgroundColor: Colors.transparent,
+        GestureDetector(
+          onTap: () => Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const SettingsPage()),
+          ),
+          child: CircleAvatar(
+            radius: 28,
+            backgroundImage: NetworkImage("https://caricom.org/wp-content/uploads/Floyd-Morris-Remake-1024x879-1.jpg"),
+            onBackgroundImageError: (_, _) {},
+            backgroundColor: Colors.transparent,
+          ),
         ),
       ],
     );

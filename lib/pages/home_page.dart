@@ -20,7 +20,7 @@ class HomePage extends StatelessWidget {
                   HomePageHeader(),
                   SizedBox(height: 20),
                   YearDropdown(),
-                  SizedBox(height: 20),
+                  SizedBox(height: 8),
                   Expanded(
                     child: GridView.count(
                       padding: const EdgeInsets.fromLTRB(0, 0, 0, 20),
