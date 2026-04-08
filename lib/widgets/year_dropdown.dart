@@ -14,7 +14,7 @@ class YearDropdown extends StatelessWidget {
         final currentYear = DateTime.now().year.toString();
 
         return Container(
-          width: 100,
+          width: 110,
           height: 40,
           decoration: BoxDecoration(
             color: bgColor,
