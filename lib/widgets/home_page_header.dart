@@ -27,6 +27,7 @@ class HomePageHeader extends StatelessWidget {
         CircleAvatar(
           radius: 30,
           backgroundImage: NetworkImage("https://caricom.org/wp-content/uploads/Floyd-Morris-Remake-1024x879-1.jpg"),
+          onBackgroundImageError: (_, _) {},
           backgroundColor: Colors.transparent,
         ),
       ],
