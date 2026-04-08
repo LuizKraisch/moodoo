@@ -15,7 +15,7 @@ class MonthCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(22),
       ),
       child: Padding(
-        padding: EdgeInsets.all(12),
+        padding: EdgeInsets.all(16),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.start,

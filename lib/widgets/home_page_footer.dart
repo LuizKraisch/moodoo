@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/widgets/tap_bounce.dart';
 
 class HomePageFooter extends StatelessWidget {
-  const HomePageFooter({
-    super.key,
-  });
+  const HomePageFooter({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +23,16 @@ class HomePageFooter extends StatelessWidget {
               style: TextTheme.of(context).headlineSmall,
             ),
           ),
-          FilledButton(
-            onPressed: () {},
-            style: FilledButton.styleFrom(
-              shape: StadiumBorder(),
-              textStyle: TextTheme.of(context).headlineSmall,
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+          TapBounce(
+            child: FilledButton(
+              onPressed: () {},
+              style: FilledButton.styleFrom(
+                shape: StadiumBorder(),
+                textStyle: TextTheme.of(context).headlineSmall,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
+              ),
+              child: Text('add mood'),
             ),
-            child: Text('add mood'),
           ),
         ],
       ),

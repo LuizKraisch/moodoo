@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moodoo/pages/settings_page.dart';
+import 'package:moodoo/widgets/tap_bounce.dart';
 
 class HomePageHeader extends StatelessWidget {
   const HomePageHeader({
@@ -25,7 +26,7 @@ class HomePageHeader extends StatelessWidget {
             ),
           ],
         ),
-        GestureDetector(
+        TapBounce(
           onTap: () => Navigator.push(
             context,
             MaterialPageRoute(builder: (_) => const SettingsPage()),
