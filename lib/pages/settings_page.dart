@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:moodoo/theme_preferences.dart' show themeModeNotifier, saveTheme;
+import 'package:moodoo/theme_preferences.dart'
+    show themeModeNotifier, saveTheme;
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -11,43 +12,38 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
+        scrolledUnderElevation: 0,
         titleSpacing: 15,
         centerTitle: false,
-        title: Row(
-          children: [
-            GestureDetector(
-              onTap: () => Navigator.of(context).pop(),
-              child: Icon(
-                Icons.arrow_back_ios_new_rounded,
-                size: 35,
-                color: Theme.of(context).textTheme.titleMedium?.color,
+        title: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Row(
+            children: [
+              GestureDetector(
+                onTap: () => Navigator.of(context).pop(),
+                child: Icon(
+                  Icons.arrow_back_ios_new_rounded,
+                  size: 35,
+                  color: Theme.of(context).textTheme.titleMedium?.color,
+                ),
               ),
-            ),
-            SizedBox(width: 5),
-            Text(
-              'settings',
-              style: Theme.of(context).textTheme.displayLarge,
-            ),
-          ],
+              SizedBox(width: 5),
+              Text('settings', style: Theme.of(context).textTheme.displayLarge),
+            ],
+          ),
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+        padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: 10),
-            Text(
-              "theme",
-              style: Theme.of(context).textTheme.headlineMedium,
-            ),
+            Text("theme", style: Theme.of(context).textTheme.headlineMedium),
             SizedBox(height: 5),
             Row(
               children: [
-                Text(
-                  "light",
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
+                Text("light", style: Theme.of(context).textTheme.titleSmall),
                 SizedBox(width: 5),
                 Switch(
                   value: isDark,
@@ -58,10 +54,7 @@ class SettingsPage extends StatelessWidget {
                   },
                 ),
                 SizedBox(width: 5),
-                Text(
-                  "dark",
-                  style: Theme.of(context).textTheme.titleSmall,
-                ),
+                Text("dark", style: Theme.of(context).textTheme.titleSmall),
               ],
             ),
           ],

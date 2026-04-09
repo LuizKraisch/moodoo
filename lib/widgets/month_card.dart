@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:moodoo/widgets/grade_card.dart';
 
 class MonthCard extends StatelessWidget {
-  const MonthCard({
-    super.key,
-  });
+  const MonthCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(8),
+      margin: EdgeInsets.zero,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.primary,
-        borderRadius: BorderRadius.circular(22),
+        borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(
         padding: EdgeInsets.all(16),
@@ -23,19 +21,22 @@ class MonthCard extends StatelessWidget {
             Wrap(
               spacing: 5,
               runSpacing: 5,
-              children: List.generate(4, (index) => Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                  color: const [
-                    Color(0xFF8258FF),
-                    Color(0xFFFFC000),
-                    Color(0xFF00B050),
-                    Color(0xFF92D050),
-                  ][index],
-                  borderRadius: BorderRadius.circular(12),
+              children: List.generate(
+                4,
+                (index) => Container(
+                  width: 40,
+                  height: 40,
+                  decoration: BoxDecoration(
+                    color: const [
+                      Color(0xFF8258FF),
+                      Color(0xFFFFC000),
+                      Color(0xFF00B050),
+                      Color(0xFF92D050),
+                    ][index],
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
-              )),
+              ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -43,10 +44,7 @@ class MonthCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      '2026',
-                      style: Theme.of(context).textTheme.titleSmall,
-                    ),
+                    Text('2026', style: Theme.of(context).textTheme.titleSmall),
                     Text(
                       'january',
                       style: Theme.of(context).textTheme.displaySmall,
