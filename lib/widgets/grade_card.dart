@@ -4,18 +4,24 @@ class GradeCard extends StatelessWidget {
   const GradeCard({
     super.key,
     this.grade,
+    this.size = 40,
+    this.borderRadius = 12,
+    this.fontSize,
   }) : assert(
-          grade == null ||
-              grade == 'S' ||
-              grade == 'A' ||
-              grade == 'B' ||
-              grade == 'C' ||
-              grade == 'D' ||
-              grade == 'F',
-          'grade must be one of: S, A, B, C, D, F, or null',
-        );
+         grade == null ||
+             grade == 'S' ||
+             grade == 'A' ||
+             grade == 'B' ||
+             grade == 'C' ||
+             grade == 'D' ||
+             grade == 'F',
+         'grade must be one of: S, A, B, C, D, F, or null',
+       );
 
   final String? grade;
+  final double size;
+  final double borderRadius;
+  final double? fontSize;
 
   static const _colors = {
     'S': Color(0xFF8258FF),
@@ -31,16 +37,19 @@ class GradeCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 40,
-      height: 40,
+      width: size,
+      height: size,
       decoration: BoxDecoration(
         color: grade != null ? _colors[grade] : _nullColor,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: Center(
         child: Text(
           grade ?? '?',
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(color: Color(0xFFFFFFFF)),
+          style: Theme.of(context).textTheme.displaySmall?.copyWith(
+            color: Color(0xFFFFFFFF),
+            fontSize: fontSize,
+          ),
         ),
       ),
     );
