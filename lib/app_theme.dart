@@ -6,9 +6,9 @@ const _lightCard = Color(0xFF343434);
 const _lightDisabled = Color(0xFFC4C4C4);
 const _lightSubtitle = Color(0xFFB8B8B8);
 
-const _darkBackground = Color(0xFF343434);
-const _darkCard = Color(0xFFFFFFFF);
-const _darkDisabled = Color(0xFF272727);
+const _darkBackground = Color(0xFF1C1C1C);
+const _darkCard = Color(0xFF272727);
+const _darkDisabled = Color(0xFF131313);
 const _darkSubtitle = Color(0xFFB8B8B8);
 
 // COLORS
@@ -48,9 +48,9 @@ final darkTheme = ThemeData(
   disabledColor: _darkDisabled,
   textTheme: _applyColors(
     _buildTextTheme(),
-    primary: _darkCard,
+    primary: _lightBackground,
     subtitle: _darkSubtitle,
-    displaySmall: _darkBackground,
+    displaySmall: _lightBackground,
     tertiary: _darkSubtitle,
   ),
 );

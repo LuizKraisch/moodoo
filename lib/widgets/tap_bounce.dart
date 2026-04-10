@@ -49,6 +49,7 @@ class _TapBounceState extends State<TapBounce>
   }
 
   void _handleTapDown(TapDownDetails _) {
+    if (widget.onTap == null) return;
     _isPressed = true;
     _controller.value = 0;
     _controller.animateTo(0.3, duration: const Duration(milliseconds: 120)).then(
