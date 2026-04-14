@@ -36,7 +36,26 @@ class DayExpandedPanel extends StatelessWidget {
                   onTap: () => showModalBottomSheet(
                     context: context,
                     isScrollControlled: true,
-                    builder: (_) => const AddMoodSheet(),
+                    useSafeArea: true,
+                    backgroundColor: Colors.transparent,
+                    builder: (_) => TweenAnimationBuilder<double>(
+                      tween: Tween(begin: 0.85, end: 1.0),
+                      duration: const Duration(milliseconds: 600),
+                      curve: Curves.elasticOut,
+                      builder: (context, scale, child) => Transform.scale(
+                        scale: scale,
+                        alignment: Alignment.bottomCenter,
+                        child: child,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Material(
+                          color: Theme.of(context).scaffoldBackgroundColor,
+                          borderRadius: BorderRadius.circular(24),
+                          child: const AddMoodSheet(),
+                        ),
+                      ),
+                    ),
                   ),
                   child: FilledButton(
                     onPressed: () {},

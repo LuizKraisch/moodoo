@@ -26,7 +26,7 @@ class _AddMoodSheetState extends State<AddMoodSheet> {
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(24, 14, 24, 24 + bottomPadding),
+      padding: EdgeInsets.fromLTRB(18, 14, 18, 24 + bottomPadding),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -106,9 +106,13 @@ class _AddMoodSheetState extends State<AddMoodSheet> {
               child: FilledButton(
                 onPressed: _selected == null ? null : () {},
                 style: FilledButton.styleFrom(
-                  backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
+                  backgroundColor: Theme.of(
+                    context,
+                  ).textTheme.displayLarge!.color!,
                   foregroundColor: Theme.of(context).colorScheme.surface,
-                  disabledBackgroundColor: Theme.of(context).textTheme.displayLarge!.color!.withValues(alpha: 0.15),
+                  disabledBackgroundColor: Theme.of(
+                    context,
+                  ).textTheme.displayLarge!.color!.withValues(alpha: 0.15),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(100),

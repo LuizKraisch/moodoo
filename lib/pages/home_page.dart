@@ -15,6 +15,34 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _cardKeys = List.generate(12, (_) => GlobalKey());
+  final _scrollController = ScrollController();
+  bool _headerVisible = true;
+  double _lastScrollOffset = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    final offset = _scrollController.offset;
+    final isScrollingDown = offset > _lastScrollOffset;
+    _lastScrollOffset = offset;
+
+    if (isScrollingDown && _headerVisible && offset > 10) {
+      setState(() => _headerVisible = false);
+    } else if (!isScrollingDown && !_headerVisible) {
+      setState(() => _headerVisible = true);
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +56,7 @@ class _HomePageState extends State<HomePage> {
                 // YearDropdown(), --- When more years are added, this will be used to select the year to display ---
                 Expanded(
                   child: GridView.count(
+                    controller: _scrollController,
                     padding: const EdgeInsets.fromLTRB(0, 160, 0, 140),
                     crossAxisCount: 2,
                     crossAxisSpacing: 16,
@@ -66,7 +95,22 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          Positioned(top: 0, left: 0, right: 0, child: HomePageHeader()),
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: AnimatedSlide(
+              offset: _headerVisible ? Offset.zero : const Offset(0, -1),
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              child: AnimatedOpacity(
+                opacity: _headerVisible ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                child: HomePageHeader(),
+              ),
+            ),
+          ),
           Positioned(bottom: 0, left: 0, right: 0, child: HomePageFooter()),
         ],
       ),
