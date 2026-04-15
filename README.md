@@ -14,6 +14,8 @@
 
 this project is a **Flutter** application.
 
+to start: download `google-services.json` and `GoogleService-Info`.plist from your Firebase Console, copy `.env.json.example` → `.env.json` and fill in the values.
+
 more info about how setting everything up will be added soon. stay tuned!
 
 ## license
