@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:moodoo/widgets/add_mood_sheet.dart';
+import 'package:moodoo/widgets/moodoo_button.dart';
+import 'package:moodoo/widgets/moodoo_modal.dart';
+import 'package:moodoo/widgets/moodoo_text.dart';
 import 'package:moodoo/widgets/grade_card.dart';
-import 'package:moodoo/widgets/tap_bounce.dart';
 
 class DayExpandedPanel extends StatelessWidget {
   const DayExpandedPanel({super.key});
@@ -25,55 +27,23 @@ class DayExpandedPanel extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    MoodooText(
                       'sunday, march 1',
-                      style: Theme.of(context).textTheme.titleSmall,
+                      variant: MoodooTextVariant.titleSmall,
                     ),
-                    Text('2026', style: Theme.of(context).textTheme.titleSmall),
+                    MoodooText('2026', variant: MoodooTextVariant.titleSmall),
                   ],
                 ),
-                TapBounce(
-                  onTap: () => showModalBottomSheet(
-                    context: context,
-                    isScrollControlled: true,
-                    useSafeArea: true,
-                    backgroundColor: Colors.transparent,
-                    builder: (_) => TweenAnimationBuilder<double>(
-                      tween: Tween(begin: 0.85, end: 1.0),
-                      duration: const Duration(milliseconds: 600),
-                      curve: Curves.elasticOut,
-                      builder: (context, scale, child) => Transform.scale(
-                        scale: scale,
-                        alignment: Alignment.bottomCenter,
-                        child: child,
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Material(
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                          borderRadius: BorderRadius.circular(24),
-                          child: const AddMoodSheet(),
-                        ),
-                      ),
-                    ),
-                  ),
-                  child: FilledButton(
-                    onPressed: () {},
-                    style: FilledButton.styleFrom(
-                      shape: StadiumBorder(),
-                      backgroundColor:
-                          Theme.of(context).brightness == Brightness.dark
-                          ? const Color(0xFFFFFFFF)
-                          : Theme.of(context).colorScheme.surface,
-                      foregroundColor: Theme.of(context).colorScheme.primary,
-                      textStyle: TextTheme.of(context).labelMedium,
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 24,
-                        vertical: 14,
-                      ),
-                    ),
-                    child: const Text('edit mood'),
-                  ),
+                MoodooButton(
+                  text: 'edit mood',
+                  onTap: () => showMoodooModal(context, title: 'how are you feeling today?', child: const AddMoodSheet()),
+                  backgroundColor:
+                      Theme.of(context).brightness == Brightness.dark
+                      ? const Color(0xFFFFFFFF)
+                      : Theme.of(context).colorScheme.surface,
+                  foregroundColor: Theme.of(context).colorScheme.primary,
+                  textStyle: TextTheme.of(context).labelMedium,
+                  fullWidth: false,
                 ),
               ],
             ),
@@ -86,20 +56,18 @@ class DayExpandedPanel extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      MoodooText(
                         '"Feeling good today, got some things done and had a nice walk outside."',
-                        style: Theme.of(context).textTheme.titleSmall?.copyWith(
-                          color: Theme.of(context).brightness == Brightness.dark
-                              ? const Color(0xFFFFFFFF)
-                              : Theme.of(context).colorScheme.surface,
-                        ),
+                        variant: MoodooTextVariant.titleSmall,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? const Color(0xFFFFFFFF)
+                            : Theme.of(context).colorScheme.surface,
                       ),
                       const SizedBox(height: 4),
-                      Text(
+                      MoodooText(
                         'added on march 1, 2026 at 2:48 PM',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodySmall?.copyWith(fontSize: 12),
+                        variant: MoodooTextVariant.bodySmall,
+                        fontSize: 12,
                       ),
                     ],
                   ),

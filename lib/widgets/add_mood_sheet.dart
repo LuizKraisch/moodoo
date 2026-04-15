@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/widgets/moodoo_button.dart';
+import 'package:moodoo/widgets/moodoo_text.dart';
 import 'package:moodoo/widgets/grade_card.dart';
 import 'package:moodoo/widgets/tap_bounce.dart';
 
@@ -26,27 +28,11 @@ class _AddMoodSheetState extends State<AddMoodSheet> {
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
 
     return Padding(
-      padding: EdgeInsets.fromLTRB(18, 14, 18, 24 + bottomPadding),
+      padding: EdgeInsets.fromLTRB(0, 20, 0, 24 + bottomPadding),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Icon(
-              Icons.keyboard_arrow_down_rounded,
-              size: 35,
-              color: Theme.of(context).textTheme.titleMedium?.color,
-            ),
-          ),
-          const SizedBox(height: 10),
-          Text(
-            "how are you feeling today?",
-            style: Theme.of(
-              context,
-            ).textTheme.displayLarge?.copyWith(fontSize: 22),
-          ),
-          const SizedBox(height: 20),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: _grades.map((grade) {
@@ -77,7 +63,7 @@ class _AddMoodSheetState extends State<AddMoodSheet> {
             }).toList(),
           ),
           const SizedBox(height: 10),
-          Text("march 29, 2026", style: Theme.of(context).textTheme.titleSmall),
+          MoodooText("march 29, 2026", variant: MoodooTextVariant.titleSmall),
           const SizedBox(height: 20),
           TextField(
             controller: _controller,
@@ -98,30 +84,16 @@ class _AddMoodSheetState extends State<AddMoodSheet> {
             ),
           ),
           const SizedBox(height: 16),
-          TapBounce(
-            peakScale: 1.04,
+          MoodooButton(
+            text: 'save mood',
             onTap: _selected == null ? null : () => Navigator.pop(context),
-            child: SizedBox(
-              width: double.infinity,
-              child: FilledButton(
-                onPressed: _selected == null ? null : () {},
-                style: FilledButton.styleFrom(
-                  backgroundColor: Theme.of(
-                    context,
-                  ).textTheme.displayLarge!.color!,
-                  foregroundColor: Theme.of(context).colorScheme.surface,
-                  disabledBackgroundColor: Theme.of(
-                    context,
-                  ).textTheme.displayLarge!.color!.withValues(alpha: 0.15),
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(100),
-                  ),
-                  textStyle: Theme.of(context).textTheme.headlineSmall,
-                ),
-                child: const Text('save mood'),
-              ),
-            ),
+            backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
+            foregroundColor: Theme.of(context).colorScheme.surface,
+            disabledBackgroundColor: Theme.of(
+              context,
+            ).textTheme.displayLarge!.color!.withValues(alpha: 0.15),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+            bouncePeakScale: 1.04,
           ),
           const SizedBox(height: 16),
         ],

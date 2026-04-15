@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/widgets/moodoo_text.dart';
 import 'package:moodoo/widgets/grade_card.dart';
 import 'package:moodoo/widgets/tap_bounce.dart';
 
@@ -24,15 +25,14 @@ class DayCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('monday', style: Theme.of(context).textTheme.titleSmall),
+              MoodooText('monday', variant: MoodooTextVariant.titleSmall),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  MoodooText(
                     '1',
-                    style: Theme.of(
-                      context,
-                    ).textTheme.displaySmall?.copyWith(fontSize: 30),
+                    variant: MoodooTextVariant.displaySmall,
+                    fontSize: 30,
                   ),
                   GradeCard(grade: "A"),
                 ],

@@ -9,8 +9,8 @@ class AuthService {
   }
 
   Future<UserCredential> signInWithGoogle() async {
-    final GoogleSignInAccount googleUser =
-        await GoogleSignIn.instance.authenticate();
+    final GoogleSignInAccount googleUser = await GoogleSignIn.instance
+        .authenticate();
 
     final String? idToken = googleUser.authentication.idToken;
 
@@ -21,7 +21,7 @@ class AuthService {
     return await _auth.signInWithCredential(credential);
   }
 
-  Future<void> signOut() async {
+  Future<void> signOutFromGoogle() async {
     await GoogleSignIn.instance.signOut();
     await _auth.signOut();
   }

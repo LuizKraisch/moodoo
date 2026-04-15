@@ -1,6 +1,8 @@
 import 'dart:ui';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:moodoo/pages/settings_page.dart';
+import 'package:moodoo/widgets/moodoo_text.dart';
 import 'package:moodoo/widgets/tap_bounce.dart';
 
 class HomePageHeader extends StatelessWidget {
@@ -9,6 +11,9 @@ class HomePageHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final topPadding = MediaQuery.of(context).padding.top;
+    final user = FirebaseAuth.instance.currentUser;
+    final firstName = (user?.displayName ?? '').split(' ').first.toLowerCase();
+    final photoUrl = user?.photoURL;
 
     return ClipRect(
       child: BackdropFilter(
@@ -28,17 +33,15 @@ class HomePageHeader extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        'hi, kyle!',
-                        style: Theme.of(
-                          context,
-                        ).textTheme.displayLarge?.copyWith(fontSize: 25),
+                      MoodooText(
+                        'hi, $firstName!',
+                        variant: MoodooTextVariant.displayLarge,
+                        fontSize: 25,
                       ),
-                      Text(
+                      MoodooText(
                         "here's your mood overview",
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(fontSize: 18),
+                        variant: MoodooTextVariant.titleMedium,
+                        fontSize: 18,
                       ),
                     ],
                   ),
@@ -49,11 +52,21 @@ class HomePageHeader extends StatelessWidget {
                     ),
                     child: CircleAvatar(
                       radius: 28,
-                      backgroundImage: NetworkImage(
-                        "https://caricom.org/wp-content/uploads/Floyd-Morris-Remake-1024x879-1.jpg",
-                      ),
-                      onBackgroundImageError: (_, _) {},
-                      backgroundColor: Colors.transparent,
+                      backgroundImage: photoUrl != null
+                          ? NetworkImage(photoUrl)
+                          : null,
+                      onBackgroundImageError: photoUrl != null
+                          ? (_, _) {}
+                          : null,
+                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      child: photoUrl == null
+                          ? Text(
+                              firstName.isNotEmpty
+                                  ? firstName[0].toUpperCase()
+                                  : '?',
+                              style: const TextStyle(color: Colors.white),
+                            )
+                          : null,
                     ),
                   ),
                 ],

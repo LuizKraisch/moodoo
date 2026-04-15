@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:moodoo/widgets/moodoo_text.dart';
 import 'package:moodoo/widgets/grade_card.dart';
 import 'package:moodoo/widgets/tap_bounce.dart';
 
@@ -40,17 +41,15 @@ class CalendarPageHeader extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          MoodooText(
                             'january',
-                            style: Theme.of(
-                              context,
-                            ).textTheme.displayLarge?.copyWith(fontSize: 25),
+                            variant: MoodooTextVariant.displayLarge,
+                            fontSize: 25,
                           ),
-                          Text(
+                          MoodooText(
                             '2026',
-                            style: Theme.of(
-                              context,
-                            ).textTheme.titleMedium?.copyWith(fontSize: 18),
+                            variant: MoodooTextVariant.titleMedium,
+                            fontSize: 18,
                           ),
                         ],
                       ),
@@ -66,9 +65,9 @@ class CalendarPageHeader extends StatelessWidget {
                         fontSize: 28,
                       ),
                       const SizedBox(height: 4),
-                      Text(
+                      MoodooText(
                         'average mood',
-                        style: Theme.of(context).textTheme.titleSmall,
+                        variant: MoodooTextVariant.titleSmall,
                       ),
                     ],
                   ),
