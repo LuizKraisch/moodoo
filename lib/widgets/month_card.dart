@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/widgets/moodoo_text.dart';
 import 'package:moodoo/widgets/grade_card.dart';
 
 class MonthCard extends StatelessWidget {
@@ -44,10 +45,10 @@ class MonthCard extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('2026', style: Theme.of(context).textTheme.titleSmall),
-                    Text(
+                    MoodooText('2026', variant: MoodooTextVariant.titleSmall),
+                    MoodooText(
                       'january',
-                      style: Theme.of(context).textTheme.displaySmall,
+                      variant: MoodooTextVariant.displaySmall,
                     ),
                   ],
                 ),

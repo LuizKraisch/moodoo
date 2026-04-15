@@ -1,10 +1,16 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:moodoo/widgets/add_mood_sheet.dart';
-import 'package:moodoo/widgets/tap_bounce.dart';
+import 'package:moodoo/widgets/moodoo_button.dart';
+import 'package:moodoo/widgets/moodoo_modal.dart';
+import 'package:moodoo/widgets/moodoo_text.dart';
 
 class HomePageFooter extends StatelessWidget {
   const HomePageFooter({super.key});
+
+  void _showAddMoodSheet(BuildContext context) {
+    showMoodooModal(context, title: 'how are you feeling today?', child: const AddMoodSheet());
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,52 +43,18 @@ class HomePageFooter extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: 160,
-                    child: Text(
+                    child: MoodooText(
                       "you didn't add your mood for today",
-                      style: TextTheme.of(
-                        context,
-                      ).headlineSmall?.copyWith(color: Colors.white),
+                      variant: MoodooTextVariant.headlineSmall,
+                      color: Colors.white,
                     ),
                   ),
-                  TapBounce(
-                    onTap: () => showModalBottomSheet(
-                      context: context,
-                      isScrollControlled: true,
-                      useSafeArea: true,
-                      backgroundColor: Colors.transparent,
-                      builder: (_) => TweenAnimationBuilder<double>(
-                        tween: Tween(begin: 0.85, end: 1.0),
-                        duration: const Duration(milliseconds: 600),
-                        curve: Curves.elasticOut,
-                        builder: (context, scale, child) => Transform.scale(
-                          scale: scale,
-                          alignment: Alignment.bottomCenter,
-                          child: child,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          child: Material(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                            borderRadius: BorderRadius.circular(24),
-                            child: const AddMoodSheet(),
-                          ),
-                        ),
-                      ),
-                    ),
-                    child: FilledButton(
-                      onPressed: () {},
-                      style: FilledButton.styleFrom(
-                        shape: StadiumBorder(),
-                        backgroundColor: Colors.white,
-                        foregroundColor: Colors.black,
-                        textStyle: TextTheme.of(context).headlineSmall,
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 24,
-                          vertical: 14,
-                        ),
-                      ),
-                      child: const Text('add mood'),
-                    ),
+                  MoodooButton(
+                    text: 'add mood',
+                    onTap: () => _showAddMoodSheet(context),
+                    backgroundColor: Colors.white,
+                    foregroundColor: Colors.black,
+                    fullWidth: false,
                   ),
                 ],
               ),

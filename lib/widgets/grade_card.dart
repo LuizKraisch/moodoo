@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/widgets/moodoo_text.dart';
 
 class GradeCard extends StatelessWidget {
   const GradeCard({
@@ -44,12 +45,11 @@ class GradeCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(borderRadius),
       ),
       child: Center(
-        child: Text(
+        child: MoodooText(
           grade ?? '?',
-          style: Theme.of(context).textTheme.displaySmall?.copyWith(
-            color: Color(0xFFFFFFFF),
-            fontSize: fontSize,
-          ),
+          variant: MoodooTextVariant.displaySmall,
+          color: const Color(0xFFFFFFFF),
+          fontSize: fontSize,
         ),
       ),
     );
