@@ -1,11 +1,16 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:moodoo/models/mood.dart';
+import 'package:moodoo/services/firebase_service.dart';
+import 'package:moodoo/services/mood_service.dart';
 import 'package:moodoo/widgets/calendar_page_header.dart';
 import 'package:moodoo/widgets/day_card.dart';
 import 'package:moodoo/widgets/day_expanded_panel.dart';
 
 class CalendarPage extends StatefulWidget {
-  const CalendarPage({super.key});
+  final MonthSummary summary;
+
+  const CalendarPage({super.key, required this.summary});
 
   @override
   State<CalendarPage> createState() => _CalendarPageState();
@@ -21,25 +26,21 @@ class _CalendarPageState extends State<CalendarPage>
   final _scrollController = ScrollController();
   bool _headerVisible = true;
   double _lastScrollOffset = 0;
+  late final Stream<List<Mood>> _moodsStream;
 
   static const int _crossAxisCount = 3;
-  static const int _itemCount = 30;
 
-  void _onScroll() {
-    final offset = _scrollController.offset;
-    final isScrollingDown = offset > _lastScrollOffset;
-    _lastScrollOffset = offset;
-
-    if (isScrollingDown && _headerVisible && offset > 10) {
-      setState(() => _headerVisible = false);
-    } else if (!isScrollingDown && !_headerVisible) {
-      setState(() => _headerVisible = true);
-    }
-  }
+  // Days in the month, e.g. DateTime(2026, 2+1, 0).day == 28
+  int get _daysInMonth =>
+      DateTime(widget.summary.year, widget.summary.month + 1, 0).day;
 
   @override
   void initState() {
     super.initState();
+    _moodsStream = FirebaseService().getMoodsForMonth(
+      widget.summary.month,
+      widget.summary.year,
+    );
     _scrollController.addListener(_onScroll);
     _expandController = AnimationController(
       duration: const Duration(milliseconds: 380),
@@ -55,6 +56,18 @@ class _CalendarPageState extends State<CalendarPage>
       curve: const Interval(0.0, 0.7, curve: Curves.easeOut),
       reverseCurve: const Interval(0.0, 0.5, curve: Curves.easeOut),
     );
+  }
+
+  void _onScroll() {
+    final offset = _scrollController.offset;
+    final isScrollingDown = offset > _lastScrollOffset;
+    _lastScrollOffset = offset;
+
+    if (isScrollingDown && _headerVisible && offset > 10) {
+      setState(() => _headerVisible = false);
+    } else if (!isScrollingDown && !_headerVisible) {
+      setState(() => _headerVisible = true);
+    }
   }
 
   @override
@@ -105,100 +118,132 @@ class _CalendarPageState extends State<CalendarPage>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                  height: _headerVisible ? 130 : 0,
-                ),
-                Expanded(
-                  child: SingleChildScrollView(
-                    controller: _scrollController,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 60, bottom: 20),
-                      child: Column(
-                        children: List.generate(
-                          ((_itemCount + _crossAxisCount - 1) / _crossAxisCount)
-                              .ceil(),
-                          (rowIndex) {
-                            final startIdx = rowIndex * _crossAxisCount;
-                            final endIdx = min(
-                              startIdx + _crossAxisCount,
-                              _itemCount,
-                            );
-                            final itemsInRow = endIdx - startIdx;
-                            final selectedInThisRow =
-                                _selectedIndex != null &&
-                                _selectedIndex! >= startIdx &&
-                                _selectedIndex! < endIdx;
+    final itemCount = _daysInMonth;
+    final rowCount =
+        ((itemCount + _crossAxisCount - 1) / _crossAxisCount).ceil();
 
-                            return Column(
-                              children: [
-                                Row(
-                                  key: selectedInThisRow ? _selectedRowKey : null,
-                                  children: [
-                                    ...List.generate(itemsInRow, (i) {
-                                      final idx = startIdx + i;
-                                      return Expanded(
-                                        child: AspectRatio(
-                                          aspectRatio: 1.0,
-                                          child: DayCard(
-                                            onTap: () => _onCardTap(idx),
+    return Scaffold(
+      body: StreamBuilder<List<Mood>>(
+        stream: _moodsStream,
+        builder: (context, snapshot) {
+          final moods = snapshot.data ?? widget.summary.moods;
+          final moodByDay = {
+            for (final mood in moods) mood.day.toDate().day: mood,
+          };
+          final liveSummary = MonthSummary(
+            month: widget.summary.month,
+            year: widget.summary.year,
+            averageScore: MoodService.averageGrade(moods),
+            moods: moods,
+          );
+
+          return Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    AnimatedContainer(
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeInOut,
+                      height: _headerVisible ? 130 : 0,
+                    ),
+                    Expanded(
+                      child: SingleChildScrollView(
+                        controller: _scrollController,
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 60, bottom: 20),
+                          child: Column(
+                            children: List.generate(rowCount, (rowIndex) {
+                              final startIdx = rowIndex * _crossAxisCount;
+                              final endIdx =
+                                  min(startIdx + _crossAxisCount, itemCount);
+                              final itemsInRow = endIdx - startIdx;
+                              final selectedInThisRow =
+                                  _selectedIndex != null &&
+                                      _selectedIndex! >= startIdx &&
+                                      _selectedIndex! < endIdx;
+
+                              return Column(
+                                children: [
+                                  Row(
+                                    key: selectedInThisRow
+                                        ? _selectedRowKey
+                                        : null,
+                                    children: [
+                                      ...List.generate(itemsInRow, (i) {
+                                        final dayIndex = startIdx + i;
+                                        final dayNumber = dayIndex + 1;
+                                        final date = DateTime(
+                                          widget.summary.year,
+                                          widget.summary.month,
+                                          dayNumber,
+                                        );
+                                        return Expanded(
+                                          child: AspectRatio(
+                                            aspectRatio: 1.0,
+                                            child: DayCard(
+                                              date: date,
+                                              mood: moodByDay[dayNumber],
+                                              onTap: () =>
+                                                  _onCardTap(dayIndex),
+                                            ),
                                           ),
-                                        ),
-                                      );
-                                    }),
-                                    ...List.generate(
-                                      _crossAxisCount - itemsInRow,
-                                      (_) => const Expanded(child: SizedBox()),
-                                    ),
-                                  ],
-                                ),
-                                if (selectedInThisRow)
-                                  SizeTransition(
-                                    sizeFactor: _sizeCurve,
-                                    axisAlignment: -1,
-                                    child: FadeTransition(
-                                      opacity: _fadeCurve,
-                                      child: const DayExpandedPanel(),
-                                    ),
+                                        );
+                                      }),
+                                      ...List.generate(
+                                        _crossAxisCount - itemsInRow,
+                                        (_) =>
+                                            const Expanded(child: SizedBox()),
+                                      ),
+                                    ],
                                   ),
-                              ],
-                            );
-                          },
+                                  if (selectedInThisRow)
+                                    SizeTransition(
+                                      sizeFactor: _sizeCurve,
+                                      axisAlignment: -1,
+                                      child: FadeTransition(
+                                        opacity: _fadeCurve,
+                                        child: DayExpandedPanel(
+                                          date: DateTime(
+                                            widget.summary.year,
+                                            widget.summary.month,
+                                            _selectedIndex! + 1,
+                                          ),
+                                          mood: moodByDay[_selectedIndex! + 1],
+                                        ),
+                                      ),
+                                    ),
+                                ],
+                              );
+                            }),
+                          ),
                         ),
                       ),
                     ),
+                  ],
+                ),
+              ),
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: AnimatedSlide(
+                  offset: _headerVisible ? Offset.zero : const Offset(0, -1),
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.easeInOut,
+                  child: AnimatedOpacity(
+                    opacity: _headerVisible ? 1.0 : 0.0,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    child: CalendarPageHeader(summary: liveSummary),
                   ),
                 ),
-              ],
-            ),
-          ),
-
-          Positioned(
-            top: 0,
-            left: 0,
-            right: 0,
-            child: AnimatedSlide(
-              offset: _headerVisible ? Offset.zero : const Offset(0, -1),
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-              child: AnimatedOpacity(
-                opacity: _headerVisible ? 1.0 : 0.0,
-                duration: const Duration(milliseconds: 300),
-                curve: Curves.easeInOut,
-                child: CalendarPageHeader(),
               ),
-            ),
-          ),
-        ],
+            ],
+          );
+        },
       ),
     );
   }

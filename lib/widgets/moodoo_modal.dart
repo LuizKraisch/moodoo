@@ -16,10 +16,10 @@ Future<T?> showMoodooModal<T>(
       tween: Tween(begin: 0.85, end: 1.0),
       duration: const Duration(milliseconds: 600),
       curve: Curves.elasticOut,
-      builder: (ctx, scale, c) => Transform.scale(
+      builder: (ctx, scale, child) => Transform.scale(
         scale: scale,
         alignment: Alignment.bottomCenter,
-        child: c,
+        child: child,
       ),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -34,14 +34,23 @@ Future<T?> showMoodooModal<T>(
               children: [
                 GestureDetector(
                   onTap: () => Navigator.of(context).pop(),
-                  child: Icon(
-                    Icons.keyboard_arrow_down_rounded,
-                    size: 35,
-                    color: Theme.of(context).textTheme.titleMedium?.color,
+                  child: Container(
+                    width: 40,
+                    height: 4,
+                    decoration: BoxDecoration(
+                      color: Theme.of(
+                        context,
+                      ).textTheme.titleMedium?.color?.withValues(alpha: 0.3),
+                      borderRadius: BorderRadius.circular(2),
+                    ),
                   ),
                 ),
-                const SizedBox(height: 10),
-                MoodooText(title, variant: MoodooTextVariant.displayLarge, fontSize: 22),
+                const SizedBox(height: 20),
+                MoodooText(
+                  title,
+                  variant: MoodooTextVariant.displayLarge,
+                  fontSize: 22,
+                ),
                 if (subtitle != null) ...[
                   const SizedBox(height: 8),
                   MoodooText(subtitle, variant: MoodooTextVariant.titleSmall),
