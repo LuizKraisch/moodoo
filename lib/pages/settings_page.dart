@@ -4,7 +4,7 @@ import 'package:moodoo/theme_preferences.dart'
 import 'package:moodoo/widgets/moodoo_button.dart';
 import 'package:moodoo/widgets/moodoo_modal.dart';
 import 'package:moodoo/widgets/moodoo_text.dart';
-import 'package:moodoo/services/auth/auth_service.dart';
+import 'package:moodoo/services/auth_service.dart';
 
 class _SignOutSheet extends StatelessWidget {
   const _SignOutSheet();
@@ -29,7 +29,9 @@ class _SignOutSheet extends StatelessWidget {
           MoodooButton(
             text: 'cancel',
             onTap: () => Navigator.of(context).pop(false),
-            backgroundColor: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.15),
+            backgroundColor: Theme.of(
+              context,
+            ).colorScheme.secondary.withValues(alpha: 0.15),
             foregroundColor: Theme.of(context).textTheme.titleMedium!.color!,
             padding: const EdgeInsets.symmetric(vertical: 16),
             bouncePeakScale: 1.04,
@@ -47,7 +49,7 @@ class SettingsPage extends StatelessWidget {
     final confirmed = await showMoodooModal<bool>(
       context,
       title: 'sign out',
-      subtitle: 'are you sure you want to sign out?',
+      subtitle: 'are you sure?',
       child: const _SignOutSheet(),
     );
 

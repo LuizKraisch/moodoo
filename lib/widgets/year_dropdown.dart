@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 class YearDropdown extends StatelessWidget {
-  const YearDropdown({
-    super.key,
-  });
+  const YearDropdown({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +28,9 @@ class YearDropdown extends StatelessWidget {
               isDense: true,
               alignment: Alignment.center,
               onChanged: (String? value) {},
-              items: <String>['2026', '2027', '2028', '2029'].map<DropdownMenuItem<String>>((String value) {
+              items: <String>['2026', '2027'].map<DropdownMenuItem<String>>((
+                String value,
+              ) {
                 return DropdownMenuItem<String>(
                   value: value,
                   alignment: Alignment.center,

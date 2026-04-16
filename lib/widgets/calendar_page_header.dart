@@ -1,11 +1,14 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:moodoo/widgets/moodoo_text.dart';
+import 'package:moodoo/services/mood_service.dart';
 import 'package:moodoo/widgets/grade_card.dart';
+import 'package:moodoo/widgets/moodoo_text.dart';
 import 'package:moodoo/widgets/tap_bounce.dart';
 
 class CalendarPageHeader extends StatelessWidget {
-  const CalendarPageHeader({super.key});
+  final MonthSummary summary;
+
+  const CalendarPageHeader({super.key, required this.summary});
 
   @override
   Widget build(BuildContext context) {
@@ -42,12 +45,12 @@ class CalendarPageHeader extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           MoodooText(
-                            'january',
+                            MoodService.monthName(summary.month),
                             variant: MoodooTextVariant.displayLarge,
                             fontSize: 25,
                           ),
                           MoodooText(
-                            '2026',
+                            '${summary.year}',
                             variant: MoodooTextVariant.titleMedium,
                             fontSize: 18,
                           ),
@@ -59,10 +62,10 @@ class CalendarPageHeader extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       GradeCard(
-                        grade: 'A',
+                        grade: summary.averageScore,
                         size: 60,
                         borderRadius: 18,
-                        fontSize: 28,
+                        fontSize: 20,
                       ),
                       const SizedBox(height: 4),
                       MoodooText(
