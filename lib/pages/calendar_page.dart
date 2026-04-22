@@ -119,8 +119,8 @@ class _CalendarPageState extends State<CalendarPage>
   @override
   Widget build(BuildContext context) {
     final itemCount = _daysInMonth;
-    final rowCount =
-        ((itemCount + _crossAxisCount - 1) / _crossAxisCount).ceil();
+    final rowCount = ((itemCount + _crossAxisCount - 1) / _crossAxisCount)
+        .ceil();
 
     return Scaffold(
       body: StreamBuilder<List<Mood>>(
@@ -147,7 +147,7 @@ class _CalendarPageState extends State<CalendarPage>
                     AnimatedContainer(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.easeInOut,
-                      height: _headerVisible ? 130 : 0,
+                      height: _headerVisible ? 140 : 0,
                     ),
                     Expanded(
                       child: SingleChildScrollView(
@@ -157,13 +157,15 @@ class _CalendarPageState extends State<CalendarPage>
                           child: Column(
                             children: List.generate(rowCount, (rowIndex) {
                               final startIdx = rowIndex * _crossAxisCount;
-                              final endIdx =
-                                  min(startIdx + _crossAxisCount, itemCount);
+                              final endIdx = min(
+                                startIdx + _crossAxisCount,
+                                itemCount,
+                              );
                               final itemsInRow = endIdx - startIdx;
                               final selectedInThisRow =
                                   _selectedIndex != null &&
-                                      _selectedIndex! >= startIdx &&
-                                      _selectedIndex! < endIdx;
+                                  _selectedIndex! >= startIdx &&
+                                  _selectedIndex! < endIdx;
 
                               return Column(
                                 children: [
@@ -186,8 +188,7 @@ class _CalendarPageState extends State<CalendarPage>
                                             child: DayCard(
                                               date: date,
                                               mood: moodByDay[dayNumber],
-                                              onTap: () =>
-                                                  _onCardTap(dayIndex),
+                                              onTap: () => _onCardTap(dayIndex),
                                             ),
                                           ),
                                         );

@@ -4,6 +4,7 @@ import 'package:moodoo/theme_preferences.dart'
 import 'package:moodoo/widgets/moodoo_button.dart';
 import 'package:moodoo/widgets/moodoo_modal.dart';
 import 'package:moodoo/widgets/moodoo_text.dart';
+import 'package:moodoo/widgets/settings_page_header.dart';
 import 'package:moodoo/services/auth_service.dart';
 
 class _SignOutSheet extends StatelessWidget {
@@ -20,8 +21,8 @@ class _SignOutSheet extends StatelessWidget {
           MoodooButton(
             text: 'sign out',
             onTap: () => Navigator.of(context).pop(true),
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
+            backgroundColor: Colors.red.withValues(alpha: 0.15),
+            foregroundColor: Colors.red,
             padding: const EdgeInsets.symmetric(vertical: 16),
             bouncePeakScale: 1.04,
           ),
@@ -75,72 +76,59 @@ class SettingsPage extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        scrolledUnderElevation: 0,
-        titleSpacing: 15,
-        centerTitle: false,
-        title: Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: Row(
-            children: [
-              GestureDetector(
-                onTap: () => Navigator.of(context).pop(),
-                child: Icon(
-                  Icons.arrow_back_ios_new_rounded,
-                  size: 35,
-                  color: Theme.of(context).textTheme.titleMedium?.color,
-                ),
-              ),
-              SizedBox(width: 5),
-              MoodooText('settings', variant: MoodooTextVariant.displayLarge),
-            ],
-          ),
-        ),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(25, 10, 25, 0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 10),
-            MoodooText("theme", variant: MoodooTextVariant.headlineMedium),
-            SizedBox(height: 5),
-            Row(
+      body: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                MoodooText("light", variant: MoodooTextVariant.titleSmall),
-                SizedBox(width: 5),
-                Switch(
-                  value: isDark,
-                  onChanged: (value) {
-                    final mode = value ? ThemeMode.dark : ThemeMode.light;
-                    themeModeNotifier.value = mode;
-                    saveTheme(mode);
-                  },
+                const SizedBox(height: 140),
+                MoodooText("theme", variant: MoodooTextVariant.headlineMedium),
+                SizedBox(height: 5),
+                Row(
+                  children: [
+                    MoodooText("light", variant: MoodooTextVariant.titleSmall),
+                    SizedBox(width: 5),
+                    Switch(
+                      value: isDark,
+                      onChanged: (value) {
+                        final mode = value ? ThemeMode.dark : ThemeMode.light;
+                        themeModeNotifier.value = mode;
+                        saveTheme(mode);
+                      },
+                    ),
+                    SizedBox(width: 5),
+                    MoodooText("dark", variant: MoodooTextVariant.titleSmall),
+                  ],
                 ),
-                SizedBox(width: 5),
-                MoodooText("dark", variant: MoodooTextVariant.titleSmall),
+                Spacer(),
+                SizedBox(height: 20),
+                MoodooButton(
+                  text: 'sign out',
+                  onTap: () => signout(context),
+                  backgroundColor: Colors.red.withValues(alpha: 0.15),
+                  foregroundColor: Colors.red,
+                ),
+                SizedBox(height: 10),
+                Center(
+                  child: MoodooText(
+                    "logged as ${AuthService().getCurrentUser()?.email}",
+                    variant: MoodooTextVariant.titleMedium,
+                    fontSize: 13,
+                  ),
+                ),
+                SizedBox(height: 40),
               ],
             ),
-            Spacer(),
-            SizedBox(height: 20),
-            MoodooButton(
-              text: 'sign out',
-              onTap: () => signout(context),
-              backgroundColor: Colors.red,
-              foregroundColor: Colors.white,
-            ),
-            SizedBox(height: 10),
-            Center(
-              child: MoodooText(
-                "logged in as ${AuthService().getCurrentUser()?.email}",
-                variant: MoodooTextVariant.titleMedium,
-                fontSize: 13,
-              ),
-            ),
-            SizedBox(height: 40),
-          ],
-        ),
+          ),
+          const Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: SettingsPageHeader(),
+          ),
+        ],
       ),
     );
   }
