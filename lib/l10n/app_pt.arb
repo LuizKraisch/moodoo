@@ -22,6 +22,9 @@
   "language": "idioma",
   "english": "inglês",
   "portuguese": "português",
+  "french": "francês",
+  "german": "alemão",
+  "spanish": "espanhol",
   "loggedAs": "conectado como {email}",
 
   "averageMood": "média do mês",

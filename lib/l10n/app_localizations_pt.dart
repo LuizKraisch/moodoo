@@ -66,6 +66,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String get portuguese => 'português';
 
   @override
+  String get french => 'francês';
+
+  @override
+  String get german => 'alemão';
+
+  @override
+  String get spanish => 'espanhol';
+
+  @override
   String loggedAs(String email) {
     return 'conectado como $email';
   }

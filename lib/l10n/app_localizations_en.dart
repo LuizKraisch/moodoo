@@ -12,7 +12,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginSubtitle => 'track your days, create your own mood calendar';
 
   @override
-  String get loginWithGoogle => 'login with Google';
+  String get loginWithGoogle => 'log in with Google';
 
   @override
   String hiUser(String name) {
@@ -65,8 +65,17 @@ class AppLocalizationsEn extends AppLocalizations {
   String get portuguese => 'portuguese';
 
   @override
+  String get french => 'french';
+
+  @override
+  String get german => 'german';
+
+  @override
+  String get spanish => 'spanish';
+
+  @override
   String loggedAs(String email) {
-    return 'logged as $email';
+    return 'logged in as $email';
   }
 
   @override

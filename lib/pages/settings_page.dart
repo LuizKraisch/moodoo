@@ -89,11 +89,17 @@ class SettingsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 140),
-                MoodooText(l10n.theme, variant: MoodooTextVariant.headlineMedium),
+                MoodooText(
+                  l10n.theme,
+                  variant: MoodooTextVariant.headlineMedium,
+                ),
                 const SizedBox(height: 5),
                 Row(
                   children: [
-                    MoodooText(l10n.light, variant: MoodooTextVariant.titleSmall),
+                    MoodooText(
+                      l10n.light,
+                      variant: MoodooTextVariant.titleSmall,
+                    ),
                     const SizedBox(width: 5),
                     Switch(
                       value: isDark,
@@ -104,31 +110,68 @@ class SettingsPage extends StatelessWidget {
                       },
                     ),
                     const SizedBox(width: 5),
-                    MoodooText(l10n.dark, variant: MoodooTextVariant.titleSmall),
+                    MoodooText(
+                      l10n.dark,
+                      variant: MoodooTextVariant.titleSmall,
+                    ),
                   ],
                 ),
                 const SizedBox(height: 20),
-                MoodooText(l10n.language, variant: MoodooTextVariant.headlineMedium),
-                const SizedBox(height: 5),
+                MoodooText(
+                  l10n.language,
+                  variant: MoodooTextVariant.headlineMedium,
+                ),
+                const SizedBox(height: 10),
                 ValueListenableBuilder<Locale>(
                   valueListenable: localeNotifier,
                   builder: (context, locale, _) {
-                    final isPt = locale.languageCode == 'pt';
-                    return Row(
-                      children: [
-                        MoodooText(l10n.english, variant: MoodooTextVariant.titleSmall),
-                        const SizedBox(width: 5),
-                        Switch(
-                          value: isPt,
-                          onChanged: (value) {
-                            final code = value ? 'pt' : 'en';
+                    final languages = {
+                      'en': l10n.english,
+                      'pt': l10n.portuguese,
+                      'fr': l10n.french,
+                      'de': l10n.german,
+                      'es': l10n.spanish,
+                    };
+                    final bgColor = Theme.of(context).colorScheme.primary;
+                    final textColor = Theme.of(context).colorScheme.onPrimary;
+                    return Container(
+                      height: 40,
+                      decoration: BoxDecoration(
+                        color: bgColor,
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 14),
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton<String>(
+                          value: locale.languageCode,
+                          dropdownColor: bgColor,
+                          iconEnabledColor: textColor,
+                          borderRadius: BorderRadius.circular(16),
+                          isDense: true,
+                          alignment: Alignment.center,
+                          items: languages.entries
+                              .map(
+                                (e) => DropdownMenuItem(
+                                  value: e.key,
+                                  alignment: Alignment.center,
+                                  child: Text(
+                                    e.value,
+                                    style: TextStyle(
+                                      color: textColor,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w300,
+                                    ),
+                                  ),
+                                ),
+                              )
+                              .toList(),
+                          onChanged: (code) {
+                            if (code == null) return;
                             localeNotifier.value = Locale(code);
                             saveLocale(code);
                           },
                         ),
-                        const SizedBox(width: 5),
-                        MoodooText(l10n.portuguese, variant: MoodooTextVariant.titleSmall),
-                      ],
+                      ),
                     );
                   },
                 ),

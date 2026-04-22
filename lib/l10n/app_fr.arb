@@ -1,0 +1,63 @@
+{
+  "@@locale": "fr",
+
+  "loginSubtitle": "suivez vos jours, créez votre propre calendrier d'humeur",
+  "loginWithGoogle": "se connecter avec Google",
+
+  "hiUser": "salut, {name}!",
+  "moodOverview": "voici votre aperçu d'humeur",
+
+  "today": "aujourd'hui",
+  "noMoodToday": "vous n'avez pas ajouté votre humeur aujourd'hui",
+  "addMood": "ajouter humeur",
+  "editMood": "modifier humeur",
+
+  "settings": "paramètres",
+  "signOut": "se déconnecter",
+  "areYouSure": "êtes-vous sûr?",
+  "cancel": "annuler",
+  "theme": "thème",
+  "light": "clair",
+  "dark": "sombre",
+  "language": "langue",
+  "english": "anglais",
+  "portuguese": "portugais",
+  "french": "français",
+  "german": "allemand",
+  "spanish": "espagnol",
+  "loggedAs": "connecté en tant que {email}",
+
+  "averageMood": "humeur moyenne",
+
+  "howAreYouFeelingToday": "comment vous sentez-vous aujourd'hui?",
+  "howDidYouFeelThatDay": "comment vous sentiez-vous ce jour-là?",
+  "writeNotes": "écrivez quelque chose... (optionnel)",
+  "saveChanges": "sauvegarder les modifications",
+  "saveMood": "sauvegarder l'humeur",
+  "deleteMood": "supprimer l'humeur",
+
+  "monthJanuary": "janvier",
+  "monthFebruary": "février",
+  "monthMarch": "mars",
+  "monthApril": "avril",
+  "monthMay": "mai",
+  "monthJune": "juin",
+  "monthJuly": "juillet",
+  "monthAugust": "août",
+  "monthSeptember": "septembre",
+  "monthOctober": "octobre",
+  "monthNovember": "novembre",
+  "monthDecember": "décembre",
+
+  "weekdayMonday": "lundi",
+  "weekdayTuesday": "mardi",
+  "weekdayWednesday": "mercredi",
+  "weekdayThursday": "jeudi",
+  "weekdayFriday": "vendredi",
+  "weekdaySaturday": "samedi",
+  "weekdaySunday": "dimanche",
+
+  "formatDayHeader": "{weekday}, {day} {month}",
+  "formatDateLabel": "{day} {month} {year}",
+  "formatCreatedAt": "ajouté le {day} {month} {year} à {time}"
+}
