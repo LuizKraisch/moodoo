@@ -152,7 +152,6 @@ class _HomePageFooterState extends State<HomePageFooter>
                               child: MoodooText(
                                 "you didn't add your mood for today",
                                 variant: MoodooTextVariant.headlineSmall,
-                                color: Colors.white,
                               ),
                             ),
                           ),

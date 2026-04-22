@@ -15,35 +15,51 @@ class HomePageHeader extends StatelessWidget {
     final firstName = (user?.displayName ?? '').split(' ').first.toLowerCase();
     final photoUrl = user?.photoURL;
 
-    return ClipRect(
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
-        child: Container(
-          color: Theme.of(
-            context,
-          ).scaffoldBackgroundColor.withValues(alpha: 0.75),
-          child: Padding(
-            padding: EdgeInsets.fromLTRB(20, topPadding, 20, 10),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+          colors: [
+            Theme.of(context).scaffoldBackgroundColor,
+            Theme.of(context).scaffoldBackgroundColor.withValues(alpha: 0),
+          ],
+          stops: const [0.65, 1.0],
+        ),
+      ),
+      child: Padding(
+        padding: EdgeInsets.fromLTRB(20, topPadding + 8, 20, 0),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(100),
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
             child: Container(
-              padding: const EdgeInsets.fromLTRB(6, 12, 6, 6),
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.55),
+                borderRadius: BorderRadius.circular(100),
+              ),
+              padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      MoodooText(
-                        'hi, $firstName!',
-                        variant: MoodooTextVariant.displayLarge,
-                        fontSize: 25,
-                      ),
-                      MoodooText(
-                        "here's your mood overview",
-                        variant: MoodooTextVariant.titleMedium,
-                        fontSize: 18,
-                      ),
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MoodooText(
+                          'hi, $firstName!',
+                          variant: MoodooTextVariant.displayLarge,
+                          fontSize: 22,
+                        ),
+                        MoodooText(
+                          "here's your mood overview",
+                          variant: MoodooTextVariant.titleMedium,
+                          fontSize: 16,
+                        ),
+                      ],
+                    ),
                   ),
                   TapBounce(
                     onTap: () => Navigator.push(

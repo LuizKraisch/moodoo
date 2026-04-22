@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                     Expanded(
                       child: GridView.count(
                         controller: _scrollController,
-                        padding: const EdgeInsets.fromLTRB(0, 160, 0, 140),
+                        padding: const EdgeInsets.fromLTRB(0, 170, 0, 140),
                         crossAxisCount: 2,
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
@@ -106,7 +106,8 @@ class _HomePageState extends State<HomePage> {
                             );
                           }
                           final summary = summaries[index];
-                          final isFuture = summary.year > now.year ||
+                          final isFuture =
+                              summary.year > now.year ||
                               (summary.year == now.year &&
                                   summary.month > now.month);
                           return Container(
