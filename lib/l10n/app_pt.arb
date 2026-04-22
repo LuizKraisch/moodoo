@@ -1,0 +1,60 @@
+{
+  "@@locale": "pt",
+
+  "loginSubtitle": "registre seus dias, crie seu próprio calendário de moods",
+  "loginWithGoogle": "entrar com Google",
+
+  "hiUser": "oi, {name}!",
+  "moodOverview": "aqui está o seu resumo",
+
+  "today": "hoje",
+  "noMoodToday": "você não registrou seu mood hoje",
+  "addMood": "registrar mood",
+  "editMood": "editar mood",
+
+  "settings": "configurações",
+  "signOut": "sair",
+  "areYouSure": "tem certeza?",
+  "cancel": "cancelar",
+  "theme": "tema",
+  "light": "claro",
+  "dark": "escuro",
+  "language": "idioma",
+  "english": "inglês",
+  "portuguese": "português",
+  "loggedAs": "conectado como {email}",
+
+  "averageMood": "média do mês",
+
+  "howAreYouFeelingToday": "como você está se sentindo hoje?",
+  "howDidYouFeelThatDay": "como você se sentiu neste dia?",
+  "writeNotes": "escreva algo sobre... (opcional)",
+  "saveChanges": "salvar alterações",
+  "saveMood": "salvar mood",
+  "deleteMood": "excluir mood",
+
+  "monthJanuary": "janeiro",
+  "monthFebruary": "fevereiro",
+  "monthMarch": "março",
+  "monthApril": "abril",
+  "monthMay": "maio",
+  "monthJune": "junho",
+  "monthJuly": "julho",
+  "monthAugust": "agosto",
+  "monthSeptember": "setembro",
+  "monthOctober": "outubro",
+  "monthNovember": "novembro",
+  "monthDecember": "dezembro",
+
+  "weekdayMonday": "segunda-feira",
+  "weekdayTuesday": "terça-feira",
+  "weekdayWednesday": "quarta-feira",
+  "weekdayThursday": "quinta-feira",
+  "weekdayFriday": "sexta-feira",
+  "weekdaySaturday": "sábado",
+  "weekdaySunday": "domingo",
+
+  "formatDayHeader": "{weekday}, {day} de {month}",
+  "formatDateLabel": "{day} de {month} de {year}",
+  "formatCreatedAt": "adicionado em {day} de {month} de {year} às {time}"
+}

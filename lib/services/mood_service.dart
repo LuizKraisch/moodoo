@@ -1,3 +1,4 @@
+import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 
 class MonthSummary {
@@ -15,31 +16,6 @@ class MonthSummary {
 }
 
 class MoodService {
-  static const _monthNames = [
-    'january',
-    'february',
-    'march',
-    'april',
-    'may',
-    'june',
-    'july',
-    'august',
-    'september',
-    'october',
-    'november',
-    'december',
-  ];
-
-  static const _weekdayNames = [
-    'monday',
-    'tuesday',
-    'wednesday',
-    'thursday',
-    'friday',
-    'saturday',
-    'sunday',
-  ];
-
   static const _gradeToValue = {'S': 5, 'A': 4, 'B': 3, 'C': 2, 'D': 1, 'F': 0};
   static const _valueToGrade = {5: 'S', 4: 'A', 3: 'B', 2: 'C', 1: 'D', 0: 'F'};
 
@@ -70,20 +46,76 @@ class MoodService {
     });
   }
 
-  static String monthName(int month) => _monthNames[month - 1];
+  static String monthName(AppLocalizations l10n, int month) {
+    const names = [
+      'january', 'february', 'march', 'april', 'may', 'june',
+      'july', 'august', 'september', 'october', 'november', 'december',
+    ];
+    final key = names[month - 1];
+    return _monthByKey(l10n, key);
+  }
 
-  static String weekdayName(int weekday) => _weekdayNames[weekday - 1];
+  static String weekdayName(AppLocalizations l10n, int weekday) {
+    const names = [
+      'monday', 'tuesday', 'wednesday', 'thursday',
+      'friday', 'saturday', 'sunday',
+    ];
+    final key = names[weekday - 1];
+    return _weekdayByKey(l10n, key);
+  }
 
-  static String formatDayHeader(DateTime date) =>
-      '${weekdayName(date.weekday)}, ${monthName(date.month)} ${date.day}';
+  static String formatDayHeader(AppLocalizations l10n, DateTime date) =>
+      l10n.formatDayHeader(
+        weekdayName(l10n, date.weekday),
+        monthName(l10n, date.month),
+        date.day,
+      );
 
-  static String formatDateLabel(DateTime date) =>
-      '${monthName(date.month)} ${date.day}, ${date.year}';
+  static String formatDateLabel(AppLocalizations l10n, DateTime date) =>
+      l10n.formatDateLabel(
+        monthName(l10n, date.month),
+        date.day,
+        date.year,
+      );
 
-  static String formatCreatedAt(DateTime datetime) {
+  static String formatCreatedAt(AppLocalizations l10n, DateTime datetime) {
     final hour = datetime.hour % 12 == 0 ? 12 : datetime.hour % 12;
     final ampm = datetime.hour >= 12 ? 'PM' : 'AM';
     final minute = datetime.minute.toString().padLeft(2, '0');
-    return 'added on ${monthName(datetime.month)} ${datetime.day}, ${datetime.year} at $hour:$minute $ampm';
+    return l10n.formatCreatedAt(
+      monthName(l10n, datetime.month),
+      datetime.day,
+      datetime.year,
+      '$hour:$minute $ampm',
+    );
+  }
+
+  static String _monthByKey(AppLocalizations l10n, String key) {
+    switch (key) {
+      case 'january': return l10n.monthJanuary;
+      case 'february': return l10n.monthFebruary;
+      case 'march': return l10n.monthMarch;
+      case 'april': return l10n.monthApril;
+      case 'may': return l10n.monthMay;
+      case 'june': return l10n.monthJune;
+      case 'july': return l10n.monthJuly;
+      case 'august': return l10n.monthAugust;
+      case 'september': return l10n.monthSeptember;
+      case 'october': return l10n.monthOctober;
+      case 'november': return l10n.monthNovember;
+      default: return l10n.monthDecember;
+    }
+  }
+
+  static String _weekdayByKey(AppLocalizations l10n, String key) {
+    switch (key) {
+      case 'monday': return l10n.weekdayMonday;
+      case 'tuesday': return l10n.weekdayTuesday;
+      case 'wednesday': return l10n.weekdayWednesday;
+      case 'thursday': return l10n.weekdayThursday;
+      case 'friday': return l10n.weekdayFriday;
+      case 'saturday': return l10n.weekdaySaturday;
+      default: return l10n.weekdaySunday;
+    }
   }
 }

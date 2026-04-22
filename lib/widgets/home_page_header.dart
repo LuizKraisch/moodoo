@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/pages/settings_page.dart';
 import 'package:moodoo/widgets/moodoo_text.dart';
 import 'package:moodoo/widgets/tap_bounce.dart';
@@ -10,6 +11,7 @@ class HomePageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final topPadding = MediaQuery.of(context).padding.top;
     final user = FirebaseAuth.instance.currentUser;
     final firstName = (user?.displayName ?? '').split(' ').first.toLowerCase();
@@ -49,12 +51,12 @@ class HomePageHeader extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         MoodooText(
-                          'hi, $firstName!',
+                          l10n.hiUser(firstName),
                           variant: MoodooTextVariant.displayLarge,
                           fontSize: 22,
                         ),
                         MoodooText(
-                          "here's your mood overview",
+                          l10n.moodOverview,
                           variant: MoodooTextVariant.titleMedium,
                           fontSize: 16,
                         ),

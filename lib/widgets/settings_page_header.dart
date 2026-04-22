@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/widgets/moodoo_text.dart';
 import 'package:moodoo/widgets/tap_bounce.dart';
 
@@ -8,6 +9,7 @@ class SettingsPageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final topPadding = MediaQuery.of(context).padding.top;
 
     return Container(
@@ -50,7 +52,7 @@ class SettingsPageHeader extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   MoodooText(
-                    'settings',
+                    l10n.settings,
                     variant: MoodooTextVariant.displayLarge,
                     fontSize: 22,
                   ),

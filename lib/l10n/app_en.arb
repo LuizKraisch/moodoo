@@ -1,0 +1,92 @@
+{
+  "@@locale": "en",
+
+  "loginSubtitle": "track your days, create your own mood calendar",
+  "loginWithGoogle": "login with Google",
+
+  "hiUser": "hi, {name}!",
+  "@hiUser": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "moodOverview": "here's your mood overview",
+
+  "today": "today",
+  "noMoodToday": "you didn't add your mood for today",
+  "addMood": "add mood",
+  "editMood": "edit mood",
+
+  "settings": "settings",
+  "signOut": "sign out",
+  "areYouSure": "are you sure?",
+  "cancel": "cancel",
+  "theme": "theme",
+  "light": "light",
+  "dark": "dark",
+  "language": "language",
+  "english": "english",
+  "portuguese": "portuguese",
+  "loggedAs": "logged as {email}",
+  "@loggedAs": {
+    "placeholders": {
+      "email": { "type": "String" }
+    }
+  },
+
+  "averageMood": "average mood",
+
+  "howAreYouFeelingToday": "how are you feeling today?",
+  "howDidYouFeelThatDay": "how did you feel that day?",
+  "writeNotes": "write something about it... (optional)",
+  "saveChanges": "save changes",
+  "saveMood": "save mood",
+  "deleteMood": "delete mood",
+
+  "monthJanuary": "january",
+  "monthFebruary": "february",
+  "monthMarch": "march",
+  "monthApril": "april",
+  "monthMay": "may",
+  "monthJune": "june",
+  "monthJuly": "july",
+  "monthAugust": "august",
+  "monthSeptember": "september",
+  "monthOctober": "october",
+  "monthNovember": "november",
+  "monthDecember": "december",
+
+  "weekdayMonday": "monday",
+  "weekdayTuesday": "tuesday",
+  "weekdayWednesday": "wednesday",
+  "weekdayThursday": "thursday",
+  "weekdayFriday": "friday",
+  "weekdaySaturday": "saturday",
+  "weekdaySunday": "sunday",
+
+  "formatDayHeader": "{weekday}, {month} {day}",
+  "@formatDayHeader": {
+    "placeholders": {
+      "weekday": { "type": "String" },
+      "month": { "type": "String" },
+      "day": { "type": "int" }
+    }
+  },
+  "formatDateLabel": "{month} {day}, {year}",
+  "@formatDateLabel": {
+    "placeholders": {
+      "month": { "type": "String" },
+      "day": { "type": "int" },
+      "year": { "type": "int" }
+    }
+  },
+  "formatCreatedAt": "added on {month} {day}, {year} at {time}",
+  "@formatCreatedAt": {
+    "placeholders": {
+      "month": { "type": "String" },
+      "day": { "type": "int" },
+      "year": { "type": "int" },
+      "time": { "type": "String" }
+    }
+  }
+}

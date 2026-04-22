@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/widgets/login_page_presentation.dart';
 import 'package:moodoo/widgets/moodoo_button.dart';
 import 'package:moodoo/widgets/moodoo_text.dart';
@@ -23,6 +24,8 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
@@ -44,13 +47,13 @@ class LoginPage extends StatelessWidget {
                   ),
                   const SizedBox(height: 5),
                   MoodooText(
-                    "track your days, create your own mood calendar",
+                    l10n.loginSubtitle,
                     variant: MoodooTextVariant.titleMedium,
                     fontSize: 20,
                   ),
                   const SizedBox(height: 20),
                   MoodooButton(
-                    text: 'login with Google',
+                    text: l10n.loginWithGoogle,
                     onTap: () => login(context),
                     backgroundColor: Colors.white,
                     foregroundColor: Colors.black,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/services/mood_service.dart';
 import 'package:moodoo/widgets/grade_card.dart';
 import 'package:moodoo/widgets/moodoo_text.dart';
@@ -24,6 +25,8 @@ class MonthCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     if (isFuture) {
       final isDark = Theme.of(context).brightness == Brightness.dark;
       return Container(
@@ -82,7 +85,7 @@ class MonthCard extends StatelessWidget {
                       variant: MoodooTextVariant.titleSmall,
                     ),
                     MoodooText(
-                      MoodService.monthName(summary.month),
+                      MoodService.monthName(l10n, summary.month),
                       variant: MoodooTextVariant.displaySmall,
                     ),
                   ],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/mood_service.dart';
 import 'package:moodoo/widgets/mood_sheet.dart';
@@ -15,6 +16,8 @@ class DayExpandedPanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Container(
       margin: const EdgeInsets.fromLTRB(6, 6, 6, 6),
       decoration: BoxDecoration(
@@ -29,31 +32,35 @@ class DayExpandedPanel extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    MoodooText(
-                      MoodService.formatDayHeader(date),
-                      variant: MoodooTextVariant.titleSmall,
-                    ),
-                    MoodooText(
-                      '${date.year}',
-                      variant: MoodooTextVariant.titleSmall,
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MoodooText(
+                        MoodService.formatDayHeader(l10n, date),
+                        variant: MoodooTextVariant.titleSmall,
+                      ),
+                      MoodooText(
+                        '${date.year}',
+                        variant: MoodooTextVariant.titleSmall,
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(width: 10),
                 MoodooButton(
-                  text: mood == null ? 'add mood' : 'edit mood',
+                  text: mood == null ? l10n.addMood : l10n.editMood,
                   onTap: () {
                     final now = DateTime.now();
-                    final isToday = date.year == now.year &&
+                    final isToday =
+                        date.year == now.year &&
                         date.month == now.month &&
                         date.day == now.day;
                     showMoodooModal(
                       context,
                       title: isToday
-                          ? 'how are you feeling today?'
-                          : 'how did you feel that day?',
+                          ? l10n.howAreYouFeelingToday
+                          : l10n.howDidYouFeelThatDay,
                       child: MoodSheet(date: date, mood: mood),
                     );
                   },
@@ -92,6 +99,7 @@ class DayExpandedPanel extends StatelessWidget {
                             const SizedBox(height: 4),
                             MoodooText(
                               MoodService.formatCreatedAt(
+                                l10n,
                                 mood!.createdAt.toDate(),
                               ),
                               variant: MoodooTextVariant.bodySmall,
