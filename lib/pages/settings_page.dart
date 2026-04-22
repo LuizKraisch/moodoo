@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/l10n/app_localizations.dart';
+import 'package:moodoo/locale_preferences.dart';
 import 'package:moodoo/theme_preferences.dart'
     show themeModeNotifier, saveTheme;
 import 'package:moodoo/widgets/moodoo_button.dart';
@@ -12,6 +14,7 @@ class _SignOutSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 24, 0, 40),
       child: Column(
@@ -19,7 +22,7 @@ class _SignOutSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           MoodooButton(
-            text: 'sign out',
+            text: l10n.signOut,
             onTap: () => Navigator.of(context).pop(true),
             backgroundColor: Colors.red.withValues(alpha: 0.15),
             foregroundColor: Colors.red,
@@ -28,7 +31,7 @@ class _SignOutSheet extends StatelessWidget {
           ),
           const SizedBox(height: 12),
           MoodooButton(
-            text: 'cancel',
+            text: l10n.cancel,
             onTap: () => Navigator.of(context).pop(false),
             backgroundColor: Theme.of(
               context,
@@ -47,10 +50,11 @@ class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
   void signout(BuildContext context) async {
+    final l10n = AppLocalizations.of(context)!;
     final confirmed = await showMoodooModal<bool>(
       context,
-      title: 'sign out',
-      subtitle: 'are you sure?',
+      title: l10n.signOut,
+      subtitle: l10n.areYouSure,
       child: const _SignOutSheet(),
     );
 
@@ -73,6 +77,7 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
@@ -84,12 +89,12 @@ class SettingsPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(height: 140),
-                MoodooText("theme", variant: MoodooTextVariant.headlineMedium),
-                SizedBox(height: 5),
+                MoodooText(l10n.theme, variant: MoodooTextVariant.headlineMedium),
+                const SizedBox(height: 5),
                 Row(
                   children: [
-                    MoodooText("light", variant: MoodooTextVariant.titleSmall),
-                    SizedBox(width: 5),
+                    MoodooText(l10n.light, variant: MoodooTextVariant.titleSmall),
+                    const SizedBox(width: 5),
                     Switch(
                       value: isDark,
                       onChanged: (value) {
@@ -98,27 +103,52 @@ class SettingsPage extends StatelessWidget {
                         saveTheme(mode);
                       },
                     ),
-                    SizedBox(width: 5),
-                    MoodooText("dark", variant: MoodooTextVariant.titleSmall),
+                    const SizedBox(width: 5),
+                    MoodooText(l10n.dark, variant: MoodooTextVariant.titleSmall),
                   ],
                 ),
-                Spacer(),
-                SizedBox(height: 20),
+                const SizedBox(height: 20),
+                MoodooText(l10n.language, variant: MoodooTextVariant.headlineMedium),
+                const SizedBox(height: 5),
+                ValueListenableBuilder<Locale>(
+                  valueListenable: localeNotifier,
+                  builder: (context, locale, _) {
+                    final isPt = locale.languageCode == 'pt';
+                    return Row(
+                      children: [
+                        MoodooText(l10n.english, variant: MoodooTextVariant.titleSmall),
+                        const SizedBox(width: 5),
+                        Switch(
+                          value: isPt,
+                          onChanged: (value) {
+                            final code = value ? 'pt' : 'en';
+                            localeNotifier.value = Locale(code);
+                            saveLocale(code);
+                          },
+                        ),
+                        const SizedBox(width: 5),
+                        MoodooText(l10n.portuguese, variant: MoodooTextVariant.titleSmall),
+                      ],
+                    );
+                  },
+                ),
+                const Spacer(),
+                const SizedBox(height: 20),
                 MoodooButton(
-                  text: 'sign out',
+                  text: l10n.signOut,
                   onTap: () => signout(context),
                   backgroundColor: Colors.red.withValues(alpha: 0.15),
                   foregroundColor: Colors.red,
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Center(
                   child: MoodooText(
-                    "logged as ${AuthService().getCurrentUser()?.email}",
+                    l10n.loggedAs(AuthService().getCurrentUser()?.email ?? ''),
                     variant: MoodooTextVariant.titleMedium,
                     fontSize: 13,
                   ),
                 ),
-                SizedBox(height: 40),
+                const SizedBox(height: 40),
               ],
             ),
           ),

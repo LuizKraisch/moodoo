@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/widgets/grade_card.dart';
 import 'package:moodoo/widgets/mood_sheet.dart';
@@ -41,9 +42,10 @@ class _HomePageFooterState extends State<HomePageFooter>
   }
 
   void _showMoodSheet(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     showMoodooModal(
       context,
-      title: 'how are you feeling today?',
+      title: l10n.howAreYouFeelingToday,
       child: MoodSheet(date: DateTime.now(), mood: widget.todayMood),
     );
   }
@@ -95,6 +97,7 @@ class _HomePageFooterState extends State<HomePageFooter>
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final hasMood = widget.todayMood != null;
 
     return Container(
@@ -138,7 +141,7 @@ class _HomePageFooterState extends State<HomePageFooter>
                               ),
                               const SizedBox(width: 12),
                               MoodooText(
-                                'today',
+                                l10n.today,
                                 variant: MoodooTextVariant.headlineSmall,
                                 color: Colors.white,
                               ),
@@ -150,13 +153,13 @@ class _HomePageFooterState extends State<HomePageFooter>
                             child: Padding(
                               padding: const EdgeInsets.only(left: 10),
                               child: MoodooText(
-                                "you didn't add your mood for today",
+                                l10n.noMoodToday,
                                 variant: MoodooTextVariant.headlineSmall,
                               ),
                             ),
                           ),
                         MoodooButton(
-                          text: hasMood ? 'edit mood' : 'add mood',
+                          text: hasMood ? l10n.editMood : l10n.addMood,
                           onTap: () => _showMoodSheet(context),
                           backgroundColor: Colors.white,
                           foregroundColor: Colors.black,

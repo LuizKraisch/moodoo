@@ -10,7 +10,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
 
+  intl: ^0.20.1
   cupertino_icons: ^1.0.8
   google_fonts: ^8.0.2
   shared_preferences: ^2.5.5
@@ -36,6 +39,7 @@ flutter_launcher_icons:
   adaptive_icon_foreground: "assets/logos/moodoo-cow-dark.png"
 
 flutter:
+  generate: true
   uses-material-design: true
   assets:
     - assets/logos/

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/firebase_service.dart';
 import 'package:moodoo/services/mood_service.dart';
@@ -12,13 +13,14 @@ import 'package:moodoo/widgets/tap_bounce.dart';
 class _DeleteConfirmSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     return Padding(
       padding: const EdgeInsets.fromLTRB(0, 24, 0, 40),
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           MoodooButton(
-            text: 'delete mood',
+            text: l10n.deleteMood,
             onTap: () => Navigator.of(context).pop(true),
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
@@ -27,7 +29,7 @@ class _DeleteConfirmSheet extends StatelessWidget {
           ),
           const SizedBox(height: 10),
           MoodooButton(
-            text: 'cancel',
+            text: l10n.cancel,
             onTap: () => Navigator.of(context).pop(false),
             backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
             foregroundColor: Theme.of(context).colorScheme.surface,
@@ -103,10 +105,11 @@ class _MoodSheetState extends State<MoodSheet> {
   }
 
   Future<void> _delete() async {
+    final l10n = AppLocalizations.of(context)!;
     final confirmed = await showMoodooModal<bool>(
       context,
-      title: 'delete mood',
-      subtitle: 'are you sure?',
+      title: l10n.deleteMood,
+      subtitle: l10n.areYouSure,
       child: _DeleteConfirmSheet(),
     );
     if (confirmed != true) return;
@@ -117,6 +120,7 @@ class _MoodSheetState extends State<MoodSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final bottomPadding = MediaQuery.of(context).viewInsets.bottom;
 
     return Padding(
@@ -156,7 +160,7 @@ class _MoodSheetState extends State<MoodSheet> {
           ),
           const SizedBox(height: 10),
           MoodooText(
-            MoodService.formatDateLabel(widget.date),
+            MoodService.formatDateLabel(l10n, widget.date),
             variant: MoodooTextVariant.titleSmall,
           ),
           const SizedBox(height: 20),
@@ -165,7 +169,7 @@ class _MoodSheetState extends State<MoodSheet> {
             maxLines: 3,
             style: Theme.of(context).textTheme.titleSmall,
             decoration: InputDecoration(
-              hintText: 'write something about it... (optional)',
+              hintText: l10n.writeNotes,
               hintStyle: Theme.of(context).textTheme.titleSmall,
               filled: true,
               fillColor: Theme.of(
@@ -180,7 +184,7 @@ class _MoodSheetState extends State<MoodSheet> {
           ),
           const SizedBox(height: 16),
           MoodooButton(
-            text: _isEditing ? 'save changes' : 'save mood',
+            text: _isEditing ? l10n.saveChanges : l10n.saveMood,
             onTap: (_selected == null || _isLoading || !_hasChanges)
                 ? null
                 : _save,
@@ -195,7 +199,7 @@ class _MoodSheetState extends State<MoodSheet> {
           if (_isEditing) ...[
             const SizedBox(height: 10),
             MoodooButton(
-              text: 'delete mood',
+              text: l10n.deleteMood,
               onTap: _isLoading ? null : _delete,
               backgroundColor: Colors.red.withValues(alpha: 0.15),
               foregroundColor: Colors.red,

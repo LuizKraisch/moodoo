@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/services/mood_service.dart';
 import 'package:moodoo/widgets/grade_card.dart';
 import 'package:moodoo/widgets/moodoo_text.dart';
@@ -12,6 +13,7 @@ class CalendarPageHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final topPadding = MediaQuery.of(context).padding.top;
 
     return Container(
@@ -58,7 +60,7 @@ class CalendarPageHeader extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           MoodooText(
-                            MoodService.monthName(summary.month),
+                            MoodService.monthName(l10n, summary.month),
                             variant: MoodooTextVariant.displayLarge,
                             fontSize: 25,
                           ),
@@ -83,7 +85,7 @@ class CalendarPageHeader extends StatelessWidget {
                       ),
                       const SizedBox(height: 4),
                       MoodooText(
-                        'average mood',
+                        l10n.averageMood,
                         variant: MoodooTextVariant.titleSmall,
                       ),
                     ],

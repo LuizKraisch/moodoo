@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/mood_service.dart';
 import 'package:moodoo/widgets/grade_card.dart';
@@ -17,6 +18,7 @@ class DayCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
     if (date.isAfter(today)) {
@@ -46,7 +48,7 @@ class DayCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               MoodooText(
-                MoodService.weekdayName(date.weekday),
+                MoodService.weekdayName(l10n, date.weekday),
                 variant: MoodooTextVariant.titleSmall,
               ),
               Row(
