@@ -2,7 +2,7 @@
   "@@locale": "en",
 
   "loginSubtitle": "track your days, create your own mood calendar",
-  "loginWithGoogle": "login with Google",
+  "loginWithGoogle": "log in with Google",
 
   "hiUser": "hi, {name}!",
   "@hiUser": {
@@ -27,7 +27,10 @@
   "language": "language",
   "english": "english",
   "portuguese": "portuguese",
-  "loggedAs": "logged as {email}",
+  "french": "french",
+  "german": "german",
+  "spanish": "spanish",
+  "loggedAs": "logged in as {email}",
   "@loggedAs": {
     "placeholders": {
       "email": { "type": "String" }

@@ -8,7 +8,7 @@ class YearDropdown extends StatelessWidget {
     return Builder(
       builder: (context) {
         final bgColor = Theme.of(context).colorScheme.primary;
-        final textColor = Theme.of(context).colorScheme.surface;
+        final textColor = Theme.of(context).colorScheme.onPrimary;
         final currentYear = DateTime.now().year.toString();
 
         return Container(
