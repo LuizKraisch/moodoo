@@ -129,35 +129,38 @@ class _HomePageFooterState extends State<HomePageFooter>
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        if (hasMood)
-                          Row(
-                            children: [
-                              const SizedBox(width: 10),
-                              GradeCard(
-                                grade: widget.todayMood!.score,
-                                size: 48,
-                                borderRadius: 12,
-                                fontSize: 22,
-                              ),
-                              const SizedBox(width: 12),
-                              MoodooText(
-                                l10n.today,
-                                variant: MoodooTextVariant.headlineSmall,
-                                color: Colors.white,
-                              ),
-                            ],
-                          )
-                        else
-                          SizedBox(
-                            width: 180,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 10),
-                              child: MoodooText(
-                                l10n.noMoodToday,
-                                variant: MoodooTextVariant.headlineSmall,
-                              ),
-                            ),
-                          ),
+                        Flexible(
+                          child: hasMood
+                              ? Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    const SizedBox(width: 10),
+                                    GradeCard(
+                                      grade: widget.todayMood!.score,
+                                      size: 48,
+                                      borderRadius: 12,
+                                      fontSize: 22,
+                                    ),
+                                    const SizedBox(width: 12),
+                                    Flexible(
+                                      child: MoodooText(
+                                        l10n.today,
+                                        variant:
+                                            MoodooTextVariant.headlineSmall,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ],
+                                )
+                              : Padding(
+                                  padding: const EdgeInsets.only(left: 10),
+                                  child: MoodooText(
+                                    l10n.noMoodToday,
+                                    variant: MoodooTextVariant.headlineSmall,
+                                  ),
+                                ),
+                        ),
+                        const SizedBox(width: 8),
                         MoodooButton(
                           text: hasMood ? l10n.editMood : l10n.addMood,
                           onTap: () => _showMoodSheet(context),
