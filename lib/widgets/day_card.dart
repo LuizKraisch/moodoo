@@ -35,36 +35,49 @@ class DayCard extends StatelessWidget {
     return TapBounce(
       peakScale: 1.06,
       onTap: onTap,
-      child: Container(
-        margin: const EdgeInsets.all(6),
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.circular(25),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              MoodooText(
-                MoodService.weekdayName(l10n, date.weekday),
-                variant: MoodooTextVariant.titleSmall,
-              ),
-              Row(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final w = constraints.maxWidth - 12;
+          final padding = (w * 0.1).clamp(8.0, 15.0);
+          final gradeSize = (w * 0.35).clamp(26.0, 48.0);
+          final dateFontSize = (w * 0.2).clamp(14.0, 30.0);
+          return Container(
+            margin: const EdgeInsets.all(6),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.primary,
+              borderRadius: BorderRadius.circular(25),
+            ),
+            child: Padding(
+              padding: EdgeInsets.all(padding),
+              child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   MoodooText(
-                    '${date.day}',
-                    variant: MoodooTextVariant.displaySmall,
-                    fontSize: 30,
+                    MoodService.weekdayName(l10n, date.weekday),
+                    variant: MoodooTextVariant.titleSmall,
                   ),
-                  GradeCard(grade: mood?.score),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      MoodooText(
+                        '${date.day}',
+                        variant: MoodooTextVariant.displaySmall,
+                        fontSize: dateFontSize,
+                      ),
+                      GradeCard(
+                        grade: mood?.score,
+                        size: gradeSize,
+                        borderRadius: gradeSize * 0.3,
+                        fontSize: gradeSize * 0.5,
+                      ),
+                    ],
+                  ),
                 ],
               ),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

@@ -22,8 +22,8 @@ class _DeleteConfirmSheet extends StatelessWidget {
           MoodooButton(
             text: l10n.deleteMood,
             onTap: () => Navigator.of(context).pop(true),
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
+            backgroundColor: Colors.red.withValues(alpha: 0.15),
+            foregroundColor: Colors.red,
             padding: const EdgeInsets.symmetric(vertical: 16),
             bouncePeakScale: 1.04,
           ),
@@ -129,34 +129,42 @@ class _MoodSheetState extends State<MoodSheet> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: _grades.map((grade) {
-              final isSelected = _selected == grade;
-              return TapBounce(
-                onTap: () => setState(() => _selected = grade),
-                child: AnimatedContainer(
-                  duration: const Duration(milliseconds: 200),
-                  curve: Curves.easeOutCubic,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(18),
-                    border: Border.all(
-                      color: isSelected
-                          ? Theme.of(context).textTheme.displayLarge!.color!
-                          : Colors.transparent,
-                      width: 3,
+          LayoutBuilder(
+            builder: (context, constraints) {
+              const gap = 8.0;
+              const n = 6;
+              final cardOuter = (constraints.maxWidth - gap * (n - 1)) / n;
+              final cardInner = cardOuter - 6;
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: _grades.map((grade) {
+                  final isSelected = _selected == grade;
+                  return TapBounce(
+                    onTap: () => setState(() => _selected = grade),
+                    child: AnimatedContainer(
+                      duration: const Duration(milliseconds: 200),
+                      curve: Curves.easeOutCubic,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(cardOuter * 0.33),
+                        border: Border.all(
+                          color: isSelected
+                              ? Theme.of(context).textTheme.displayLarge!.color!
+                              : Colors.transparent,
+                          width: 3,
+                        ),
+                      ),
+                      padding: const EdgeInsets.all(3),
+                      child: GradeCard(
+                        grade: grade,
+                        size: cardInner,
+                        borderRadius: cardInner * 0.29,
+                        fontSize: cardInner * 0.46,
+                      ),
                     ),
-                  ),
-                  padding: const EdgeInsets.all(3),
-                  child: GradeCard(
-                    grade: grade,
-                    size: 48,
-                    borderRadius: 14,
-                    fontSize: 22,
-                  ),
-                ),
+                  );
+                }).toList(),
               );
-            }).toList(),
+            },
           ),
           const SizedBox(height: 10),
           MoodooText(
