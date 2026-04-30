@@ -132,7 +132,6 @@ class _HomePageFooterState extends State<HomePageFooter>
                         Expanded(
                           child: hasMood
                               ? Row(
-                                  mainAxisSize: MainAxisSize.min,
                                   children: [
                                     const SizedBox(width: 10),
                                     GradeCard(

@@ -54,7 +54,11 @@ Future<T?> showMoodooModal<T>(
                 ),
                 if (subtitle != null) ...[
                   const SizedBox(height: 8),
-                  MoodooText(subtitle, variant: MoodooTextVariant.titleSmall),
+                  MoodooText(
+                    subtitle,
+                    variant: MoodooTextVariant.titleSmall,
+                    textAlign: TextAlign.center,
+                  ),
                 ],
                 child,
               ],

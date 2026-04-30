@@ -15,6 +15,7 @@
   "settings": "paramètres",
   "signOut": "se déconnecter",
   "areYouSure": "êtes-vous sûr?",
+  "areYouSureReauth": "êtes-vous sûr ? vous devrez vous reconnecter pour confirmer",
   "cancel": "annuler",
   "theme": "thème",
   "light": "clair",
@@ -61,6 +62,11 @@
   "formatDayHeader": "{weekday}, {day} {month}",
   "formatDateLabel": "{day} {month} {year}",
   "addedOn": "ajouté le:",
+  "dangerZone": "zone dangereuse",
+  "deleteAllMoods": "supprimer toutes les humeurs",
+  "deleteAllMoodsDescription": "cela supprimera définitivement toutes vos entrées d'humeur. cette action est irréversible.",
+  "deleteAccount": "supprimer le compte",
+  "deleteAccountDescription": "cela supprimera définitivement toutes vos humeurs et votre compte. cette action est irréversible.",
   "formatDateTime": "{day} {month} {year} à {time}",
   "formatCreatedAt": "ajouté le {day} {month} {year} à {time}"
 }

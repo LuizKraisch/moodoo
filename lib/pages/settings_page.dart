@@ -6,6 +6,7 @@ import 'package:moodoo/theme_preferences.dart'
 import 'package:moodoo/widgets/moodoo_button.dart';
 import 'package:moodoo/widgets/moodoo_modal.dart';
 import 'package:moodoo/widgets/moodoo_text.dart';
+import 'package:moodoo/widgets/danger_zone.dart';
 import 'package:moodoo/widgets/settings_page_header.dart';
 import 'package:moodoo/services/auth_service.dart';
 
@@ -194,6 +195,17 @@ class SettingsPage extends StatelessWidget {
                     );
                   },
                 ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Divider(
+                    height: 70,
+                    thickness: 3,
+                    color: Theme.of(
+                      context,
+                    ).dividerColor.withValues(alpha: 0.3),
+                  ),
+                ),
+                const DangerZone(),
                 const Spacer(),
                 const SizedBox(height: 20),
                 MoodooButton(

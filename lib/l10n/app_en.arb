@@ -20,6 +20,7 @@
   "settings": "settings",
   "signOut": "sign out",
   "areYouSure": "are you sure?",
+  "areYouSureReauth": "are you sure? you'll be asked to sign in again to confirm",
   "cancel": "cancel",
   "theme": "theme",
   "light": "light",
@@ -85,6 +86,11 @@
     }
   },
   "addedOn": "added on:",
+  "dangerZone": "danger zone",
+  "deleteAllMoods": "delete all moods",
+  "deleteAllMoodsDescription": "this will permanently delete all your mood entries. this action cannot be undone.",
+  "deleteAccount": "delete account",
+  "deleteAccountDescription": "this will permanently delete all your moods and your account. this action cannot be undone.",
   "formatDateTime": "{month} {day}, {year} at {time}",
   "@formatDateTime": {
     "placeholders": {
