@@ -20,6 +20,7 @@
   "light": "claro",
   "dark": "escuro",
   "language": "idioma",
+  "changeLanguage": "alterar idioma",
   "english": "inglês",
   "portuguese": "português",
   "french": "francês",
@@ -59,5 +60,7 @@
 
   "formatDayHeader": "{weekday}, {day} de {month}",
   "formatDateLabel": "{day} de {month} de {year}",
+  "addedOn": "adicionado em:",
+  "formatDateTime": "{day} de {month} de {year} às {time}",
   "formatCreatedAt": "adicionado em {day} de {month} de {year} às {time}"
 }

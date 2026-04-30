@@ -17,12 +17,14 @@ class MoodooText extends StatelessWidget {
     required this.variant,
     this.fontSize,
     this.color,
+    this.textAlign,
   });
 
   final String text;
   final MoodooTextVariant variant;
   final double? fontSize;
   final Color? color;
+  final TextAlign? textAlign;
 
   TextStyle? _baseStyle(TextTheme tt) => switch (variant) {
     MoodooTextVariant.displayLarge => tt.displayLarge,
@@ -40,6 +42,6 @@ class MoodooText extends StatelessWidget {
     final style = (fontSize != null || color != null)
         ? base?.copyWith(fontSize: fontSize, color: color)
         : base;
-    return Text(text, style: style);
+    return Text(text, style: style, textAlign: textAlign);
   }
 }

@@ -129,7 +129,7 @@ class _HomePageFooterState extends State<HomePageFooter>
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Flexible(
+                        Expanded(
                           child: hasMood
                               ? Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -142,21 +142,29 @@ class _HomePageFooterState extends State<HomePageFooter>
                                       fontSize: 22,
                                     ),
                                     const SizedBox(width: 12),
-                                    Flexible(
-                                      child: MoodooText(
-                                        l10n.today,
-                                        variant:
-                                            MoodooTextVariant.headlineSmall,
-                                        color: Colors.white,
+                                    Expanded(
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        alignment: Alignment.centerLeft,
+                                        child: MoodooText(
+                                          l10n.today,
+                                          variant:
+                                              MoodooTextVariant.headlineSmall,
+                                          color: Colors.white,
+                                        ),
                                       ),
                                     ),
                                   ],
                                 )
                               : Padding(
                                   padding: const EdgeInsets.only(left: 10),
-                                  child: MoodooText(
-                                    l10n.noMoodToday,
-                                    variant: MoodooTextVariant.headlineSmall,
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    alignment: Alignment.centerLeft,
+                                    child: MoodooText(
+                                      l10n.noMoodToday,
+                                      variant: MoodooTextVariant.headlineSmall,
+                                    ),
                                   ),
                                 ),
                         ),

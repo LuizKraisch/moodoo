@@ -25,6 +25,7 @@
   "light": "light",
   "dark": "dark",
   "language": "language",
+  "changeLanguage": "change language",
   "english": "english",
   "portuguese": "portuguese",
   "french": "french",
@@ -81,6 +82,16 @@
       "month": { "type": "String" },
       "day": { "type": "int" },
       "year": { "type": "int" }
+    }
+  },
+  "addedOn": "added on:",
+  "formatDateTime": "{month} {day}, {year} at {time}",
+  "@formatDateTime": {
+    "placeholders": {
+      "month": { "type": "String" },
+      "day": { "type": "int" },
+      "year": { "type": "int" },
+      "time": { "type": "String" }
     }
   },
   "formatCreatedAt": "added on {month} {day}, {year} at {time}",

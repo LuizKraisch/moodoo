@@ -46,6 +46,47 @@ class _SignOutSheet extends StatelessWidget {
   }
 }
 
+class _LanguageSheet extends StatelessWidget {
+  const _LanguageSheet({required this.languages, required this.currentCode});
+
+  final Map<String, String> languages;
+  final String currentCode;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(0, 24, 0, 40),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: languages.entries.map((e) {
+          final isSelected = e.key == currentCode;
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 10),
+            child: MoodooButton(
+              text: e.value,
+              bouncePeakScale: 1.04,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              backgroundColor: isSelected
+                  ? Theme.of(context).textTheme.displayLarge!.color!
+                  : Theme.of(
+                      context,
+                    ).colorScheme.secondary.withValues(alpha: 0.15),
+              foregroundColor: isSelected
+                  ? Theme.of(context).colorScheme.surface
+                  : Theme.of(context).textTheme.titleMedium!.color!,
+              onTap: () {
+                localeNotifier.value = Locale(e.key);
+                saveLocale(e.key);
+                Navigator.of(context).pop();
+              },
+            ),
+          );
+        }).toList(),
+      ),
+    );
+  }
+}
+
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
 
@@ -132,46 +173,24 @@ class SettingsPage extends StatelessWidget {
                       'de': l10n.german,
                       'es': l10n.spanish,
                     };
-                    final bgColor = Theme.of(context).colorScheme.primary;
-                    final textColor = Theme.of(context).colorScheme.onPrimary;
-                    return Container(
-                      height: 40,
-                      decoration: BoxDecoration(
-                        color: bgColor,
-                        borderRadius: BorderRadius.circular(50),
+                    return MoodooButton(
+                      text: l10n.changeLanguage,
+                      fullWidth: false,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 10,
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 14),
-                      child: DropdownButtonHideUnderline(
-                        child: DropdownButton<String>(
-                          value: locale.languageCode,
-                          dropdownColor: bgColor,
-                          iconEnabledColor: textColor,
-                          borderRadius: BorderRadius.circular(16),
-                          isDense: true,
-                          alignment: Alignment.center,
-                          items: languages.entries
-                              .map(
-                                (e) => DropdownMenuItem(
-                                  value: e.key,
-                                  alignment: Alignment.center,
-                                  child: Text(
-                                    e.value,
-                                    style: TextStyle(
-                                      color: textColor,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w300,
-                                    ),
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                          onChanged: (code) {
-                            if (code == null) return;
-                            localeNotifier.value = Locale(code);
-                            saveLocale(code);
-                          },
-                        ),
-                      ),
+                      bouncePeakScale: 1.04,
+                      onTap: () {
+                        showMoodooModal<void>(
+                          context,
+                          title: l10n.language,
+                          child: _LanguageSheet(
+                            languages: languages,
+                            currentCode: locale.languageCode,
+                          ),
+                        );
+                      },
                     );
                   },
                 ),

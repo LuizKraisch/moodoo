@@ -10,10 +10,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get loginSubtitle =>
-      'verfolge deine Tage, erstelle deinen eigenen Stimmungskalender';
+      'verfolge deine tage, erstelle deinen eigenen stimmungskalender';
 
   @override
-  String get loginWithGoogle => 'mit Google anmelden';
+  String get loginWithGoogle => 'mit google anmelden';
 
   @override
   String hiUser(String name) {
@@ -21,22 +21,22 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get moodOverview => 'hier ist deine Stimmungsübersicht';
+  String get moodOverview => 'hier ist deine stimmungsübersicht';
 
   @override
   String get today => 'heute';
 
   @override
-  String get noMoodToday => 'du hast deine Stimmung heute nicht hinzugefügt';
+  String get noMoodToday => 'du hast deine stimmung heute nicht hinzugefügt';
 
   @override
-  String get addMood => 'Stimmung hinzufügen';
+  String get addMood => 'stimmung hinzufügen';
 
   @override
-  String get editMood => 'Stimmung bearbeiten';
+  String get editMood => 'stimmung bearbeiten';
 
   @override
-  String get settings => 'Einstellungen';
+  String get settings => 'einstellungen';
 
   @override
   String get signOut => 'abmelden';
@@ -48,7 +48,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get cancel => 'abbrechen';
 
   @override
-  String get theme => 'Thema';
+  String get theme => 'thema';
 
   @override
   String get light => 'hell';
@@ -57,22 +57,25 @@ class AppLocalizationsDe extends AppLocalizations {
   String get dark => 'dunkel';
 
   @override
-  String get language => 'Sprache';
+  String get language => 'sprache';
 
   @override
-  String get english => 'Englisch';
+  String get changeLanguage => 'sprache ändern';
 
   @override
-  String get portuguese => 'Portugiesisch';
+  String get english => 'englisch';
 
   @override
-  String get french => 'Französisch';
+  String get portuguese => 'portugiesisch';
 
   @override
-  String get german => 'Deutsch';
+  String get french => 'französisch';
 
   @override
-  String get spanish => 'Spanisch';
+  String get german => 'deutsch';
+
+  @override
+  String get spanish => 'spanisch';
 
   @override
   String loggedAs(String email) {
@@ -80,82 +83,82 @@ class AppLocalizationsDe extends AppLocalizations {
   }
 
   @override
-  String get averageMood => 'durchschnittliche Stimmung';
+  String get averageMood => 'durchschnittliche stimmung';
 
   @override
   String get howAreYouFeelingToday => 'wie fühlst du dich heute?';
 
   @override
-  String get howDidYouFeelThatDay => 'wie hast du dich an diesem Tag gefühlt?';
+  String get howDidYouFeelThatDay => 'wie hast du dich an diesem tag gefühlt?';
 
   @override
   String get writeNotes => 'schreibe etwas darüber... (optional)';
 
   @override
-  String get saveChanges => 'Änderungen speichern';
+  String get saveChanges => 'änderungen speichern';
 
   @override
-  String get saveMood => 'Stimmung speichern';
+  String get saveMood => 'stimmung speichern';
 
   @override
-  String get deleteMood => 'Stimmung löschen';
+  String get deleteMood => 'stimmung löschen';
 
   @override
-  String get monthJanuary => 'Januar';
+  String get monthJanuary => 'januar';
 
   @override
-  String get monthFebruary => 'Februar';
+  String get monthFebruary => 'februar';
 
   @override
-  String get monthMarch => 'März';
+  String get monthMarch => 'märz';
 
   @override
-  String get monthApril => 'April';
+  String get monthApril => 'april';
 
   @override
-  String get monthMay => 'Mai';
+  String get monthMay => 'mai';
 
   @override
-  String get monthJune => 'Juni';
+  String get monthJune => 'juni';
 
   @override
-  String get monthJuly => 'Juli';
+  String get monthJuly => 'juli';
 
   @override
-  String get monthAugust => 'August';
+  String get monthAugust => 'august';
 
   @override
-  String get monthSeptember => 'September';
+  String get monthSeptember => 'september';
 
   @override
-  String get monthOctober => 'Oktober';
+  String get monthOctober => 'oktober';
 
   @override
-  String get monthNovember => 'November';
+  String get monthNovember => 'november';
 
   @override
-  String get monthDecember => 'Dezember';
+  String get monthDecember => 'dezember';
 
   @override
-  String get weekdayMonday => 'Montag';
+  String get weekdayMonday => 'montag';
 
   @override
-  String get weekdayTuesday => 'Dienstag';
+  String get weekdayTuesday => 'dienstag';
 
   @override
-  String get weekdayWednesday => 'Mittwoch';
+  String get weekdayWednesday => 'mittwoch';
 
   @override
-  String get weekdayThursday => 'Donnerstag';
+  String get weekdayThursday => 'donnerstag';
 
   @override
-  String get weekdayFriday => 'Freitag';
+  String get weekdayFriday => 'freitag';
 
   @override
-  String get weekdaySaturday => 'Samstag';
+  String get weekdaySaturday => 'samstag';
 
   @override
-  String get weekdaySunday => 'Sonntag';
+  String get weekdaySunday => 'sonntag';
 
   @override
   String formatDayHeader(String weekday, String month, int day) {
@@ -165,6 +168,14 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String formatDateLabel(String month, int day, int year) {
     return '$day. $month $year';
+  }
+
+  @override
+  String get addedOn => 'hinzugefügt am:';
+
+  @override
+  String formatDateTime(String month, int day, int year, String time) {
+    return '$day. $month $year um $time';
   }
 
   @override

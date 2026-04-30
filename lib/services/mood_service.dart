@@ -48,8 +48,18 @@ class MoodService {
 
   static String monthName(AppLocalizations l10n, int month) {
     const names = [
-      'january', 'february', 'march', 'april', 'may', 'june',
-      'july', 'august', 'september', 'october', 'november', 'december',
+      'january',
+      'february',
+      'march',
+      'april',
+      'may',
+      'june',
+      'july',
+      'august',
+      'september',
+      'october',
+      'november',
+      'december',
     ];
     final key = names[month - 1];
     return _monthByKey(l10n, key);
@@ -57,8 +67,13 @@ class MoodService {
 
   static String weekdayName(AppLocalizations l10n, int weekday) {
     const names = [
-      'monday', 'tuesday', 'wednesday', 'thursday',
-      'friday', 'saturday', 'sunday',
+      'monday',
+      'tuesday',
+      'wednesday',
+      'thursday',
+      'friday',
+      'saturday',
+      'sunday',
     ];
     final key = names[weekday - 1];
     return _weekdayByKey(l10n, key);
@@ -72,50 +87,76 @@ class MoodService {
       );
 
   static String formatDateLabel(AppLocalizations l10n, DateTime date) =>
-      l10n.formatDateLabel(
-        monthName(l10n, date.month),
-        date.day,
-        date.year,
-      );
+      l10n.formatDateLabel(monthName(l10n, date.month), date.day, date.year);
 
-  static String formatCreatedAt(AppLocalizations l10n, DateTime datetime) {
+  static String _timeString(DateTime datetime) {
     final hour = datetime.hour % 12 == 0 ? 12 : datetime.hour % 12;
     final ampm = datetime.hour >= 12 ? 'PM' : 'AM';
     final minute = datetime.minute.toString().padLeft(2, '0');
-    return l10n.formatCreatedAt(
-      monthName(l10n, datetime.month),
-      datetime.day,
-      datetime.year,
-      '$hour:$minute $ampm',
-    );
+    return '$hour:$minute $ampm';
   }
+
+  static String formatCreatedAt(AppLocalizations l10n, DateTime datetime) =>
+      l10n.formatCreatedAt(
+        monthName(l10n, datetime.month),
+        datetime.day,
+        datetime.year,
+        _timeString(datetime),
+      );
+
+  static String formatDateTime(AppLocalizations l10n, DateTime datetime) =>
+      l10n.formatDateTime(
+        monthName(l10n, datetime.month),
+        datetime.day,
+        datetime.year,
+        _timeString(datetime),
+      );
 
   static String _monthByKey(AppLocalizations l10n, String key) {
     switch (key) {
-      case 'january': return l10n.monthJanuary;
-      case 'february': return l10n.monthFebruary;
-      case 'march': return l10n.monthMarch;
-      case 'april': return l10n.monthApril;
-      case 'may': return l10n.monthMay;
-      case 'june': return l10n.monthJune;
-      case 'july': return l10n.monthJuly;
-      case 'august': return l10n.monthAugust;
-      case 'september': return l10n.monthSeptember;
-      case 'october': return l10n.monthOctober;
-      case 'november': return l10n.monthNovember;
-      default: return l10n.monthDecember;
+      case 'january':
+        return l10n.monthJanuary;
+      case 'february':
+        return l10n.monthFebruary;
+      case 'march':
+        return l10n.monthMarch;
+      case 'april':
+        return l10n.monthApril;
+      case 'may':
+        return l10n.monthMay;
+      case 'june':
+        return l10n.monthJune;
+      case 'july':
+        return l10n.monthJuly;
+      case 'august':
+        return l10n.monthAugust;
+      case 'september':
+        return l10n.monthSeptember;
+      case 'october':
+        return l10n.monthOctober;
+      case 'november':
+        return l10n.monthNovember;
+      default:
+        return l10n.monthDecember;
     }
   }
 
   static String _weekdayByKey(AppLocalizations l10n, String key) {
     switch (key) {
-      case 'monday': return l10n.weekdayMonday;
-      case 'tuesday': return l10n.weekdayTuesday;
-      case 'wednesday': return l10n.weekdayWednesday;
-      case 'thursday': return l10n.weekdayThursday;
-      case 'friday': return l10n.weekdayFriday;
-      case 'saturday': return l10n.weekdaySaturday;
-      default: return l10n.weekdaySunday;
+      case 'monday':
+        return l10n.weekdayMonday;
+      case 'tuesday':
+        return l10n.weekdayTuesday;
+      case 'wednesday':
+        return l10n.weekdayWednesday;
+      case 'thursday':
+        return l10n.weekdayThursday;
+      case 'friday':
+        return l10n.weekdayFriday;
+      case 'saturday':
+        return l10n.weekdaySaturday;
+      default:
+        return l10n.weekdaySunday;
     }
   }
 }
