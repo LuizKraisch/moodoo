@@ -200,6 +200,12 @@ abstract class AppLocalizations {
   /// **'language'**
   String get language;
 
+  /// No description provided for @changeLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'change language'**
+  String get changeLanguage;
+
   /// No description provided for @english.
   ///
   /// In en, this message translates to:
@@ -403,6 +409,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{month} {day}, {year}'**
   String formatDateLabel(String month, int day, int year);
+
+  /// No description provided for @addedOn.
+  ///
+  /// In en, this message translates to:
+  /// **'added on:'**
+  String get addedOn;
+
+  /// No description provided for @formatDateTime.
+  ///
+  /// In en, this message translates to:
+  /// **'{month} {day}, {year} at {time}'**
+  String formatDateTime(String month, int day, int year, String time);
 
   /// No description provided for @formatCreatedAt.
   ///

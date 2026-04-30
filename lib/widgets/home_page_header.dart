@@ -45,24 +45,35 @@ class HomePageHeader extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        MoodooText(
-                          l10n.hiUser(firstName),
-                          variant: MoodooTextVariant.displayLarge,
-                          fontSize: 22,
-                        ),
-                        MoodooText(
-                          l10n.moodOverview,
-                          variant: MoodooTextVariant.titleMedium,
-                          fontSize: 16,
-                        ),
-                      ],
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(8.0, 0, 0, 0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            alignment: Alignment.centerLeft,
+                            child: MoodooText(
+                              l10n.hiUser(firstName),
+                              variant: MoodooTextVariant.displayLarge,
+                              fontSize: 22,
+                            ),
+                          ),
+                          FittedBox(
+                            fit: BoxFit.scaleDown,
+                            alignment: Alignment.centerLeft,
+                            child: MoodooText(
+                              l10n.moodOverview,
+                              variant: MoodooTextVariant.titleMedium,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
+                  const SizedBox(width: 12),
                   TapBounce(
                     onTap: () => Navigator.push(
                       context,

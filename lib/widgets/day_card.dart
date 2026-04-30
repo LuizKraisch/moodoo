@@ -39,8 +39,8 @@ class DayCard extends StatelessWidget {
         builder: (context, constraints) {
           final w = constraints.maxWidth - 12;
           final padding = (w * 0.1).clamp(8.0, 15.0);
-          final gradeSize = (w * 0.35).clamp(26.0, 48.0);
-          final dateFontSize = (w * 0.2).clamp(14.0, 30.0);
+          final gradeSize = (w * 0.44).clamp(32.0, 58.0);
+          final dateFontSize = (w * 0.23).clamp(16.0, 32.0);
           return Container(
             margin: const EdgeInsets.all(6),
             decoration: BoxDecoration(

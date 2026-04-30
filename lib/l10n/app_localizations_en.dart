@@ -59,6 +59,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get language => 'language';
 
   @override
+  String get changeLanguage => 'change language';
+
+  @override
   String get english => 'english';
 
   @override
@@ -164,6 +167,14 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String formatDateLabel(String month, int day, int year) {
     return '$month $day, $year';
+  }
+
+  @override
+  String get addedOn => 'added on:';
+
+  @override
+  String formatDateTime(String month, int day, int year, String time) {
+    return '$month $day, $year at $time';
   }
 
   @override
