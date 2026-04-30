@@ -62,4 +62,17 @@ class FirebaseService {
   Future<void> deleteMood(String moodId) async {
     await _firestore.collection("moods").doc(moodId).delete();
   }
+
+  Future<void> deleteAllMoods() async {
+    final uid = _auth.currentUser!.uid;
+    final snapshot = await _firestore
+        .collection("moods")
+        .where("userId", isEqualTo: uid)
+        .get();
+    final batch = _firestore.batch();
+    for (final doc in snapshot.docs) {
+      batch.delete(doc.reference);
+    }
+    await batch.commit();
+  }
 }

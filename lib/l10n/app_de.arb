@@ -15,6 +15,7 @@
   "settings": "einstellungen",
   "signOut": "abmelden",
   "areYouSure": "bist du sicher?",
+  "areYouSureReauth": "bist du sicher? du wirst gebeten, dich zur bestätigung erneut anzumelden",
   "cancel": "abbrechen",
   "theme": "thema",
   "light": "hell",
@@ -61,6 +62,11 @@
   "formatDayHeader": "{weekday}, {day}. {month}",
   "formatDateLabel": "{day}. {month} {year}",
   "addedOn": "hinzugefügt am:",
+  "dangerZone": "gefahrenzone",
+  "deleteAllMoods": "alle stimmungen löschen",
+  "deleteAllMoodsDescription": "dies löscht dauerhaft alle deine stimmungseinträge. diese aktion kann nicht rückgängig gemacht werden.",
+  "deleteAccount": "konto löschen",
+  "deleteAccountDescription": "dies löscht dauerhaft alle deine stimmungen und dein konto. diese aktion kann nicht rückgängig gemacht werden.",
   "formatDateTime": "{day}. {month} {year} um {time}",
   "formatCreatedAt": "hinzugefügt am {day}. {month} {year} um {time}"
 }

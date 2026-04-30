@@ -45,6 +45,10 @@ class AppLocalizationsPt extends AppLocalizations {
   String get areYouSure => 'tem certeza?';
 
   @override
+  String get areYouSureReauth =>
+      'tem certeza? você precisará entrar novamente para confirmar';
+
+  @override
   String get cancel => 'cancelar';
 
   @override
@@ -172,6 +176,23 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get addedOn => 'adicionado em:';
+
+  @override
+  String get dangerZone => 'zona de perigo';
+
+  @override
+  String get deleteAllMoods => 'excluir todos os moods';
+
+  @override
+  String get deleteAllMoodsDescription =>
+      'isso excluirá permanentemente todos os seus registros de humor. esta ação não pode ser desfeita.';
+
+  @override
+  String get deleteAccount => 'excluir conta';
+
+  @override
+  String get deleteAccountDescription =>
+      'isso excluirá permanentemente todos os seus moods e sua conta. esta ação não pode ser desfeita.';
 
   @override
   String formatDateTime(String month, int day, int year, String time) {

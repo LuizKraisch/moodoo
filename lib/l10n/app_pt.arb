@@ -15,6 +15,7 @@
   "settings": "configurações",
   "signOut": "sair",
   "areYouSure": "tem certeza?",
+  "areYouSureReauth": "tem certeza? você precisará entrar novamente para confirmar",
   "cancel": "cancelar",
   "theme": "tema",
   "light": "claro",
@@ -61,6 +62,11 @@
   "formatDayHeader": "{weekday}, {day} de {month}",
   "formatDateLabel": "{day} de {month} de {year}",
   "addedOn": "adicionado em:",
+  "dangerZone": "zona de perigo",
+  "deleteAllMoods": "excluir todos os moods",
+  "deleteAllMoodsDescription": "isso excluirá permanentemente todos os seus registros de humor. esta ação não pode ser desfeita.",
+  "deleteAccount": "excluir conta",
+  "deleteAccountDescription": "isso excluirá permanentemente todos os seus moods e sua conta. esta ação não pode ser desfeita.",
   "formatDateTime": "{day} de {month} de {year} às {time}",
   "formatCreatedAt": "adicionado em {day} de {month} de {year} às {time}"
 }

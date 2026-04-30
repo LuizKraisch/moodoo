@@ -44,6 +44,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get areYouSure => 'are you sure?';
 
   @override
+  String get areYouSureReauth =>
+      'are you sure? you\'ll be asked to sign in again to confirm';
+
+  @override
   String get cancel => 'cancel';
 
   @override
@@ -171,6 +175,23 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addedOn => 'added on:';
+
+  @override
+  String get dangerZone => 'danger zone';
+
+  @override
+  String get deleteAllMoods => 'delete all moods';
+
+  @override
+  String get deleteAllMoodsDescription =>
+      'this will permanently delete all your mood entries. this action cannot be undone.';
+
+  @override
+  String get deleteAccount => 'delete account';
+
+  @override
+  String get deleteAccountDescription =>
+      'this will permanently delete all your moods and your account. this action cannot be undone.';
 
   @override
   String formatDateTime(String month, int day, int year, String time) {

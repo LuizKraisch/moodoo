@@ -170,6 +170,12 @@ abstract class AppLocalizations {
   /// **'are you sure?'**
   String get areYouSure;
 
+  /// No description provided for @areYouSureReauth.
+  ///
+  /// In en, this message translates to:
+  /// **'are you sure? you\'ll be asked to sign in again to confirm'**
+  String get areYouSureReauth;
+
   /// No description provided for @cancel.
   ///
   /// In en, this message translates to:
@@ -415,6 +421,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'added on:'**
   String get addedOn;
+
+  /// No description provided for @dangerZone.
+  ///
+  /// In en, this message translates to:
+  /// **'danger zone'**
+  String get dangerZone;
+
+  /// No description provided for @deleteAllMoods.
+  ///
+  /// In en, this message translates to:
+  /// **'delete all moods'**
+  String get deleteAllMoods;
+
+  /// No description provided for @deleteAllMoodsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'this will permanently delete all your mood entries. this action cannot be undone.'**
+  String get deleteAllMoodsDescription;
+
+  /// No description provided for @deleteAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'delete account'**
+  String get deleteAccount;
+
+  /// No description provided for @deleteAccountDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'this will permanently delete all your moods and your account. this action cannot be undone.'**
+  String get deleteAccountDescription;
 
   /// No description provided for @formatDateTime.
   ///

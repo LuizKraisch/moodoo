@@ -15,6 +15,7 @@
   "settings": "configuración",
   "signOut": "cerrar sesión",
   "areYouSure": "¿estás seguro?",
+  "areYouSureReauth": "¿estás seguro? tendrás que iniciar sesión de nuevo para confirmar",
   "cancel": "cancelar",
   "theme": "tema",
   "light": "claro",
@@ -61,6 +62,11 @@
   "formatDayHeader": "{weekday}, {day} de {month}",
   "formatDateLabel": "{day} de {month} de {year}",
   "addedOn": "agregado el:",
+  "dangerZone": "zona de peligro",
+  "deleteAllMoods": "eliminar todos los estados de ánimo",
+  "deleteAllMoodsDescription": "esto eliminará permanentemente todos tus registros de estado de ánimo. esta acción no se puede deshacer.",
+  "deleteAccount": "eliminar cuenta",
+  "deleteAccountDescription": "esto eliminará permanentemente todos tus estados de ánimo y tu cuenta. esta acción no se puede deshacer.",
   "formatDateTime": "{day} de {month} de {year} a las {time}",
   "formatCreatedAt": "agregado el {day} de {month} de {year} a las {time}"
 }
