@@ -107,6 +107,8 @@ class SettingsPage extends StatelessWidget {
 
     try {
       await authService.signOutFromGoogle();
+      themeModeNotifier.value = ThemeMode.dark;
+      await saveTheme(ThemeMode.dark);
       // ignore: use_build_context_synchronously
       Navigator.of(context).popUntil((route) => route.isFirst);
     } catch (e) {

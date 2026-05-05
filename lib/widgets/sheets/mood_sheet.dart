@@ -193,9 +193,8 @@ class _MoodSheetState extends State<MoodSheet> {
           const SizedBox(height: 16),
           MoodooButton(
             text: _isEditing ? l10n.saveChanges : l10n.saveMood,
-            onTap: (_selected == null || _isLoading || !_hasChanges)
-                ? null
-                : _save,
+            onTap: (_selected == null || !_hasChanges) ? null : _save,
+            isLoading: _isLoading,
             backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
             foregroundColor: Theme.of(context).colorScheme.surface,
             disabledBackgroundColor: Theme.of(

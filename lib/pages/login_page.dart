@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/services/auth_service.dart';
+import 'package:moodoo/theme_preferences.dart'
+    show themeModeNotifier, saveTheme;
 import 'package:moodoo/widgets/login_page_presentation.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
 import 'package:moodoo/widgets/sheets/moodoo_error_sheet.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
-  void login(BuildContext context) async {
-    final authService = AuthService();
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
 
+class _LoginPageState extends State<LoginPage> {
+  bool _isLoading = false;
+
+  Future<void> login() async {
+    setState(() => _isLoading = true);
     try {
-      await authService.signInWithGoogle();
+      await AuthService().signInWithGoogle();
+      themeModeNotifier.value = ThemeMode.system;
+      await saveTheme(ThemeMode.system);
     } catch (e) {
-      // ignore: use_build_context_synchronously
-      showMoodooErrorSheet(context, e);
+      if (mounted) showMoodooErrorSheet(context, e);
+    } finally {
+      if (mounted) setState(() => _isLoading = false);
     }
   }
 
@@ -38,10 +49,19 @@ class LoginPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MoodooText(
-                    'moodoo',
-                    variant: MoodooTextVariant.displayLarge,
-                    fontSize: 50,
+                  Row(
+                    children: [
+                      Image.asset(
+                        'assets/logos/moodoo-cow-light.png',
+                        height: 50,
+                      ),
+                      const SizedBox(width: 10),
+                      MoodooText(
+                        'moodoo',
+                        variant: MoodooTextVariant.displayLarge,
+                        fontSize: 50,
+                      ),
+                    ],
                   ),
                   const SizedBox(height: 5),
                   MoodooText(
@@ -52,9 +72,10 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(height: 20),
                   MoodooButton(
                     text: l10n.loginWithGoogle,
-                    onTap: () => login(context),
+                    onTap: login,
+                    isLoading: _isLoading,
                     backgroundColor: Colors.white,
-                    foregroundColor: Colors.black,
+                    foregroundColor: Color(0xFF1C1C1C),
                     leading: Image.asset(
                       'assets/logos/google-g-logo.png',
                       height: 22,

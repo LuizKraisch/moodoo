@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:moodoo/widgets/shared/tap_bounce.dart';
 
 class MoodooButton extends StatelessWidget {
@@ -14,6 +15,7 @@ class MoodooButton extends StatelessWidget {
     this.fullWidth = true,
     this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
     this.bouncePeakScale = 1.22,
+    this.isLoading = false,
   });
 
   final String text;
@@ -26,11 +28,12 @@ class MoodooButton extends StatelessWidget {
   final bool fullWidth;
   final EdgeInsetsGeometry padding;
   final double bouncePeakScale;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return TapBounce(
-      onTap: onTap,
+      onTap: isLoading ? null : onTap,
       peakScale: bouncePeakScale,
       child: FilledButton(
         onPressed: onTap == null ? null : () {},
@@ -43,7 +46,18 @@ class MoodooButton extends StatelessWidget {
           minimumSize: fullWidth ? const Size(double.infinity, 0) : null,
           padding: padding,
         ),
-        child: leading != null
+        child: isLoading
+            ? SizedBox(
+                height: 20,
+                width: 20,
+                child: LoadingAnimationWidget.threeRotatingDots(
+                  color:
+                      foregroundColor ??
+                      Theme.of(context).colorScheme.onPrimary,
+                  size: 25,
+                ),
+              )
+            : leading != null
             ? Row(
                 mainAxisSize: MainAxisSize.max,
                 mainAxisAlignment: MainAxisAlignment.center,
