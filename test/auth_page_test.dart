@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/pages/auth_gate.dart';
 
 void main() {
@@ -10,6 +11,8 @@ void main() {
     // Pass a fake stream so Firebase.initializeApp() is not required
     await tester.pumpWidget(
       MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         home: AuthGate(authStream: Stream<User?>.value(null)),
       ),
     );
