@@ -27,13 +27,13 @@ class AppLocalizationsFr extends AppLocalizations {
   String get today => 'aujourd\'hui';
 
   @override
-  String get noMoodToday => 'vous n\'avez pas ajouté votre humeur aujourd\'hui';
+  String get noMoodToday => 'pas de mood aujourd\'hui';
 
   @override
-  String get addMood => 'ajouter humeur';
+  String get addMood => 'ajouter mood';
 
   @override
-  String get editMood => 'modifier humeur';
+  String get editMood => 'modifier mood';
 
   @override
   String get settings => 'paramètres';

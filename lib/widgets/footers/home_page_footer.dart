@@ -157,9 +157,8 @@ class _HomePageFooterState extends State<HomePageFooter>
                                 )
                               : Padding(
                                   padding: const EdgeInsets.only(left: 10),
-                                  child: FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    alignment: Alignment.centerLeft,
+                                  child: SizedBox(
+                                    width: 10,
                                     child: MoodooText(
                                       l10n.noMoodToday,
                                       variant: MoodooTextVariant.headlineSmall,

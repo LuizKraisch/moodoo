@@ -5,12 +5,12 @@
   "loginWithGoogle": "iniciar sesión con Google",
 
   "hiUser": "hola, {name}!",
-  "moodOverview": "aquí está tu resumen de estado de ánimo",
+  "moodOverview": "aquí está tu resumen",
 
   "today": "hoy",
-  "noMoodToday": "no agregaste tu estado de ánimo hoy",
-  "addMood": "agregar estado de ánimo",
-  "editMood": "editar estado de ánimo",
+  "noMoodToday": "sin mood hoy",
+  "addMood": "agregar mood",
+  "editMood": "editar mood",
 
   "settings": "configuración",
   "signOut": "cerrar sesión",

@@ -26,7 +26,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get today => 'today';
 
   @override
-  String get noMoodToday => 'you didn\'t add your mood for today';
+  String get noMoodToday => 'no mood today';
 
   @override
   String get addMood => 'add mood';

@@ -21,19 +21,19 @@ class AppLocalizationsEs extends AppLocalizations {
   }
 
   @override
-  String get moodOverview => 'aquí está tu resumen de estado de ánimo';
+  String get moodOverview => 'aquí está tu resumen';
 
   @override
   String get today => 'hoy';
 
   @override
-  String get noMoodToday => 'no agregaste tu estado de ánimo hoy';
+  String get noMoodToday => 'sin mood hoy';
 
   @override
-  String get addMood => 'agregar estado de ánimo';
+  String get addMood => 'agregar mood';
 
   @override
-  String get editMood => 'editar estado de ánimo';
+  String get editMood => 'editar mood';
 
   @override
   String get settings => 'configuración';

@@ -8,9 +8,9 @@
   "moodOverview": "voici votre aperçu d'humeur",
 
   "today": "aujourd'hui",
-  "noMoodToday": "vous n'avez pas ajouté votre humeur aujourd'hui",
-  "addMood": "ajouter humeur",
-  "editMood": "modifier humeur",
+  "noMoodToday": "pas de mood aujourd'hui",
+  "addMood": "ajouter mood",
+  "editMood": "modifier mood",
 
   "settings": "paramètres",
   "signOut": "se déconnecter",

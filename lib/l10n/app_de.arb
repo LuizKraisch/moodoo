@@ -8,9 +8,9 @@
   "moodOverview": "hier ist deine stimmungsübersicht",
 
   "today": "heute",
-  "noMoodToday": "du hast deine stimmung heute nicht hinzugefügt",
-  "addMood": "stimmung hinzufügen",
-  "editMood": "stimmung bearbeiten",
+  "noMoodToday": "kein mood heute",
+  "addMood": "mood hinzufügen",
+  "editMood": "mood bearbeiten",
 
   "settings": "einstellungen",
   "signOut": "abmelden",

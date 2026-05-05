@@ -137,7 +137,7 @@ abstract class AppLocalizations {
   /// No description provided for @noMoodToday.
   ///
   /// In en, this message translates to:
-  /// **'you didn\'t add your mood for today'**
+  /// **'no mood today'**
   String get noMoodToday;
 
   /// No description provided for @addMood.
