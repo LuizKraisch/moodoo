@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/mood_service.dart';
-import 'package:moodoo/widgets/grade_card.dart';
-import 'package:moodoo/widgets/moodoo_text.dart';
-import 'package:moodoo/widgets/tap_bounce.dart';
+import 'package:moodoo/widgets/shared/grade_card.dart';
+import 'package:moodoo/widgets/shared/moodoo_text.dart';
+import 'package:moodoo/widgets/shared/tap_bounce.dart';
 
 class DayCard extends StatelessWidget {
   final DateTime date;

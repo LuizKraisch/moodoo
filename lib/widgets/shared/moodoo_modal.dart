@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moodoo/widgets/moodoo_text.dart';
+import 'package:moodoo/widgets/shared/moodoo_text.dart';
 
 Future<T?> showMoodooModal<T>(
   BuildContext context, {

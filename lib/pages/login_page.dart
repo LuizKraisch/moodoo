@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/services/auth_service.dart';
 import 'package:moodoo/widgets/login_page_presentation.dart';
-import 'package:moodoo/widgets/moodoo_button.dart';
-import 'package:moodoo/widgets/moodoo_error_sheet.dart';
-import 'package:moodoo/widgets/moodoo_text.dart';
+import 'package:moodoo/widgets/shared/moodoo_button.dart';
+import 'package:moodoo/widgets/sheets/moodoo_error_sheet.dart';
+import 'package:moodoo/widgets/shared/moodoo_text.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});

@@ -19,9 +19,10 @@ class _MonthCardSkeletonState extends State<MonthCardSkeleton>
       vsync: this,
       duration: const Duration(milliseconds: 900),
     )..repeat(reverse: true);
-    _animation = Tween<double>(begin: 0.4, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _animation = Tween<double>(
+      begin: 0.4,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -32,7 +33,9 @@ class _MonthCardSkeletonState extends State<MonthCardSkeleton>
 
   @override
   Widget build(BuildContext context) {
-    final shimmer = Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3);
+    final shimmer = Theme.of(
+      context,
+    ).colorScheme.secondary.withValues(alpha: 0.3);
     return AnimatedBuilder(
       animation: _animation,
       builder: (_, _) => Opacity(

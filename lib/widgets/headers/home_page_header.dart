@@ -3,8 +3,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/pages/settings_page.dart';
-import 'package:moodoo/widgets/moodoo_text.dart';
-import 'package:moodoo/widgets/tap_bounce.dart';
+import 'package:moodoo/widgets/shared/moodoo_text.dart';
+import 'package:moodoo/widgets/shared/tap_bounce.dart';
 
 class HomePageHeader extends StatelessWidget {
   const HomePageHeader({super.key});

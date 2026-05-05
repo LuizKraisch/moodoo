@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/mood_service.dart';
-import 'package:moodoo/widgets/mood_sheet.dart';
-import 'package:moodoo/widgets/grade_card.dart';
-import 'package:moodoo/widgets/moodoo_button.dart';
-import 'package:moodoo/widgets/moodoo_modal.dart';
-import 'package:moodoo/widgets/moodoo_text.dart';
+import 'package:moodoo/widgets/sheets/mood_sheet.dart';
+import 'package:moodoo/widgets/shared/grade_card.dart';
+import 'package:moodoo/widgets/shared/moodoo_button.dart';
+import 'package:moodoo/widgets/shared/moodoo_modal.dart';
+import 'package:moodoo/widgets/shared/moodoo_text.dart';
 
 class DayExpandedPanel extends StatelessWidget {
   final DateTime date;

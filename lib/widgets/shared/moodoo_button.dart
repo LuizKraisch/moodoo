@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moodoo/widgets/tap_bounce.dart';
+import 'package:moodoo/widgets/shared/tap_bounce.dart';
 
 class MoodooButton extends StatelessWidget {
   const MoodooButton({

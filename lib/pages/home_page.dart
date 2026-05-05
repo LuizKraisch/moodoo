@@ -4,11 +4,11 @@ import 'package:moodoo/pages/calendar_page.dart';
 import 'package:moodoo/routes/card_expand_route.dart';
 import 'package:moodoo/services/firebase_service.dart';
 import 'package:moodoo/services/mood_service.dart';
-import 'package:moodoo/widgets/home_page_footer.dart';
-import 'package:moodoo/widgets/home_page_header.dart';
+import 'package:moodoo/widgets/footers/home_page_footer.dart';
+import 'package:moodoo/widgets/headers/home_page_header.dart';
 import 'package:moodoo/widgets/month_card.dart';
-import 'package:moodoo/widgets/month_card_skeleton.dart';
-import 'package:moodoo/widgets/tap_bounce.dart';
+import 'package:moodoo/widgets/shared/month_card_skeleton.dart';
+import 'package:moodoo/widgets/shared/tap_bounce.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

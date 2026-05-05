@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
-import 'package:moodoo/widgets/moodoo_button.dart';
-import 'package:moodoo/widgets/moodoo_modal.dart';
+import 'package:moodoo/widgets/shared/moodoo_button.dart';
+import 'package:moodoo/widgets/shared/moodoo_modal.dart';
 
 String _humanizeFirebaseError(AppLocalizations l10n, Object e) {
   if (e is FirebaseAuthException) {

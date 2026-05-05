@@ -4,11 +4,11 @@ import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/firebase_service.dart';
 import 'package:moodoo/services/mood_service.dart';
-import 'package:moodoo/widgets/grade_card.dart';
-import 'package:moodoo/widgets/moodoo_button.dart';
-import 'package:moodoo/widgets/moodoo_text.dart';
-import 'package:moodoo/widgets/moodoo_modal.dart';
-import 'package:moodoo/widgets/tap_bounce.dart';
+import 'package:moodoo/widgets/shared/grade_card.dart';
+import 'package:moodoo/widgets/shared/moodoo_button.dart';
+import 'package:moodoo/widgets/shared/moodoo_text.dart';
+import 'package:moodoo/widgets/shared/moodoo_modal.dart';
+import 'package:moodoo/widgets/shared/tap_bounce.dart';
 
 class _DeleteConfirmSheet extends StatelessWidget {
   @override

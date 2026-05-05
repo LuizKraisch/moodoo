@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/firebase_service.dart';
 import 'package:moodoo/services/mood_service.dart';
-import 'package:moodoo/widgets/calendar_page_header.dart';
+import 'package:moodoo/widgets/headers/calendar_page_header.dart';
 import 'package:moodoo/widgets/day_card.dart';
 import 'package:moodoo/widgets/day_expanded_panel.dart';
 

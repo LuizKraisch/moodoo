@@ -3,12 +3,12 @@ import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/locale_preferences.dart';
 import 'package:moodoo/theme_preferences.dart'
     show themeModeNotifier, saveTheme;
-import 'package:moodoo/widgets/moodoo_button.dart';
-import 'package:moodoo/widgets/moodoo_error_sheet.dart';
-import 'package:moodoo/widgets/moodoo_modal.dart';
-import 'package:moodoo/widgets/moodoo_text.dart';
+import 'package:moodoo/widgets/shared/moodoo_button.dart';
+import 'package:moodoo/widgets/sheets/moodoo_error_sheet.dart';
+import 'package:moodoo/widgets/shared/moodoo_modal.dart';
+import 'package:moodoo/widgets/shared/moodoo_text.dart';
 import 'package:moodoo/widgets/danger_zone.dart';
-import 'package:moodoo/widgets/settings_page_header.dart';
+import 'package:moodoo/widgets/headers/settings_page_header.dart';
 import 'package:moodoo/services/auth_service.dart';
 
 class _SignOutSheet extends StatelessWidget {
