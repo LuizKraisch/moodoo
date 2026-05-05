@@ -217,6 +217,7 @@ class SettingsPage extends StatelessWidget {
                   onTap: () => signout(context),
                   backgroundColor: Colors.red.withValues(alpha: 0.15),
                   foregroundColor: Colors.red,
+                  bouncePeakScale: 1.1,
                 ),
                 const SizedBox(height: 10),
                 Center(

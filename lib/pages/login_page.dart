@@ -76,6 +76,7 @@ class _LoginPageState extends State<LoginPage> {
                     isLoading: _isLoading,
                     backgroundColor: Colors.white,
                     foregroundColor: Color(0xFF1C1C1C),
+                    bouncePeakScale: 1.1,
                     leading: Image.asset(
                       'assets/logos/google-g-logo.png',
                       height: 22,
