@@ -3,6 +3,7 @@ import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/services/auth_service.dart';
 import 'package:moodoo/services/firebase_service.dart';
 import 'package:moodoo/widgets/moodoo_button.dart';
+import 'package:moodoo/widgets/moodoo_error_sheet.dart';
 import 'package:moodoo/widgets/moodoo_modal.dart';
 import 'package:moodoo/widgets/moodoo_text.dart';
 
@@ -104,11 +105,8 @@ class _DangerZoneState extends State<DangerZone> {
       // ignore: use_build_context_synchronously
       Navigator.of(context).popUntil((route) => route.isFirst);
     } catch (e) {
-      showDialog(
-        // ignore: use_build_context_synchronously
-        context: context,
-        builder: (context) => AlertDialog(title: Text(e.toString())),
-      );
+      // ignore: use_build_context_synchronously
+      showMoodooErrorSheet(context, e);
     }
   }
 
@@ -129,11 +127,8 @@ class _DangerZoneState extends State<DangerZone> {
       // ignore: use_build_context_synchronously
       Navigator.of(context).popUntil((route) => route.isFirst);
     } catch (e) {
-      showDialog(
-        // ignore: use_build_context_synchronously
-        context: context,
-        builder: (context) => AlertDialog(title: Text(e.toString())),
-      );
+      // ignore: use_build_context_synchronously
+      showMoodooErrorSheet(context, e);
     }
   }
 

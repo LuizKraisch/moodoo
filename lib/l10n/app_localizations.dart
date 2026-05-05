@@ -463,6 +463,96 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'added on {month} {day}, {year} at {time}'**
   String formatCreatedAt(String month, int day, int year, String time);
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'ok'**
+  String get ok;
+
+  /// No description provided for @errorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'oops!'**
+  String get errorTitle;
+
+  /// No description provided for @errorRecentLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'please sign in again before making this change.'**
+  String get errorRecentLogin;
+
+  /// No description provided for @errorNetworkFailed.
+  ///
+  /// In en, this message translates to:
+  /// **'no internet connection. please try again.'**
+  String get errorNetworkFailed;
+
+  /// No description provided for @errorTooManyRequests.
+  ///
+  /// In en, this message translates to:
+  /// **'too many attempts. please try again later.'**
+  String get errorTooManyRequests;
+
+  /// No description provided for @errorUserNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'account not found.'**
+  String get errorUserNotFound;
+
+  /// No description provided for @errorUserDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'this account has been disabled.'**
+  String get errorUserDisabled;
+
+  /// No description provided for @errorInvalidCredential.
+  ///
+  /// In en, this message translates to:
+  /// **'authentication failed. please sign in again.'**
+  String get errorInvalidCredential;
+
+  /// No description provided for @errorSignInCancelled.
+  ///
+  /// In en, this message translates to:
+  /// **'sign-in was cancelled.'**
+  String get errorSignInCancelled;
+
+  /// No description provided for @errorPermissionDenied.
+  ///
+  /// In en, this message translates to:
+  /// **'you don\'t have permission to do this.'**
+  String get errorPermissionDenied;
+
+  /// No description provided for @errorServiceUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'service unavailable. check your connection and try again.'**
+  String get errorServiceUnavailable;
+
+  /// No description provided for @errorNotFound.
+  ///
+  /// In en, this message translates to:
+  /// **'the requested data was not found.'**
+  String get errorNotFound;
+
+  /// No description provided for @errorDeadlineExceeded.
+  ///
+  /// In en, this message translates to:
+  /// **'the request timed out. please try again.'**
+  String get errorDeadlineExceeded;
+
+  /// No description provided for @errorResourceExhausted.
+  ///
+  /// In en, this message translates to:
+  /// **'too many requests. please try again later.'**
+  String get errorResourceExhausted;
+
+  /// No description provided for @errorGeneric.
+  ///
+  /// In en, this message translates to:
+  /// **'something went wrong. please try again.'**
+  String get errorGeneric;
 }
 
 class _AppLocalizationsDelegate

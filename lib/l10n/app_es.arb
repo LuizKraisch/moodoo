@@ -68,5 +68,21 @@
   "deleteAccount": "eliminar cuenta",
   "deleteAccountDescription": "esto eliminará permanentemente todos tus estados de ánimo y tu cuenta. esta acción no se puede deshacer.",
   "formatDateTime": "{day} de {month} de {year} a las {time}",
-  "formatCreatedAt": "agregado el {day} de {month} de {year} a las {time}"
+  "formatCreatedAt": "agregado el {day} de {month} de {year} a las {time}",
+
+  "ok": "ok",
+  "errorTitle": "¡vaya!",
+  "errorRecentLogin": "por favor, inicia sesión de nuevo antes de realizar este cambio.",
+  "errorNetworkFailed": "sin conexión a internet. por favor, inténtalo de nuevo.",
+  "errorTooManyRequests": "demasiados intentos. por favor, inténtalo más tarde.",
+  "errorUserNotFound": "cuenta no encontrada.",
+  "errorUserDisabled": "esta cuenta ha sido desactivada.",
+  "errorInvalidCredential": "autenticación fallida. por favor, inicia sesión de nuevo.",
+  "errorSignInCancelled": "se canceló el inicio de sesión.",
+  "errorPermissionDenied": "no tienes permiso para hacer esto.",
+  "errorServiceUnavailable": "servicio no disponible. comprueba tu conexión e inténtalo de nuevo.",
+  "errorNotFound": "no se encontraron los datos solicitados.",
+  "errorDeadlineExceeded": "la solicitud ha caducado. por favor, inténtalo de nuevo.",
+  "errorResourceExhausted": "demasiadas solicitudes. por favor, inténtalo más tarde.",
+  "errorGeneric": "algo salió mal. por favor, inténtalo de nuevo."
 }

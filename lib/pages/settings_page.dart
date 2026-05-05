@@ -4,6 +4,7 @@ import 'package:moodoo/locale_preferences.dart';
 import 'package:moodoo/theme_preferences.dart'
     show themeModeNotifier, saveTheme;
 import 'package:moodoo/widgets/moodoo_button.dart';
+import 'package:moodoo/widgets/moodoo_error_sheet.dart';
 import 'package:moodoo/widgets/moodoo_modal.dart';
 import 'package:moodoo/widgets/moodoo_text.dart';
 import 'package:moodoo/widgets/danger_zone.dart';
@@ -109,11 +110,8 @@ class SettingsPage extends StatelessWidget {
       // ignore: use_build_context_synchronously
       Navigator.of(context).popUntil((route) => route.isFirst);
     } catch (e) {
-      showDialog(
-        // ignore: use_build_context_synchronously
-        context: context,
-        builder: (context) => AlertDialog(title: Text(e.toString())),
-      );
+      // ignore: use_build_context_synchronously
+      showMoodooErrorSheet(context, e);
     }
   }
 
@@ -182,6 +180,10 @@ class SettingsPage extends StatelessWidget {
                         vertical: 10,
                       ),
                       bouncePeakScale: 1.04,
+                      backgroundColor: Theme.of(
+                        context,
+                      ).textTheme.displayLarge!.color!,
+                      foregroundColor: Theme.of(context).colorScheme.surface,
                       onTap: () {
                         showMoodooModal<void>(
                           context,

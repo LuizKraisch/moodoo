@@ -68,5 +68,21 @@
   "deleteAccount": "supprimer le compte",
   "deleteAccountDescription": "cela supprimera définitivement toutes vos humeurs et votre compte. cette action est irréversible.",
   "formatDateTime": "{day} {month} {year} à {time}",
-  "formatCreatedAt": "ajouté le {day} {month} {year} à {time}"
+  "formatCreatedAt": "ajouté le {day} {month} {year} à {time}",
+
+  "ok": "ok",
+  "errorTitle": "oups !",
+  "errorRecentLogin": "veuillez vous reconnecter avant d'effectuer cette modification.",
+  "errorNetworkFailed": "pas de connexion internet. veuillez réessayer.",
+  "errorTooManyRequests": "trop de tentatives. veuillez réessayer plus tard.",
+  "errorUserNotFound": "compte introuvable.",
+  "errorUserDisabled": "ce compte a été désactivé.",
+  "errorInvalidCredential": "authentification échouée. veuillez vous reconnecter.",
+  "errorSignInCancelled": "la connexion a été annulée.",
+  "errorPermissionDenied": "vous n'avez pas la permission de faire cela.",
+  "errorServiceUnavailable": "service indisponible. vérifiez votre connexion et réessayez.",
+  "errorNotFound": "les données demandées sont introuvables.",
+  "errorDeadlineExceeded": "la requête a expiré. veuillez réessayer.",
+  "errorResourceExhausted": "trop de requêtes. veuillez réessayer plus tard.",
+  "errorGeneric": "quelque chose s'est mal passé. veuillez réessayer."
 }

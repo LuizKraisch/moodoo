@@ -68,5 +68,21 @@
   "deleteAccount": "konto löschen",
   "deleteAccountDescription": "dies löscht dauerhaft alle deine stimmungen und dein konto. diese aktion kann nicht rückgängig gemacht werden.",
   "formatDateTime": "{day}. {month} {year} um {time}",
-  "formatCreatedAt": "hinzugefügt am {day}. {month} {year} um {time}"
+  "formatCreatedAt": "hinzugefügt am {day}. {month} {year} um {time}",
+
+  "ok": "ok",
+  "errorTitle": "hoppla!",
+  "errorRecentLogin": "bitte melde dich erneut an, bevor du diese änderung vornimmst.",
+  "errorNetworkFailed": "keine internetverbindung. bitte versuche es erneut.",
+  "errorTooManyRequests": "zu viele versuche. bitte versuche es später erneut.",
+  "errorUserNotFound": "konto nicht gefunden.",
+  "errorUserDisabled": "dieses konto wurde deaktiviert.",
+  "errorInvalidCredential": "authentifizierung fehlgeschlagen. bitte melde dich erneut an.",
+  "errorSignInCancelled": "anmeldung wurde abgebrochen.",
+  "errorPermissionDenied": "du hast keine berechtigung, dies zu tun.",
+  "errorServiceUnavailable": "dienst nicht verfügbar. überprüfe deine verbindung und versuche es erneut.",
+  "errorNotFound": "die angeforderten daten wurden nicht gefunden.",
+  "errorDeadlineExceeded": "die anfrage hat das zeitlimit überschritten. bitte versuche es erneut.",
+  "errorResourceExhausted": "zu viele anfragen. bitte versuche es später erneut.",
+  "errorGeneric": "etwas ist schiefgelaufen. bitte versuche es erneut."
 }

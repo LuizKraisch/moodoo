@@ -203,4 +203,58 @@ class AppLocalizationsFr extends AppLocalizations {
   String formatCreatedAt(String month, int day, int year, String time) {
     return 'ajouté le $day $month $year à $time';
   }
+
+  @override
+  String get ok => 'ok';
+
+  @override
+  String get errorTitle => 'oups !';
+
+  @override
+  String get errorRecentLogin =>
+      'veuillez vous reconnecter avant d\'effectuer cette modification.';
+
+  @override
+  String get errorNetworkFailed =>
+      'pas de connexion internet. veuillez réessayer.';
+
+  @override
+  String get errorTooManyRequests =>
+      'trop de tentatives. veuillez réessayer plus tard.';
+
+  @override
+  String get errorUserNotFound => 'compte introuvable.';
+
+  @override
+  String get errorUserDisabled => 'ce compte a été désactivé.';
+
+  @override
+  String get errorInvalidCredential =>
+      'authentification échouée. veuillez vous reconnecter.';
+
+  @override
+  String get errorSignInCancelled => 'la connexion a été annulée.';
+
+  @override
+  String get errorPermissionDenied =>
+      'vous n\'avez pas la permission de faire cela.';
+
+  @override
+  String get errorServiceUnavailable =>
+      'service indisponible. vérifiez votre connexion et réessayez.';
+
+  @override
+  String get errorNotFound => 'les données demandées sont introuvables.';
+
+  @override
+  String get errorDeadlineExceeded =>
+      'la requête a expiré. veuillez réessayer.';
+
+  @override
+  String get errorResourceExhausted =>
+      'trop de requêtes. veuillez réessayer plus tard.';
+
+  @override
+  String get errorGeneric =>
+      'quelque chose s\'est mal passé. veuillez réessayer.';
 }

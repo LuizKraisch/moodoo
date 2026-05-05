@@ -203,4 +203,56 @@ class AppLocalizationsEs extends AppLocalizations {
   String formatCreatedAt(String month, int day, int year, String time) {
     return 'agregado el $day de $month de $year a las $time';
   }
+
+  @override
+  String get ok => 'ok';
+
+  @override
+  String get errorTitle => '¡vaya!';
+
+  @override
+  String get errorRecentLogin =>
+      'por favor, inicia sesión de nuevo antes de realizar este cambio.';
+
+  @override
+  String get errorNetworkFailed =>
+      'sin conexión a internet. por favor, inténtalo de nuevo.';
+
+  @override
+  String get errorTooManyRequests =>
+      'demasiados intentos. por favor, inténtalo más tarde.';
+
+  @override
+  String get errorUserNotFound => 'cuenta no encontrada.';
+
+  @override
+  String get errorUserDisabled => 'esta cuenta ha sido desactivada.';
+
+  @override
+  String get errorInvalidCredential =>
+      'autenticación fallida. por favor, inicia sesión de nuevo.';
+
+  @override
+  String get errorSignInCancelled => 'se canceló el inicio de sesión.';
+
+  @override
+  String get errorPermissionDenied => 'no tienes permiso para hacer esto.';
+
+  @override
+  String get errorServiceUnavailable =>
+      'servicio no disponible. comprueba tu conexión e inténtalo de nuevo.';
+
+  @override
+  String get errorNotFound => 'no se encontraron los datos solicitados.';
+
+  @override
+  String get errorDeadlineExceeded =>
+      'la solicitud ha caducado. por favor, inténtalo de nuevo.';
+
+  @override
+  String get errorResourceExhausted =>
+      'demasiadas solicitudes. por favor, inténtalo más tarde.';
+
+  @override
+  String get errorGeneric => 'algo salió mal. por favor, inténtalo de nuevo.';
 }

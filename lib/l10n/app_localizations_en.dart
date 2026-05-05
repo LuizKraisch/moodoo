@@ -202,4 +202,55 @@ class AppLocalizationsEn extends AppLocalizations {
   String formatCreatedAt(String month, int day, int year, String time) {
     return 'added on $month $day, $year at $time';
   }
+
+  @override
+  String get ok => 'ok';
+
+  @override
+  String get errorTitle => 'oops!';
+
+  @override
+  String get errorRecentLogin =>
+      'please sign in again before making this change.';
+
+  @override
+  String get errorNetworkFailed => 'no internet connection. please try again.';
+
+  @override
+  String get errorTooManyRequests =>
+      'too many attempts. please try again later.';
+
+  @override
+  String get errorUserNotFound => 'account not found.';
+
+  @override
+  String get errorUserDisabled => 'this account has been disabled.';
+
+  @override
+  String get errorInvalidCredential =>
+      'authentication failed. please sign in again.';
+
+  @override
+  String get errorSignInCancelled => 'sign-in was cancelled.';
+
+  @override
+  String get errorPermissionDenied => 'you don\'t have permission to do this.';
+
+  @override
+  String get errorServiceUnavailable =>
+      'service unavailable. check your connection and try again.';
+
+  @override
+  String get errorNotFound => 'the requested data was not found.';
+
+  @override
+  String get errorDeadlineExceeded =>
+      'the request timed out. please try again.';
+
+  @override
+  String get errorResourceExhausted =>
+      'too many requests. please try again later.';
+
+  @override
+  String get errorGeneric => 'something went wrong. please try again.';
 }

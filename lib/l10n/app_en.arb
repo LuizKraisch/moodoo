@@ -108,5 +108,21 @@
       "year": { "type": "int" },
       "time": { "type": "String" }
     }
-  }
+  },
+
+  "ok": "ok",
+  "errorTitle": "oops!",
+  "errorRecentLogin": "please sign in again before making this change.",
+  "errorNetworkFailed": "no internet connection. please try again.",
+  "errorTooManyRequests": "too many attempts. please try again later.",
+  "errorUserNotFound": "account not found.",
+  "errorUserDisabled": "this account has been disabled.",
+  "errorInvalidCredential": "authentication failed. please sign in again.",
+  "errorSignInCancelled": "sign-in was cancelled.",
+  "errorPermissionDenied": "you don't have permission to do this.",
+  "errorServiceUnavailable": "service unavailable. check your connection and try again.",
+  "errorNotFound": "the requested data was not found.",
+  "errorDeadlineExceeded": "the request timed out. please try again.",
+  "errorResourceExhausted": "too many requests. please try again later.",
+  "errorGeneric": "something went wrong. please try again."
 }

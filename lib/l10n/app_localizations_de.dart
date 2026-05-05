@@ -203,4 +203,58 @@ class AppLocalizationsDe extends AppLocalizations {
   String formatCreatedAt(String month, int day, int year, String time) {
     return 'hinzugefügt am $day. $month $year um $time';
   }
+
+  @override
+  String get ok => 'ok';
+
+  @override
+  String get errorTitle => 'hoppla!';
+
+  @override
+  String get errorRecentLogin =>
+      'bitte melde dich erneut an, bevor du diese änderung vornimmst.';
+
+  @override
+  String get errorNetworkFailed =>
+      'keine internetverbindung. bitte versuche es erneut.';
+
+  @override
+  String get errorTooManyRequests =>
+      'zu viele versuche. bitte versuche es später erneut.';
+
+  @override
+  String get errorUserNotFound => 'konto nicht gefunden.';
+
+  @override
+  String get errorUserDisabled => 'dieses konto wurde deaktiviert.';
+
+  @override
+  String get errorInvalidCredential =>
+      'authentifizierung fehlgeschlagen. bitte melde dich erneut an.';
+
+  @override
+  String get errorSignInCancelled => 'anmeldung wurde abgebrochen.';
+
+  @override
+  String get errorPermissionDenied =>
+      'du hast keine berechtigung, dies zu tun.';
+
+  @override
+  String get errorServiceUnavailable =>
+      'dienst nicht verfügbar. überprüfe deine verbindung und versuche es erneut.';
+
+  @override
+  String get errorNotFound => 'die angeforderten daten wurden nicht gefunden.';
+
+  @override
+  String get errorDeadlineExceeded =>
+      'die anfrage hat das zeitlimit überschritten. bitte versuche es erneut.';
+
+  @override
+  String get errorResourceExhausted =>
+      'zu viele anfragen. bitte versuche es später erneut.';
+
+  @override
+  String get errorGeneric =>
+      'etwas ist schiefgelaufen. bitte versuche es erneut.';
 }

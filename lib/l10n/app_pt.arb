@@ -68,5 +68,21 @@
   "deleteAccount": "excluir conta",
   "deleteAccountDescription": "isso excluirá permanentemente todos os seus moods e sua conta. esta ação não pode ser desfeita.",
   "formatDateTime": "{day} de {month} de {year} às {time}",
-  "formatCreatedAt": "adicionado em {day} de {month} de {year} às {time}"
+  "formatCreatedAt": "adicionado em {day} de {month} de {year} às {time}",
+
+  "ok": "ok",
+  "errorTitle": "ops!",
+  "errorRecentLogin": "por favor, entre novamente antes de fazer esta alteração.",
+  "errorNetworkFailed": "sem conexão com a internet. tente novamente.",
+  "errorTooManyRequests": "muitas tentativas. tente novamente mais tarde.",
+  "errorUserNotFound": "conta não encontrada.",
+  "errorUserDisabled": "esta conta foi desativada.",
+  "errorInvalidCredential": "autenticação falhou. entre novamente.",
+  "errorSignInCancelled": "o login foi cancelado.",
+  "errorPermissionDenied": "você não tem permissão para fazer isso.",
+  "errorServiceUnavailable": "serviço indisponível. verifique sua conexão e tente novamente.",
+  "errorNotFound": "os dados solicitados não foram encontrados.",
+  "errorDeadlineExceeded": "o tempo da solicitação expirou. tente novamente.",
+  "errorResourceExhausted": "muitas solicitações. tente novamente mais tarde.",
+  "errorGeneric": "algo deu errado. tente novamente."
 }
