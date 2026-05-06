@@ -124,5 +124,11 @@
   "errorNotFound": "the requested data was not found.",
   "errorDeadlineExceeded": "the request timed out. please try again.",
   "errorResourceExhausted": "too many requests. please try again later.",
-  "errorGeneric": "something went wrong. please try again."
+  "errorGeneric": "something went wrong. please try again.",
+
+  "notifications": "notifications",
+  "dailyReminder": "daily reminder",
+  "reminderTime": "reminder time",
+  "notificationTitle": "mood reminder",
+  "notificationBody": "remember to add your mood for the day"
 }

@@ -553,6 +553,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'something went wrong. please try again.'**
   String get errorGeneric;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'notifications'**
+  String get notifications;
+
+  /// No description provided for @dailyReminder.
+  ///
+  /// In en, this message translates to:
+  /// **'daily reminder'**
+  String get dailyReminder;
+
+  /// No description provided for @reminderTime.
+  ///
+  /// In en, this message translates to:
+  /// **'reminder time'**
+  String get reminderTime;
+
+  /// No description provided for @notificationTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'mood reminder'**
+  String get notificationTitle;
+
+  /// No description provided for @notificationBody.
+  ///
+  /// In en, this message translates to:
+  /// **'remember to add your mood for the day'**
+  String get notificationBody;
 }
 
 class _AppLocalizationsDelegate

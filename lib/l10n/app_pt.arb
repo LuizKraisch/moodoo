@@ -84,5 +84,11 @@
   "errorNotFound": "os dados solicitados não foram encontrados.",
   "errorDeadlineExceeded": "o tempo da solicitação expirou. tente novamente.",
   "errorResourceExhausted": "muitas solicitações. tente novamente mais tarde.",
-  "errorGeneric": "algo deu errado. tente novamente."
+  "errorGeneric": "algo deu errado. tente novamente.",
+
+  "notifications": "notificações",
+  "dailyReminder": "lembrete diário",
+  "reminderTime": "horário do lembrete",
+  "notificationTitle": "lembrete de mood",
+  "notificationBody": "lembre-se de registrar seu mood do dia"
 }

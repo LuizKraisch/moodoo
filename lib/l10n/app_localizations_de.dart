@@ -257,4 +257,20 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get errorGeneric =>
       'etwas ist schiefgelaufen. bitte versuche es erneut.';
+
+  @override
+  String get notifications => 'benachrichtigungen';
+
+  @override
+  String get dailyReminder => 'tägliche erinnerung';
+
+  @override
+  String get reminderTime => 'erinnerungszeit';
+
+  @override
+  String get notificationTitle => 'mood-erinnerung';
+
+  @override
+  String get notificationBody =>
+      'vergiss nicht, deine stimmung für heute einzutragen';
 }

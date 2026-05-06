@@ -255,4 +255,19 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get errorGeneric => 'algo salió mal. por favor, inténtalo de nuevo.';
+
+  @override
+  String get notifications => 'notificaciones';
+
+  @override
+  String get dailyReminder => 'recordatorio diario';
+
+  @override
+  String get reminderTime => 'hora del recordatorio';
+
+  @override
+  String get notificationTitle => 'recordatorio de mood';
+
+  @override
+  String get notificationBody => 'recuerda agregar tu mood del día';
 }

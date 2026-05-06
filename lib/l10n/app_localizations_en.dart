@@ -253,4 +253,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get errorGeneric => 'something went wrong. please try again.';
+
+  @override
+  String get notifications => 'notifications';
+
+  @override
+  String get dailyReminder => 'daily reminder';
+
+  @override
+  String get reminderTime => 'reminder time';
+
+  @override
+  String get notificationTitle => 'mood reminder';
+
+  @override
+  String get notificationBody => 'remember to add your mood for the day';
 }

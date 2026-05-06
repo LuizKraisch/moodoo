@@ -84,5 +84,11 @@
   "errorNotFound": "les données demandées sont introuvables.",
   "errorDeadlineExceeded": "la requête a expiré. veuillez réessayer.",
   "errorResourceExhausted": "trop de requêtes. veuillez réessayer plus tard.",
-  "errorGeneric": "quelque chose s'est mal passé. veuillez réessayer."
+  "errorGeneric": "quelque chose s'est mal passé. veuillez réessayer.",
+
+  "notifications": "notifications",
+  "dailyReminder": "rappel quotidien",
+  "reminderTime": "heure du rappel",
+  "notificationTitle": "rappel d'humeur",
+  "notificationBody": "n'oubliez pas d'ajouter votre humeur du jour"
 }

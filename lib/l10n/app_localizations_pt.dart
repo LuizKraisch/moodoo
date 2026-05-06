@@ -254,4 +254,19 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get errorGeneric => 'algo deu errado. tente novamente.';
+
+  @override
+  String get notifications => 'notificações';
+
+  @override
+  String get dailyReminder => 'lembrete diário';
+
+  @override
+  String get reminderTime => 'horário do lembrete';
+
+  @override
+  String get notificationTitle => 'lembrete de mood';
+
+  @override
+  String get notificationBody => 'lembre-se de registrar seu mood do dia';
 }

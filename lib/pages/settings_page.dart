@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/locale_preferences.dart';
+import 'package:moodoo/notification_preferences.dart';
+import 'package:moodoo/services/notification_service.dart';
 import 'package:moodoo/theme_preferences.dart'
     show themeModeNotifier, saveTheme;
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
@@ -123,9 +125,32 @@ class SettingsPage extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
 
     return Scaffold(
+      bottomNavigationBar: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(25, 20, 25, 0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              MoodooButton(
+                text: l10n.signOut,
+                onTap: () => signout(context),
+                backgroundColor: Colors.red.withValues(alpha: 0.15),
+                foregroundColor: Colors.red,
+                bouncePeakScale: 1.1,
+              ),
+              const SizedBox(height: 10),
+              MoodooText(
+                l10n.loggedAs(AuthService().getCurrentUser()?.email ?? ''),
+                variant: MoodooTextVariant.titleMedium,
+                fontSize: 13,
+              ),
+            ],
+          ),
+        ),
+      ),
       body: Stack(
         children: [
-          Padding(
+          SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -199,10 +224,131 @@ class SettingsPage extends StatelessWidget {
                     );
                   },
                 ),
+                const SizedBox(height: 20),
+                MoodooText(
+                  l10n.notifications,
+                  variant: MoodooTextVariant.headlineMedium,
+                ),
+                const SizedBox(height: 5),
+                ValueListenableBuilder<bool>(
+                  valueListenable: notificationEnabledNotifier,
+                  builder: (context, enabled, _) {
+                    return AnimatedSize(
+                      duration: const Duration(milliseconds: 250),
+                      curve: Curves.easeInOut,
+                      alignment: Alignment.topCenter,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              MoodooText(
+                                l10n.dailyReminder,
+                                variant: MoodooTextVariant.titleSmall,
+                              ),
+                              Switch(
+                                value: enabled,
+                                onChanged: (value) async {
+                                  if (value) {
+                                    final granted =
+                                        await NotificationService.requestPermissions();
+                                    if (!granted) return;
+                                  }
+                                  notificationEnabledNotifier.value = value;
+                                  final time = notificationTimeNotifier.value;
+                                  await saveNotificationPrefs(
+                                    enabled: value,
+                                    time: time,
+                                  );
+                                  if (value) {
+                                    await NotificationService.scheduleDailyReminder(
+                                      hour: time.hour,
+                                      minute: time.minute,
+                                      title: l10n.notificationTitle,
+                                      body: l10n.notificationBody,
+                                    );
+                                  } else {
+                                    await NotificationService.cancelReminder();
+                                  }
+                                },
+                              ),
+                            ],
+                          ),
+                          if (enabled)
+                            Column(
+                              children: [
+                                const SizedBox(height: 10),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 15,
+                                    vertical: 10,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .secondary
+                                        .withValues(alpha: 0.15),
+                                  ),
+                                  child: ValueListenableBuilder<TimeOfDay>(
+                                    valueListenable: notificationTimeNotifier,
+                                    builder: (context, time, _) {
+                                      return GestureDetector(
+                                        onTap: () async {
+                                          final picked = await showTimePicker(
+                                            context: context,
+                                            initialTime: time,
+                                          );
+
+                                          if (picked == null) return;
+
+                                          notificationTimeNotifier.value =
+                                              picked;
+                                          await saveNotificationPrefs(
+                                            enabled: true,
+                                            time: picked,
+                                          );
+
+                                          // ignore: use_build_context_synchronously
+                                          await NotificationService.scheduleDailyReminder(
+                                            hour: picked.hour,
+                                            minute: picked.minute,
+                                            title: l10n.notificationTitle,
+                                            body: l10n.notificationBody,
+                                          );
+                                        },
+                                        child: Row(
+                                          children: [
+                                            MoodooText(
+                                              l10n.reminderTime,
+                                              variant:
+                                                  MoodooTextVariant.titleSmall,
+                                            ),
+                                            const Spacer(),
+                                            MoodooText(
+                                              time.format(context),
+                                              variant:
+                                                  MoodooTextVariant.titleSmall,
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Divider(
-                    height: 70,
+                    radius: BorderRadius.all(Radius.circular(100)),
+                    height: 50,
                     thickness: 3,
                     color: Theme.of(
                       context,
@@ -210,24 +356,7 @@ class SettingsPage extends StatelessWidget {
                   ),
                 ),
                 const DangerZone(),
-                const Spacer(),
-                const SizedBox(height: 20),
-                MoodooButton(
-                  text: l10n.signOut,
-                  onTap: () => signout(context),
-                  backgroundColor: Colors.red.withValues(alpha: 0.15),
-                  foregroundColor: Colors.red,
-                  bouncePeakScale: 1.1,
-                ),
                 const SizedBox(height: 10),
-                Center(
-                  child: MoodooText(
-                    l10n.loggedAs(AuthService().getCurrentUser()?.email ?? ''),
-                    variant: MoodooTextVariant.titleMedium,
-                    fontSize: 13,
-                  ),
-                ),
-                const SizedBox(height: 40),
               ],
             ),
           ),

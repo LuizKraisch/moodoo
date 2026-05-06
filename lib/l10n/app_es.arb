@@ -84,5 +84,11 @@
   "errorNotFound": "no se encontraron los datos solicitados.",
   "errorDeadlineExceeded": "la solicitud ha caducado. por favor, inténtalo de nuevo.",
   "errorResourceExhausted": "demasiadas solicitudes. por favor, inténtalo más tarde.",
-  "errorGeneric": "algo salió mal. por favor, inténtalo de nuevo."
+  "errorGeneric": "algo salió mal. por favor, inténtalo de nuevo.",
+
+  "notifications": "notificaciones",
+  "dailyReminder": "recordatorio diario",
+  "reminderTime": "hora del recordatorio",
+  "notificationTitle": "recordatorio de mood",
+  "notificationBody": "recuerda agregar tu mood del día"
 }

@@ -3,7 +3,9 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/app_theme.dart' show lightTheme, darkTheme;
 import 'package:moodoo/locale_preferences.dart';
+import 'package:moodoo/notification_preferences.dart';
 import 'package:moodoo/pages/auth_gate.dart';
+import 'package:moodoo/services/notification_service.dart';
 import 'package:moodoo/theme_preferences.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
@@ -14,11 +16,16 @@ void main() async {
 
   await loadTheme();
   await loadLocale();
+  await loadNotificationPrefs();
+
   try {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
   } catch (_) {}
+
+  await NotificationService.initialize();
+  await NotificationService.rescheduleFromPrefs();
 
   FlutterNativeSplash.remove();
   runApp(const MoodooApp());

@@ -84,5 +84,11 @@
   "errorNotFound": "die angeforderten daten wurden nicht gefunden.",
   "errorDeadlineExceeded": "die anfrage hat das zeitlimit überschritten. bitte versuche es erneut.",
   "errorResourceExhausted": "zu viele anfragen. bitte versuche es später erneut.",
-  "errorGeneric": "etwas ist schiefgelaufen. bitte versuche es erneut."
+  "errorGeneric": "etwas ist schiefgelaufen. bitte versuche es erneut.",
+
+  "notifications": "benachrichtigungen",
+  "dailyReminder": "tägliche erinnerung",
+  "reminderTime": "erinnerungszeit",
+  "notificationTitle": "mood-erinnerung",
+  "notificationBody": "vergiss nicht, deine stimmung für heute einzutragen"
 }

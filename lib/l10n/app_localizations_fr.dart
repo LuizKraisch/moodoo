@@ -257,4 +257,20 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get errorGeneric =>
       'quelque chose s\'est mal passé. veuillez réessayer.';
+
+  @override
+  String get notifications => 'notifications';
+
+  @override
+  String get dailyReminder => 'rappel quotidien';
+
+  @override
+  String get reminderTime => 'heure du rappel';
+
+  @override
+  String get notificationTitle => 'rappel d\'humeur';
+
+  @override
+  String get notificationBody =>
+      'n\'oubliez pas d\'ajouter votre humeur du jour';
 }
