@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/app_theme.dart' show lightTheme, darkTheme;
 import 'package:moodoo/locale_preferences.dart';
@@ -8,7 +9,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
+  FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
   await loadTheme();
   await loadLocale();
@@ -18,6 +20,7 @@ void main() async {
     );
   } catch (_) {}
 
+  FlutterNativeSplash.remove();
   runApp(const MoodooApp());
 }
 

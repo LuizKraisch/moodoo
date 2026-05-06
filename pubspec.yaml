@@ -23,6 +23,7 @@ dependencies:
   google_sign_in: ^7.2.0
   flutter_launcher_icons: ^0.14.4
   loading_animation_widget: ^1.3.0
+  flutter_native_splash: ^2.4.6
 
 dev_dependencies:
   flutter_test:
@@ -38,6 +39,17 @@ flutter_launcher_icons:
   min_sdk_android: 21
   adaptive_icon_background: "#FFFFFF"
   adaptive_icon_foreground: "assets/logos/moodoo-cow-dark.png"
+
+flutter_native_splash:
+  color: "#1C1C1C"
+  color_dark: "#1C1C1C"
+  image: assets/logos/moodoo-cow-light.png
+  image_dark: assets/logos/moodoo-cow-light.png
+  android_12:
+    color: "#1C1C1C"
+    color_dark: "#1C1C1C"
+    image: assets/logos/moodoo-cow-light.png
+    image_dark: assets/logos/moodoo-cow-light.png
 
 flutter:
   generate: true
