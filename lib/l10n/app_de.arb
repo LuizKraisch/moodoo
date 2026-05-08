@@ -90,5 +90,7 @@
   "dailyReminder": "tägliche erinnerung",
   "reminderTime": "erinnerungszeit",
   "notificationTitle": "mood-erinnerung",
-  "notificationBody": "vergiss nicht, deine stimmung für heute einzutragen"
+  "notificationBody": "vergiss nicht, deine stimmung für heute einzutragen",
+  "notificationDescription": "du erhältst jeden tag zur ausgewählten uhrzeit eine benachrichtigung, die dich daran erinnert, deine stimmung einzutragen.",
+  "done": "fertig"
 }

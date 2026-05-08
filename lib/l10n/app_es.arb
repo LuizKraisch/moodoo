@@ -90,5 +90,7 @@
   "dailyReminder": "recordatorio diario",
   "reminderTime": "hora del recordatorio",
   "notificationTitle": "recordatorio de mood",
-  "notificationBody": "recuerda agregar tu mood del día"
+  "notificationBody": "recuerda agregar tu mood del día",
+  "notificationDescription": "recibirás una notificación todos los días a la hora seleccionada para recordarte registrar tu mood.",
+  "done": "listo"
 }

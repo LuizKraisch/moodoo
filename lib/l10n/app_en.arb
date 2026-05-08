@@ -130,5 +130,7 @@
   "dailyReminder": "daily reminder",
   "reminderTime": "reminder time",
   "notificationTitle": "mood reminder",
-  "notificationBody": "remember to add your mood for the day"
+  "notificationBody": "remember to add your mood for the day",
+  "notificationDescription": "you'll receive a push notification everyday at the selected time to remind you to log your mood.",
+  "done": "done"
 }

@@ -268,4 +268,11 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationBody => 'remember to add your mood for the day';
+
+  @override
+  String get notificationDescription =>
+      'you\'ll receive a push notification everyday at the selected time to remind you to log your mood.';
+
+  @override
+  String get done => 'done';
 }

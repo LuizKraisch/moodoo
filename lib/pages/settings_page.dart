@@ -7,6 +7,7 @@ import 'package:moodoo/theme_preferences.dart'
     show themeModeNotifier, saveTheme;
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
 import 'package:moodoo/widgets/sheets/moodoo_error_sheet.dart';
+import 'package:moodoo/widgets/sheets/time_picker_sheet.dart';
 import 'package:moodoo/widgets/shared/moodoo_modal.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
 import 'package:moodoo/widgets/danger_zone.dart';
@@ -278,46 +279,63 @@ class SettingsPage extends StatelessWidget {
                           if (enabled)
                             Column(
                               children: [
+                                MoodooText(
+                                  l10n.notificationDescription,
+                                  variant: MoodooTextVariant.titleMedium,
+                                  fontSize: 13,
+                                ),
                                 const SizedBox(height: 10),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 15,
-                                    vertical: 10,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    color: Theme.of(context)
-                                        .colorScheme
-                                        .secondary
-                                        .withValues(alpha: 0.15),
-                                  ),
-                                  child: ValueListenableBuilder<TimeOfDay>(
-                                    valueListenable: notificationTimeNotifier,
-                                    builder: (context, time, _) {
-                                      return GestureDetector(
-                                        onTap: () async {
-                                          final picked = await showTimePicker(
-                                            context: context,
-                                            initialTime: time,
-                                          );
+                                ValueListenableBuilder<TimeOfDay>(
+                                  valueListenable: notificationTimeNotifier,
+                                  builder: (context, time, _) {
+                                    return GestureDetector(
+                                      onTap: () async {
+                                        final picked =
+                                            await showTimePickerSheet(
+                                              context,
+                                              initialTime: time,
+                                              title: l10n.reminderTime,
+                                              doneLabel: l10n.done,
+                                            );
 
-                                          if (picked == null) return;
+                                        if (picked == null) return;
 
-                                          notificationTimeNotifier.value =
-                                              picked;
-                                          await saveNotificationPrefs(
-                                            enabled: true,
-                                            time: picked,
-                                          );
+                                        notificationTimeNotifier.value = picked;
+                                        await saveNotificationPrefs(
+                                          enabled: true,
+                                          time: picked,
+                                        );
 
-                                          // ignore: use_build_context_synchronously
-                                          await NotificationService.scheduleDailyReminder(
-                                            hour: picked.hour,
-                                            minute: picked.minute,
-                                            title: l10n.notificationTitle,
-                                            body: l10n.notificationBody,
-                                          );
-                                        },
+                                        // ignore: use_build_context_synchronously
+                                        await NotificationService.scheduleDailyReminder(
+                                          hour: picked.hour,
+                                          minute: picked.minute,
+                                          title: l10n.notificationTitle,
+                                          body: l10n.notificationBody,
+                                        );
+                                      },
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 15,
+                                          vertical: 10,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            20,
+                                          ),
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .secondary
+                                              .withValues(
+                                                alpha:
+                                                    Theme.of(
+                                                          context,
+                                                        ).brightness ==
+                                                        Brightness.dark
+                                                    ? 0.35
+                                                    : 0.15,
+                                              ),
+                                        ),
                                         child: Row(
                                           children: [
                                             MoodooText(
@@ -333,9 +351,9 @@ class SettingsPage extends StatelessWidget {
                                             ),
                                           ],
                                         ),
-                                      );
-                                    },
-                                  ),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ],
                             ),

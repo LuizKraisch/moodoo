@@ -583,6 +583,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'remember to add your mood for the day'**
   String get notificationBody;
+
+  /// No description provided for @notificationDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'you\'ll receive a push notification everyday at the selected time to remind you to log your mood.'**
+  String get notificationDescription;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'done'**
+  String get done;
 }
 
 class _AppLocalizationsDelegate

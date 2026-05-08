@@ -269,4 +269,11 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get notificationBody => 'lembre-se de registrar seu mood do dia';
+
+  @override
+  String get notificationDescription =>
+      'você receberá uma notificação todos os dias no horário selecionado para lembrar de registrar seu mood.';
+
+  @override
+  String get done => 'pronto';
 }

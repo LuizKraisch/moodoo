@@ -273,4 +273,11 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get notificationBody =>
       'vergiss nicht, deine stimmung für heute einzutragen';
+
+  @override
+  String get notificationDescription =>
+      'du erhältst jeden tag zur ausgewählten uhrzeit eine benachrichtigung, die dich daran erinnert, deine stimmung einzutragen.';
+
+  @override
+  String get done => 'fertig';
 }

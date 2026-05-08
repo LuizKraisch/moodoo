@@ -273,4 +273,11 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get notificationBody =>
       'n\'oubliez pas d\'ajouter votre humeur du jour';
+
+  @override
+  String get notificationDescription =>
+      'vous recevrez une notification chaque jour à l\'heure sélectionnée pour vous rappeler d\'enregistrer votre humeur.';
+
+  @override
+  String get done => 'terminé';
 }
