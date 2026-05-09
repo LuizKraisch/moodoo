@@ -275,5 +275,36 @@ class AppLocalizationsPt extends AppLocalizations {
       'você receberá uma notificação todos os dias no horário selecionado para lembrar de registrar seu mood.';
 
   @override
-  String get done => 'pronto';
+  String get skip => 'pular';
+
+  @override
+  String get back => 'voltar';
+
+  @override
+  String get next => 'próximo';
+
+  @override
+  String get done => 'feito';
+
+  @override
+  String get onboardingPage1Title => 'boas-vindas ao moodoo';
+
+  @override
+  String get onboardingPage1Description =>
+      'avalie seus dias de S a F e adicione notas para capturar os momentos que moldaram como você se sentiu.';
+
+  @override
+  String get onboardingPage2Title => 'crie seu próprio calendário de moods';
+
+  @override
+  String get onboardingPage2Description =>
+      'veja o calendário para acompanhar todos os seus moods por mês e dia.';
+
+  @override
+  String get onboardingPage3Title =>
+      'ative o lembrete e nunca esqueça de registrar seu mood';
+
+  @override
+  String get onboardingPage3Description =>
+      'nas configurações você pode facilmente configurar um lembrete diário para registrar seu mood e manter seu calendário sempre atualizado.';
 }

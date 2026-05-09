@@ -590,11 +590,65 @@ abstract class AppLocalizations {
   /// **'you\'ll receive a push notification everyday at the selected time to remind you to log your mood.'**
   String get notificationDescription;
 
+  /// No description provided for @skip.
+  ///
+  /// In en, this message translates to:
+  /// **'skip'**
+  String get skip;
+
+  /// No description provided for @back.
+  ///
+  /// In en, this message translates to:
+  /// **'back'**
+  String get back;
+
+  /// No description provided for @next.
+  ///
+  /// In en, this message translates to:
+  /// **'next'**
+  String get next;
+
   /// No description provided for @done.
   ///
   /// In en, this message translates to:
   /// **'done'**
   String get done;
+
+  /// No description provided for @onboardingPage1Title.
+  ///
+  /// In en, this message translates to:
+  /// **'welcome to moodoo'**
+  String get onboardingPage1Title;
+
+  /// No description provided for @onboardingPage1Description.
+  ///
+  /// In en, this message translates to:
+  /// **'rate your days from S to F and add notes to capture the moments that shaped how you felt.'**
+  String get onboardingPage1Description;
+
+  /// No description provided for @onboardingPage2Title.
+  ///
+  /// In en, this message translates to:
+  /// **'build your own mood calendar'**
+  String get onboardingPage2Title;
+
+  /// No description provided for @onboardingPage2Description.
+  ///
+  /// In en, this message translates to:
+  /// **'check the calendar to see all your moods per month and day.'**
+  String get onboardingPage2Description;
+
+  /// No description provided for @onboardingPage3Title.
+  ///
+  /// In en, this message translates to:
+  /// **'activate the reminder and never forget to log your mood'**
+  String get onboardingPage3Title;
+
+  /// No description provided for @onboardingPage3Description.
+  ///
+  /// In en, this message translates to:
+  /// **'in settings you can easily set up a daily reminder to log your mood and keep your mood calendar up to date.'**
+  String get onboardingPage3Description;
 }
 
 class _AppLocalizationsDelegate

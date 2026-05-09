@@ -92,5 +92,15 @@
   "notificationTitle": "lembrete de mood",
   "notificationBody": "lembre-se de registrar seu mood do dia",
   "notificationDescription": "você receberá uma notificação todos os dias no horário selecionado para lembrar de registrar seu mood.",
-  "done": "pronto"
+  "skip": "pular",
+  "back": "voltar",
+  "next": "próximo",
+  "done": "feito",
+
+  "onboardingPage1Title": "boas-vindas ao moodoo",
+  "onboardingPage1Description": "avalie seus dias de S a F e adicione notas para capturar os momentos que moldaram como você se sentiu.",
+  "onboardingPage2Title": "crie seu próprio calendário de moods",
+  "onboardingPage2Description": "veja o calendário para acompanhar todos os seus moods por mês e dia.",
+  "onboardingPage3Title": "ative o lembrete e nunca esqueça de registrar seu mood",
+  "onboardingPage3Description": "nas configurações você pode facilmente configurar um lembrete diário para registrar seu mood e manter seu calendário sempre atualizado."
 }

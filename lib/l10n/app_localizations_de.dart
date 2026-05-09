@@ -279,5 +279,37 @@ class AppLocalizationsDe extends AppLocalizations {
       'du erhältst jeden tag zur ausgewählten uhrzeit eine benachrichtigung, die dich daran erinnert, deine stimmung einzutragen.';
 
   @override
+  String get skip => 'überspringen';
+
+  @override
+  String get back => 'zurück';
+
+  @override
+  String get next => 'weiter';
+
+  @override
   String get done => 'fertig';
+
+  @override
+  String get onboardingPage1Title => 'willkommen bei moodoo';
+
+  @override
+  String get onboardingPage1Description =>
+      'bewerte deine tage von S bis F und füge notizen hinzu, um die momente festzuhalten, die dein gefühl geprägt haben.';
+
+  @override
+  String get onboardingPage2Title =>
+      'erstelle deinen eigenen stimmungskalender';
+
+  @override
+  String get onboardingPage2Description =>
+      'sieh im kalender alle deine stimmungen nach monat und tag an.';
+
+  @override
+  String get onboardingPage3Title =>
+      'aktiviere die erinnerung und vergiss nie, deine stimmung einzutragen';
+
+  @override
+  String get onboardingPage3Description =>
+      'in den einstellungen kannst du ganz einfach eine tägliche erinnerung einrichten, um deine stimmung einzutragen und deinen kalender aktuell zu halten.';
 }

@@ -279,5 +279,36 @@ class AppLocalizationsFr extends AppLocalizations {
       'vous recevrez une notification chaque jour à l\'heure sélectionnée pour vous rappeler d\'enregistrer votre humeur.';
 
   @override
+  String get skip => 'passer';
+
+  @override
+  String get back => 'retour';
+
+  @override
+  String get next => 'suivant';
+
+  @override
   String get done => 'terminé';
+
+  @override
+  String get onboardingPage1Title => 'bienvenue sur moodoo';
+
+  @override
+  String get onboardingPage1Description =>
+      'notez vos journées de S à F et ajoutez des notes pour capturer les moments qui ont façonné ce que vous avez ressenti.';
+
+  @override
+  String get onboardingPage2Title => 'créez votre propre calendrier d\'humeur';
+
+  @override
+  String get onboardingPage2Description =>
+      'consultez le calendrier pour voir toutes vos humeurs par mois et par jour.';
+
+  @override
+  String get onboardingPage3Title =>
+      'activez le rappel et n\'oubliez jamais d\'enregistrer votre humeur';
+
+  @override
+  String get onboardingPage3Description =>
+      'dans les paramètres, vous pouvez facilement configurer un rappel quotidien pour enregistrer votre humeur et maintenir votre calendrier à jour.';
 }

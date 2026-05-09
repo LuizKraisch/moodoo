@@ -274,5 +274,36 @@ class AppLocalizationsEn extends AppLocalizations {
       'you\'ll receive a push notification everyday at the selected time to remind you to log your mood.';
 
   @override
+  String get skip => 'skip';
+
+  @override
+  String get back => 'back';
+
+  @override
+  String get next => 'next';
+
+  @override
   String get done => 'done';
+
+  @override
+  String get onboardingPage1Title => 'welcome to moodoo';
+
+  @override
+  String get onboardingPage1Description =>
+      'rate your days from S to F and add notes to capture the moments that shaped how you felt.';
+
+  @override
+  String get onboardingPage2Title => 'build your own mood calendar';
+
+  @override
+  String get onboardingPage2Description =>
+      'check the calendar to see all your moods per month and day.';
+
+  @override
+  String get onboardingPage3Title =>
+      'activate the reminder and never forget to log your mood';
+
+  @override
+  String get onboardingPage3Description =>
+      'in settings you can easily set up a daily reminder to log your mood and keep your mood calendar up to date.';
 }

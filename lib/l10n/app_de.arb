@@ -92,5 +92,15 @@
   "notificationTitle": "mood-erinnerung",
   "notificationBody": "vergiss nicht, deine stimmung für heute einzutragen",
   "notificationDescription": "du erhältst jeden tag zur ausgewählten uhrzeit eine benachrichtigung, die dich daran erinnert, deine stimmung einzutragen.",
-  "done": "fertig"
+  "skip": "überspringen",
+  "back": "zurück",
+  "next": "weiter",
+  "done": "fertig",
+
+  "onboardingPage1Title": "willkommen bei moodoo",
+  "onboardingPage1Description": "bewerte deine tage von S bis F und füge notizen hinzu, um die momente festzuhalten, die dein gefühl geprägt haben.",
+  "onboardingPage2Title": "erstelle deinen eigenen stimmungskalender",
+  "onboardingPage2Description": "sieh im kalender alle deine stimmungen nach monat und tag an.",
+  "onboardingPage3Title": "aktiviere die erinnerung und vergiss nie, deine stimmung einzutragen",
+  "onboardingPage3Description": "in den einstellungen kannst du ganz einfach eine tägliche erinnerung einrichten, um deine stimmung einzutragen und deinen kalender aktuell zu halten."
 }

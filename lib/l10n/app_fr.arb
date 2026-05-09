@@ -92,5 +92,15 @@
   "notificationTitle": "rappel d'humeur",
   "notificationBody": "n'oubliez pas d'ajouter votre humeur du jour",
   "notificationDescription": "vous recevrez une notification chaque jour à l'heure sélectionnée pour vous rappeler d'enregistrer votre humeur.",
-  "done": "terminé"
+  "skip": "passer",
+  "back": "retour",
+  "next": "suivant",
+  "done": "terminé",
+
+  "onboardingPage1Title": "bienvenue sur moodoo",
+  "onboardingPage1Description": "notez vos journées de S à F et ajoutez des notes pour capturer les moments qui ont façonné ce que vous avez ressenti.",
+  "onboardingPage2Title": "créez votre propre calendrier d'humeur",
+  "onboardingPage2Description": "consultez le calendrier pour voir toutes vos humeurs par mois et par jour.",
+  "onboardingPage3Title": "activez le rappel et n'oubliez jamais d'enregistrer votre humeur",
+  "onboardingPage3Description": "dans les paramètres, vous pouvez facilement configurer un rappel quotidien pour enregistrer votre humeur et maintenir votre calendrier à jour."
 }
