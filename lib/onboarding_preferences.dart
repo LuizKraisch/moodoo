@@ -7,7 +7,7 @@ const _key = 'onboarding_finished';
 
 Future<void> loadOnboardingPrefs() async {
   final prefs = await SharedPreferences.getInstance();
-  onboardingFinishedNotifier.value = false; //prefs.getBool(_key) ?? false;
+  onboardingFinishedNotifier.value = prefs.getBool(_key) ?? false;
 }
 
 Future<void> saveOnboardingFinished() async {
