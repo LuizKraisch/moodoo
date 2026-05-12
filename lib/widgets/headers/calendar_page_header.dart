@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:moodoo/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/services/mood_service.dart';
 import 'package:moodoo/widgets/shared/grade_card.dart';
@@ -36,7 +37,9 @@ class CalendarPageHeader extends StatelessWidget {
             filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.55),
+                color: Theme.of(
+                  context,
+                ).colorScheme.pillBackground.withValues(alpha: 0.55),
                 borderRadius: BorderRadius.circular(28),
               ),
               padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),

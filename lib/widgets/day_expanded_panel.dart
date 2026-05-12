@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/mood_service.dart';
@@ -21,7 +22,7 @@ class DayExpandedPanel extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.fromLTRB(6, 6, 6, 6),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.cardBackground,
         borderRadius: BorderRadius.circular(25),
       ),
       child: Padding(
@@ -64,12 +65,11 @@ class DayExpandedPanel extends StatelessWidget {
                       child: MoodSheet(date: date, mood: mood),
                     );
                   },
-                  backgroundColor:
-                      Theme.of(context).brightness == Brightness.dark
-                      ? const Color(0xFFFFFFFF)
-                      : Theme.of(context).colorScheme.surface,
-                  foregroundColor: Theme.of(context).colorScheme.primary,
-                  textStyle: TextTheme.of(context).labelMedium,
+                  backgroundColor: Theme.of(
+                    context,
+                  ).textTheme.displayLarge!.color!,
+                  foregroundColor: Theme.of(context).colorScheme.surface,
+                  textStyle: TextTheme.of(context).titleSmall,
                   fullWidth: false,
                 ),
               ],
@@ -90,11 +90,9 @@ class DayExpandedPanel extends StatelessWidget {
                               MoodooText(
                                 '"${mood!.notes}"',
                                 variant: MoodooTextVariant.titleSmall,
-                                color:
-                                    Theme.of(context).brightness ==
-                                        Brightness.dark
-                                    ? const Color(0xFFFFFFFF)
-                                    : Theme.of(context).colorScheme.surface,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.displayLarge!.color!,
                               ),
                             const SizedBox(height: 4),
                             MoodooText(

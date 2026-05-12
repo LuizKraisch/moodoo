@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/services/mood_service.dart';
 import 'package:moodoo/widgets/shared/grade_card.dart';
@@ -37,7 +38,7 @@ class MonthCard extends StatelessWidget {
       );
     }
 
-    // Show the last 4 recorded moods as colored dots (oldest → newest).
+    // Show the last 4 recorded moods as colored dots (oldest → newest)
     final recent = summary.moods.reversed.take(4).toList().reversed.toList();
     final dotColors = List.generate(4, (i) {
       if (i < recent.length) {
@@ -49,7 +50,7 @@ class MonthCard extends StatelessWidget {
     return Container(
       margin: EdgeInsets.zero,
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary,
+        color: Theme.of(context).colorScheme.cardBackground,
         borderRadius: BorderRadius.circular(30),
       ),
       child: Padding(
@@ -87,6 +88,7 @@ class MonthCard extends StatelessWidget {
                     MoodooText(
                       MoodService.monthName(l10n, summary.month),
                       variant: MoodooTextVariant.displaySmall,
+                      color: Theme.of(context).textTheme.displayLarge!.color!,
                     ),
                   ],
                 ),

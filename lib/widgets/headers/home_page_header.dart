@@ -1,6 +1,7 @@
 import 'dart:ui';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:moodoo/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/pages/settings_page.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
@@ -37,7 +38,7 @@ class HomePageHeader extends StatelessWidget {
             filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.55),
+                color: Theme.of(context).colorScheme.pillBackground.withValues(alpha: 0.55),
                 borderRadius: BorderRadius.circular(100),
               ),
               padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),

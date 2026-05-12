@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moodoo/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/mood_service.dart';
@@ -44,7 +45,7 @@ class DayCard extends StatelessWidget {
           return Container(
             margin: const EdgeInsets.all(6),
             decoration: BoxDecoration(
-              color: Theme.of(context).colorScheme.primary,
+              color: Theme.of(context).colorScheme.cardBackground,
               borderRadius: BorderRadius.circular(25),
             ),
             child: Padding(
@@ -64,6 +65,7 @@ class DayCard extends StatelessWidget {
                         '${date.day}',
                         variant: MoodooTextVariant.displaySmall,
                         fontSize: dateFontSize,
+                        color: Theme.of(context).textTheme.displayLarge!.color!,
                       ),
                       GradeCard(
                         grade: mood?.score,

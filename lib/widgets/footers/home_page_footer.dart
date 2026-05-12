@@ -2,6 +2,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
+import 'package:moodoo/app_theme.dart';
 import 'package:moodoo/widgets/shared/grade_card.dart';
 import 'package:moodoo/widgets/sheets/mood_sheet.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
@@ -120,7 +121,9 @@ class _HomePageFooterState extends State<HomePageFooter>
             filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.black.withValues(alpha: 0.55),
+                color: Theme.of(
+                  context,
+                ).colorScheme.pillBackground.withValues(alpha: 0.55),
                 borderRadius: BorderRadius.circular(100),
               ),
               padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
@@ -149,7 +152,9 @@ class _HomePageFooterState extends State<HomePageFooter>
                                           l10n.today,
                                           variant:
                                               MoodooTextVariant.headlineSmall,
-                                          color: Colors.white,
+                                          color: Theme.of(
+                                            context,
+                                          ).textTheme.displayLarge!.color!,
                                         ),
                                       ),
                                     ),
@@ -162,6 +167,9 @@ class _HomePageFooterState extends State<HomePageFooter>
                                     child: MoodooText(
                                       l10n.noMoodToday,
                                       variant: MoodooTextVariant.headlineSmall,
+                                      color: Theme.of(
+                                        context,
+                                      ).textTheme.displayLarge!.color!,
                                     ),
                                   ),
                                 ),
@@ -170,8 +178,12 @@ class _HomePageFooterState extends State<HomePageFooter>
                         MoodooButton(
                           text: hasMood ? l10n.editMood : l10n.addMood,
                           onTap: () => _showMoodSheet(context),
-                          backgroundColor: Colors.white,
-                          foregroundColor: Colors.black,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).textTheme.displayLarge!.color!,
+                          foregroundColor: Theme.of(
+                            context,
+                          ).colorScheme.surface,
                           fullWidth: false,
                         ),
                       ],
