@@ -102,5 +102,8 @@
   "onboardingPage2Title": "créez votre propre calendrier d'humeur",
   "onboardingPage2Description": "consultez le calendrier pour voir toutes vos humeurs par mois et par jour.",
   "onboardingPage3Title": "activez le rappel et n'oubliez jamais d'enregistrer votre humeur",
-  "onboardingPage3Description": "dans les paramètres, vous pouvez facilement configurer un rappel quotidien pour enregistrer votre humeur et maintenir votre calendrier à jour."
+  "onboardingPage3Description": "dans les paramètres, vous pouvez facilement configurer un rappel quotidien pour enregistrer votre humeur et maintenir votre calendrier à jour.",
+
+  "legal": "légal",
+  "privacyPolicy": "politique de confidentialité"
 }

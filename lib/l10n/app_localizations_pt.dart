@@ -307,4 +307,10 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get onboardingPage3Description =>
       'nas configurações você pode facilmente configurar um lembrete diário para registrar seu mood e manter seu calendário sempre atualizado.';
+
+  @override
+  String get legal => 'legal';
+
+  @override
+  String get privacyPolicy => 'política de privacidade';
 }

@@ -649,6 +649,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'in settings you can easily set up a daily reminder to log your mood and keep your mood calendar up to date.'**
   String get onboardingPage3Description;
+
+  /// No description provided for @legal.
+  ///
+  /// In en, this message translates to:
+  /// **'legal'**
+  String get legal;
+
+  /// No description provided for @privacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'privacy policy'**
+  String get privacyPolicy;
 }
 
 class _AppLocalizationsDelegate

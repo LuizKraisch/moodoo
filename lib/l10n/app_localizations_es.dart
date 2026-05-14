@@ -308,4 +308,10 @@ class AppLocalizationsEs extends AppLocalizations {
   @override
   String get onboardingPage3Description =>
       'en configuración puedes configurar fácilmente un recordatorio diario para registrar tu mood y mantener tu calendario actualizado.';
+
+  @override
+  String get legal => 'legal';
+
+  @override
+  String get privacyPolicy => 'política de privacidad';
 }

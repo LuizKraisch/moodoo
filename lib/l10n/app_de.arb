@@ -102,5 +102,8 @@
   "onboardingPage2Title": "erstelle deinen eigenen stimmungskalender",
   "onboardingPage2Description": "sieh im kalender alle deine stimmungen nach monat und tag an.",
   "onboardingPage3Title": "aktiviere die erinnerung und vergiss nie, deine stimmung einzutragen",
-  "onboardingPage3Description": "in den einstellungen kannst du ganz einfach eine tägliche erinnerung einrichten, um deine stimmung einzutragen und deinen kalender aktuell zu halten."
+  "onboardingPage3Description": "in den einstellungen kannst du ganz einfach eine tägliche erinnerung einrichten, um deine stimmung einzutragen und deinen kalender aktuell zu halten.",
+
+  "legal": "rechtliches",
+  "privacyPolicy": "datenschutzrichtlinie"
 }

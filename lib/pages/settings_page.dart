@@ -2,16 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/locale_preferences.dart';
 import 'package:moodoo/notification_preferences.dart';
+import 'package:moodoo/pages/privacy_policy_page.dart';
 import 'package:moodoo/services/notification_service.dart';
 import 'package:moodoo/theme_preferences.dart'
     show themeModeNotifier, saveTheme;
+import 'package:moodoo/widgets/headers/moodoo_header.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
 import 'package:moodoo/widgets/sheets/moodoo_error_sheet.dart';
 import 'package:moodoo/widgets/sheets/time_picker_sheet.dart';
 import 'package:moodoo/widgets/shared/moodoo_modal.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
 import 'package:moodoo/widgets/danger_zone.dart';
-import 'package:moodoo/widgets/headers/settings_page_header.dart';
 import 'package:moodoo/services/auth_service.dart';
 
 class _SignOutSheet extends StatelessWidget {
@@ -362,6 +363,32 @@ class SettingsPage extends StatelessWidget {
                     );
                   },
                 ),
+                const SizedBox(height: 20),
+                MoodooText(
+                  l10n.legal,
+                  variant: MoodooTextVariant.headlineMedium,
+                ),
+                const SizedBox(height: 10),
+                MoodooButton(
+                  text: l10n.privacyPolicy,
+                  fullWidth: false,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 10,
+                  ),
+                  bouncePeakScale: 1.04,
+                  backgroundColor: Theme.of(
+                    context,
+                  ).textTheme.displayLarge!.color!,
+                  foregroundColor: Theme.of(context).colorScheme.surface,
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const PrivacyPolicyPage(),
+                      ),
+                    );
+                  },
+                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Divider(
@@ -378,11 +405,11 @@ class SettingsPage extends StatelessWidget {
               ],
             ),
           ),
-          const Positioned(
+          Positioned(
             top: 0,
             left: 0,
             right: 0,
-            child: SettingsPageHeader(),
+            child: MoodooHeader(title: l10n.settings),
           ),
         ],
       ),

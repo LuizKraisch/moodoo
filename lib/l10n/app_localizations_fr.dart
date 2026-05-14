@@ -311,4 +311,10 @@ class AppLocalizationsFr extends AppLocalizations {
   @override
   String get onboardingPage3Description =>
       'dans les paramètres, vous pouvez facilement configurer un rappel quotidien pour enregistrer votre humeur et maintenir votre calendrier à jour.';
+
+  @override
+  String get legal => 'légal';
+
+  @override
+  String get privacyPolicy => 'politique de confidentialité';
 }

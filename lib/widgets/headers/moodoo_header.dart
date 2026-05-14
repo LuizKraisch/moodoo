@@ -1,16 +1,16 @@
 import 'dart:ui';
 import 'package:moodoo/app_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
 import 'package:moodoo/widgets/shared/tap_bounce.dart';
 
-class SettingsPageHeader extends StatelessWidget {
-  const SettingsPageHeader({super.key});
+class MoodooHeader extends StatelessWidget {
+  const MoodooHeader({super.key, required this.title});
+
+  final String title;
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context)!;
     final topPadding = MediaQuery.of(context).padding.top;
 
     return Container(
@@ -38,24 +38,21 @@ class SettingsPageHeader extends StatelessWidget {
                 ).colorScheme.pillBackground.withValues(alpha: 0.55),
                 borderRadius: BorderRadius.circular(100),
               ),
-              padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),
+              padding: const EdgeInsets.all(14),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   TapBounce(
                     onTap: () => Navigator.of(context).pop(),
-                    child: Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-                      child: Icon(
-                        Icons.arrow_back_ios_new_rounded,
-                        size: 28,
-                        color: Theme.of(context).textTheme.titleMedium?.color,
-                      ),
+                    child: Icon(
+                      Icons.arrow_back_ios_new_rounded,
+                      size: 28,
+                      color: Theme.of(context).textTheme.titleMedium?.color,
                     ),
                   ),
                   const SizedBox(width: 8),
                   MoodooText(
-                    l10n.settings,
+                    title,
                     variant: MoodooTextVariant.displayLarge,
                     fontSize: 22,
                   ),

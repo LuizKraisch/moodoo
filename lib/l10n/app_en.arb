@@ -142,5 +142,8 @@
   "onboardingPage2Title": "build your own mood calendar",
   "onboardingPage2Description": "check the calendar to see all your moods per month and day.",
   "onboardingPage3Title": "activate the reminder and never forget to log your mood",
-  "onboardingPage3Description": "in settings you can easily set up a daily reminder to log your mood and keep your mood calendar up to date."
+  "onboardingPage3Description": "in settings you can easily set up a daily reminder to log your mood and keep your mood calendar up to date.",
+
+  "legal": "legal",
+  "privacyPolicy": "privacy policy"
 }

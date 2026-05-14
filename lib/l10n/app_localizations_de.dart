@@ -312,4 +312,10 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get onboardingPage3Description =>
       'in den einstellungen kannst du ganz einfach eine tägliche erinnerung einrichten, um deine stimmung einzutragen und deinen kalender aktuell zu halten.';
+
+  @override
+  String get legal => 'rechtliches';
+
+  @override
+  String get privacyPolicy => 'datenschutzrichtlinie';
 }

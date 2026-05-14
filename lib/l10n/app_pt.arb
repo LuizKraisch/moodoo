@@ -102,5 +102,8 @@
   "onboardingPage2Title": "crie seu próprio calendário de moods",
   "onboardingPage2Description": "veja o calendário para acompanhar todos os seus moods por mês e dia.",
   "onboardingPage3Title": "ative o lembrete e nunca esqueça de registrar seu mood",
-  "onboardingPage3Description": "nas configurações você pode facilmente configurar um lembrete diário para registrar seu mood e manter seu calendário sempre atualizado."
+  "onboardingPage3Description": "nas configurações você pode facilmente configurar um lembrete diário para registrar seu mood e manter seu calendário sempre atualizado.",
+
+  "legal": "legal",
+  "privacyPolicy": "política de privacidade"
 }

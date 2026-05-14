@@ -306,4 +306,10 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get onboardingPage3Description =>
       'in settings you can easily set up a daily reminder to log your mood and keep your mood calendar up to date.';
+
+  @override
+  String get legal => 'legal';
+
+  @override
+  String get privacyPolicy => 'privacy policy';
 }

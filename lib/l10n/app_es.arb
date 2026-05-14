@@ -102,5 +102,8 @@
   "onboardingPage2Title": "crea tu propio calendario de moods",
   "onboardingPage2Description": "consulta el calendario para ver todos tus moods por mes y día.",
   "onboardingPage3Title": "activa el recordatorio y nunca olvides registrar tu mood",
-  "onboardingPage3Description": "en configuración puedes configurar fácilmente un recordatorio diario para registrar tu mood y mantener tu calendario actualizado."
+  "onboardingPage3Description": "en configuración puedes configurar fácilmente un recordatorio diario para registrar tu mood y mantener tu calendario actualizado.",
+
+  "legal": "legal",
+  "privacyPolicy": "política de privacidad"
 }
