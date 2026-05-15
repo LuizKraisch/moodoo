@@ -3,6 +3,7 @@
 
   "loginSubtitle": "registra tus días, crea tu propio calendario de estado de ánimo",
   "loginWithGoogle": "iniciar sesión con Google",
+  "loginWithApple": "continuar con Apple",
 
   "hiUser": "hola, {name}!",
   "moodOverview": "aquí está tu resumen",

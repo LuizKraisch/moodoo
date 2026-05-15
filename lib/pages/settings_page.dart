@@ -110,7 +110,7 @@ class SettingsPage extends StatelessWidget {
     final authService = AuthService();
 
     try {
-      await authService.signOutFromGoogle();
+      await authService.signOut();
       themeModeNotifier.value = ThemeMode.dark;
       await saveTheme(ThemeMode.dark);
       // ignore: use_build_context_synchronously
@@ -142,7 +142,7 @@ class SettingsPage extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               MoodooText(
-                l10n.loggedAs(AuthService().getCurrentUser()?.email ?? ''),
+                l10n.loggedAs(AuthService().userEmail ?? ''),
                 variant: MoodooTextVariant.titleMedium,
                 fontSize: 13,
               ),

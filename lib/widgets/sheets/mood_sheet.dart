@@ -1,9 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
-import 'package:moodoo/services/firebase_service.dart';
+import 'package:moodoo/services/api_service.dart';
 import 'package:moodoo/services/mood_service.dart';
+import 'package:moodoo/widgets/sheets/moodoo_error_sheet.dart';
 import 'package:moodoo/widgets/shared/grade_card.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
@@ -55,7 +55,7 @@ class MoodSheet extends StatefulWidget {
 class _MoodSheetState extends State<MoodSheet> {
   String? _selected;
   final _controller = TextEditingController();
-  final _firebaseService = FirebaseService();
+  final _apiService = ApiService();
   bool _isLoading = false;
 
   static const _grades = ['S', 'A', 'B', 'C', 'D', 'F'];
@@ -87,21 +87,28 @@ class _MoodSheetState extends State<MoodSheet> {
   Future<void> _save() async {
     if (_selected == null) return;
     setState(() => _isLoading = true);
-    if (_isEditing) {
-      await _firebaseService.updateMood(
-        widget.mood!.id,
-        _controller.text,
-        _selected!,
-      );
-    } else {
-      await _firebaseService.addMood(
-        '',
-        Timestamp.fromDate(widget.date),
-        _selected!,
-        _controller.text,
-      );
+    try {
+      if (_isEditing) {
+        await _apiService.updateMood(
+          widget.mood!.id,
+          _controller.text,
+          _selected!,
+        );
+      } else {
+        await _apiService.addMood(
+          widget.date,
+          _selected!,
+          _controller.text,
+        );
+      }
+      if (mounted) Navigator.pop(context);
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isLoading = false);
+        // ignore: use_build_context_synchronously
+        showMoodooErrorSheet(context, e);
+      }
     }
-    if (mounted) Navigator.pop(context);
   }
 
   Future<void> _delete() async {
@@ -114,8 +121,16 @@ class _MoodSheetState extends State<MoodSheet> {
     );
     if (confirmed != true) return;
     setState(() => _isLoading = true);
-    await _firebaseService.deleteMood(widget.mood!.id);
-    if (mounted) Navigator.pop(context);
+    try {
+      await _apiService.deleteMood(widget.mood!.id);
+      if (mounted) Navigator.pop(context);
+    } catch (e) {
+      if (mounted) {
+        setState(() => _isLoading = false);
+        // ignore: use_build_context_synchronously
+        showMoodooErrorSheet(context, e);
+      }
+    }
   }
 
   @override

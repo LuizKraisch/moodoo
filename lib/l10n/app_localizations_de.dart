@@ -16,6 +16,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get loginWithGoogle => 'mit google anmelden';
 
   @override
+  String get loginWithApple => 'mit Apple fortfahren';
+
+  @override
   String hiUser(String name) {
     return 'hallo, $name!';
   }

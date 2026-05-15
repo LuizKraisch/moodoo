@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:moodoo/models/mood.dart';
-import 'package:moodoo/services/firebase_service.dart';
+import 'package:moodoo/services/api_service.dart';
 import 'package:moodoo/services/mood_service.dart';
 import 'package:moodoo/widgets/headers/calendar_page_header.dart';
 import 'package:moodoo/widgets/day_card.dart';
@@ -37,7 +37,7 @@ class _CalendarPageState extends State<CalendarPage>
   @override
   void initState() {
     super.initState();
-    _moodsStream = FirebaseService().getMoodsForMonth(
+    _moodsStream = ApiService().getMoodsForMonth(
       widget.summary.month,
       widget.summary.year,
     );
@@ -118,9 +118,12 @@ class _CalendarPageState extends State<CalendarPage>
 
   @override
   Widget build(BuildContext context) {
-    final itemCount = _daysInMonth;
-    final rowCount = ((itemCount + _crossAxisCount - 1) / _crossAxisCount)
-        .ceil();
+    final now = DateTime.now();
+    final isCurrentMonth =
+        widget.summary.year == now.year && widget.summary.month == now.month;
+    final itemCount =
+        isCurrentMonth ? (now.day - 1).clamp(0, _daysInMonth) : _daysInMonth;
+    final rowCount = (itemCount / _crossAxisCount).ceil();
 
     return Scaffold(
       body: StreamBuilder<List<Mood>>(
@@ -128,7 +131,7 @@ class _CalendarPageState extends State<CalendarPage>
         builder: (context, snapshot) {
           final moods = snapshot.data ?? widget.summary.moods;
           final moodByDay = {
-            for (final mood in moods) mood.day.toDate().day: mood,
+            for (final mood in moods) mood.day.day: mood,
           };
           final liveSummary = MonthSummary(
             month: widget.summary.month,

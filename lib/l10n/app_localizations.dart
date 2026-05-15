@@ -116,6 +116,12 @@ abstract class AppLocalizations {
   /// **'log in with Google'**
   String get loginWithGoogle;
 
+  /// No description provided for @loginWithApple.
+  ///
+  /// In en, this message translates to:
+  /// **'continue with Apple'**
+  String get loginWithApple;
+
   /// No description provided for @hiUser.
   ///
   /// In en, this message translates to:

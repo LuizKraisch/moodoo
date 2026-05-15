@@ -32,7 +32,7 @@ class LoginPagePresentation extends StatelessWidget {
       child: LayoutBuilder(
         builder: (context, constraints) => ClipRect(
           child: Transform.translate(
-            offset: const Offset(-60, 220),
+            offset: const Offset(-60, 170),
             child: OverflowBox(
               maxWidth: double.infinity,
               maxHeight: double.infinity,

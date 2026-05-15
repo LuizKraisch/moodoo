@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/services/auth_service.dart';
-import 'package:moodoo/services/firebase_service.dart';
+import 'package:moodoo/services/api_service.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
 import 'package:moodoo/widgets/sheets/moodoo_error_sheet.dart';
 import 'package:moodoo/widgets/shared/moodoo_modal.dart';
@@ -101,7 +101,7 @@ class _DangerZoneState extends State<DangerZone> {
     if (confirmed != true) return;
 
     try {
-      await FirebaseService().deleteAllMoods();
+      await ApiService().deleteAllMoods();
       // ignore: use_build_context_synchronously
       Navigator.of(context).popUntil((route) => route.isFirst);
     } catch (e) {
@@ -122,8 +122,8 @@ class _DangerZoneState extends State<DangerZone> {
     if (confirmed != true) return;
 
     try {
-      await FirebaseService().deleteAllMoods();
-      await AuthService().deleteUser();
+      await ApiService().deleteAllMoods();
+      await AuthService().signOut();
       // ignore: use_build_context_synchronously
       Navigator.of(context).popUntil((route) => route.isFirst);
     } catch (e) {

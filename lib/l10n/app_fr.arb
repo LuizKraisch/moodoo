@@ -3,6 +3,7 @@
 
   "loginSubtitle": "suivez vos jours, créez votre propre calendrier d'humeur",
   "loginWithGoogle": "se connecter avec Google",
+  "loginWithApple": "continuer avec Apple",
 
   "hiUser": "salut, {name}!",
   "moodOverview": "voici votre aperçu d'humeur",

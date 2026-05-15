@@ -3,6 +3,7 @@
 
   "loginSubtitle": "track your days, create your own mood calendar",
   "loginWithGoogle": "log in with Google",
+  "loginWithApple": "continue with Apple",
 
   "hiUser": "hi, {name}!",
   "@hiUser": {

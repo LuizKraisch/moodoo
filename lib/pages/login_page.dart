@@ -7,6 +7,7 @@ import 'package:moodoo/widgets/login_page_presentation.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
 import 'package:moodoo/widgets/sheets/moodoo_error_sheet.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,10 +17,20 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  bool _isLoading = false;
+  bool _isLoadingGoogle = false;
+  bool _isLoadingApple = false;
+  bool _appleAvailable = false;
 
-  Future<void> login() async {
-    setState(() => _isLoading = true);
+  @override
+  void initState() {
+    super.initState();
+    SignInWithApple.isAvailable().then((available) {
+      if (mounted) setState(() => _appleAvailable = available);
+    });
+  }
+
+  Future<void> _loginWithGoogle() async {
+    setState(() => _isLoadingGoogle = true);
     try {
       await AuthService().signInWithGoogle();
       themeModeNotifier.value = ThemeMode.system;
@@ -27,7 +38,20 @@ class _LoginPageState extends State<LoginPage> {
     } catch (e) {
       if (mounted) showMoodooErrorSheet(context, e);
     } finally {
-      if (mounted) setState(() => _isLoading = false);
+      if (mounted) setState(() => _isLoadingGoogle = false);
+    }
+  }
+
+  Future<void> _loginWithApple() async {
+    setState(() => _isLoadingApple = true);
+    try {
+      await AuthService().signInWithApple();
+      themeModeNotifier.value = ThemeMode.system;
+      await saveTheme(ThemeMode.system);
+    } catch (e) {
+      if (mounted) showMoodooErrorSheet(context, e);
+    } finally {
+      if (mounted) setState(() => _isLoadingApple = false);
     }
   }
 
@@ -45,7 +69,7 @@ class _LoginPageState extends State<LoginPage> {
             const LoginPagePresentation(),
             Container(
               color: Theme.of(context).colorScheme.surface,
-              padding: const EdgeInsets.fromLTRB(30, 24, 30, 60),
+              padding: const EdgeInsets.fromLTRB(30, 24, 30, 40),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -72,16 +96,32 @@ class _LoginPageState extends State<LoginPage> {
                   const SizedBox(height: 20),
                   MoodooButton(
                     text: l10n.loginWithGoogle,
-                    onTap: login,
-                    isLoading: _isLoading,
+                    onTap: _loginWithGoogle,
+                    isLoading: _isLoadingGoogle,
                     backgroundColor: Colors.white,
-                    foregroundColor: Color(0xFF1C1C1C),
+                    foregroundColor: const Color(0xFF1C1C1C),
                     bouncePeakScale: 1.1,
                     leading: Image.asset(
                       'assets/logos/google-g-logo.png',
                       height: 22,
                     ),
                   ),
+                  if (_appleAvailable) ...[
+                    const SizedBox(height: 12),
+                    MoodooButton(
+                      text: l10n.loginWithApple,
+                      onTap: _loginWithApple,
+                      isLoading: _isLoadingApple,
+                      backgroundColor: Colors.black,
+                      foregroundColor: Colors.white,
+                      bouncePeakScale: 1.1,
+                      leading: const Icon(
+                        Icons.apple,
+                        color: Colors.white,
+                        size: 26,
+                      ),
+                    ),
+                  ],
                 ],
               ),
             ),

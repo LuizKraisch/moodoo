@@ -1,9 +1,9 @@
 import 'dart:ui';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:moodoo/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/pages/settings_page.dart';
+import 'package:moodoo/services/auth_service.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
 import 'package:moodoo/widgets/shared/tap_bounce.dart';
 
@@ -14,9 +14,9 @@ class HomePageHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final topPadding = MediaQuery.of(context).padding.top;
-    final user = FirebaseAuth.instance.currentUser;
-    final firstName = (user?.displayName ?? '').split(' ').first.toLowerCase();
-    final photoUrl = user?.photoURL;
+    final auth = AuthService();
+    final firstName = (auth.userName ?? auth.userEmail ?? '').split(' ').first.toLowerCase();
+    final photoUrl = auth.userPhotoUrl;
 
     return Container(
       decoration: BoxDecoration(

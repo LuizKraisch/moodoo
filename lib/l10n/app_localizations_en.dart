@@ -15,6 +15,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginWithGoogle => 'log in with Google';
 
   @override
+  String get loginWithApple => 'continue with Apple';
+
+  @override
   String hiUser(String name) {
     return 'hi, $name!';
   }
