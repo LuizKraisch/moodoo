@@ -18,14 +18,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _cardKeys = <(int, int), GlobalKey>{};
+  // One stable key per calendar month (index = month - 1).
+  final _cardKeys = List.generate(12, (_) => GlobalKey());
   final _scrollController = ScrollController();
   final _apiService = ApiService();
   bool _headerVisible = true;
   double _lastScrollOffset = 0;
-
-  GlobalKey _keyFor(MonthSummary s) =>
-      _cardKeys.putIfAbsent((s.year, s.month), GlobalKey.new);
 
   @override
   void initState() {
@@ -52,8 +50,10 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-  void _onMonthTap(BuildContext context, GlobalKey key, MonthSummary summary) {
-    final renderBox = key.currentContext?.findRenderObject() as RenderBox?;
+  void _onMonthTap(BuildContext context, MonthSummary summary) {
+    final renderBox =
+        _cardKeys[summary.month - 1].currentContext?.findRenderObject()
+            as RenderBox?;
     if (renderBox == null) return;
     final rect = renderBox.localToGlobal(Offset.zero) & renderBox.size;
     Navigator.push(
@@ -66,22 +66,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _buildCard(BuildContext context, MonthSummary summary, DateTime now) {
-    final key = _keyFor(summary);
-    final isFuture = summary.year > now.year ||
-        (summary.year == now.year && summary.month > now.month);
-    return Container(
-      key: key,
-      child: isFuture
-          ? MonthCard(summary: summary, isFuture: true)
-          : TapBounce(
-              peakScale: 1.06,
-              onTap: () => _onMonthTap(context, key, summary),
-              child: MonthCard(summary: summary),
-            ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +74,7 @@ class _HomePageState extends State<HomePage> {
         builder: (context, snapshot) {
           final moods = snapshot.data ?? [];
           final now = DateTime.now();
-          final allSummaries = snapshot.hasData
+          final summaries = snapshot.hasData
               ? MoodService.buildMonthSummaries(moods, now.year)
               : null;
 
@@ -100,9 +84,8 @@ class _HomePageState extends State<HomePage> {
                 m.day.day == now.day;
           }).firstOrNull;
 
-          // Show months with data + current month + future months (grey).
-          // Past months with no moods are excluded.
-          final displaySummaries = allSummaries
+          // Show current + future months, plus past months that have records.
+          final displaySummaries = summaries
               ?.where((s) => s.month >= now.month || s.moods.isNotEmpty)
               .toList();
 
@@ -121,11 +104,23 @@ class _HomePageState extends State<HomePage> {
                         mainAxisSpacing: 16,
                         children: displaySummaries == null
                             ? List.generate(
-                                3, (_) => const MonthCardSkeleton())
-                            : [
-                                for (final s in displaySummaries)
-                                  _buildCard(context, s, now),
-                              ],
+                                4, (_) => const MonthCardSkeleton())
+                            : List.generate(displaySummaries.length, (i) {
+                                final summary = displaySummaries[i];
+                                final isFuture = summary.month > now.month;
+                                return Container(
+                                  key: _cardKeys[summary.month - 1],
+                                  child: isFuture
+                                      ? MonthCard(
+                                          summary: summary, isFuture: true)
+                                      : TapBounce(
+                                          peakScale: 1.06,
+                                          onTap: () => _onMonthTap(
+                                              context, summary),
+                                          child: MonthCard(summary: summary),
+                                        ),
+                                );
+                              }),
                       ),
                     ),
                   ],

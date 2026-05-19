@@ -10,12 +10,14 @@ class UserInfo {
   final String email;
   final String name;
   final String? photoUrl;
+  final DateTime? createdAt;
 
   const UserInfo({
     required this.id,
     required this.email,
     required this.name,
     this.photoUrl,
+    this.createdAt,
   });
 }
 
@@ -42,6 +44,7 @@ class AuthService {
     return (name != null && name.isNotEmpty) ? name : null;
   }
   String? get userPhotoUrl => _currentUser?.photoUrl;
+  DateTime? get userCreatedAt => _currentUser?.createdAt;
 
   Future<String?> getToken() => _storage.read(key: 'jwt_token');
 
@@ -69,8 +72,10 @@ class AuthService {
     final email = await _storage.read(key: 'user_email');
     final name = await _storage.read(key: 'user_name');
     final photoUrl = await _storage.read(key: 'user_photo_url');
+    final createdAtRaw = await _storage.read(key: 'user_created_at');
+    final createdAt = createdAtRaw != null ? DateTime.tryParse(createdAtRaw) : null;
     if (id != null && email != null) {
-      _currentUser = UserInfo(id: id, email: email, name: name ?? '', photoUrl: photoUrl);
+      _currentUser = UserInfo(id: id, email: email, name: name ?? '', photoUrl: photoUrl, createdAt: createdAt);
     }
   }
 
@@ -84,12 +89,16 @@ class AuthService {
     final token = data['token'] as String;
     final user = data['user'] as Map<String, dynamic>;
     final photoUrl = user['photo_url'] as String?;
+    final createdAt = user['created_at'] != null
+        ? DateTime.tryParse(user['created_at'] as String)
+        : null;
 
     _currentUser = UserInfo(
       id: user['id'] as String,
       email: user['email'] as String,
       name: user['name'] as String? ?? '',
       photoUrl: photoUrl,
+      createdAt: createdAt,
     );
 
     await _storage.write(key: 'jwt_token', value: token);
@@ -100,6 +109,9 @@ class AuthService {
       await _storage.write(key: 'user_photo_url', value: photoUrl);
     } else {
       await _storage.delete(key: 'user_photo_url');
+    }
+    if (createdAt != null) {
+      await _storage.write(key: 'user_created_at', value: createdAt.toIso8601String());
     }
 
     _authStateController.add(true);

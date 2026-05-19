@@ -118,11 +118,7 @@ class _CalendarPageState extends State<CalendarPage>
 
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
-    final isCurrentMonth =
-        widget.summary.year == now.year && widget.summary.month == now.month;
-    final itemCount =
-        isCurrentMonth ? (now.day - 1).clamp(0, _daysInMonth) : _daysInMonth;
+    final itemCount = _daysInMonth;
     final rowCount = (itemCount / _crossAxisCount).ceil();
 
     return Scaffold(
