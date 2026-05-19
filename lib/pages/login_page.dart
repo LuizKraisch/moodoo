@@ -26,7 +26,7 @@ class _LoginPageState extends State<LoginPage> {
     super.initState();
     SignInWithApple.isAvailable().then((available) {
       if (mounted) setState(() => _appleAvailable = available);
-    });
+    }).catchError((_) {});
   }
 
   Future<void> _loginWithGoogle() async {
