@@ -26,7 +26,7 @@ class AuthService {
   factory AuthService() => _instance;
   AuthService._internal();
 
-  static const String _baseUrl = 'http://localhost:3000';
+  static const String _baseUrl = String.fromEnvironment('API_BASE_URL');
   static const _storage = FlutterSecureStorage();
 
   UserInfo? _currentUser;
@@ -43,6 +43,7 @@ class AuthService {
     final name = _currentUser?.name;
     return (name != null && name.isNotEmpty) ? name : null;
   }
+
   String? get userPhotoUrl => _currentUser?.photoUrl;
   DateTime? get userCreatedAt => _currentUser?.createdAt;
 
@@ -57,8 +58,12 @@ class AuthService {
       if (!controller.isClosed) controller.add(token != null);
 
       final sub = _authStateController.stream.listen(
-        (value) { if (!controller.isClosed) controller.add(value); },
-        onDone: () { if (!controller.isClosed) controller.close(); },
+        (value) {
+          if (!controller.isClosed) controller.add(value);
+        },
+        onDone: () {
+          if (!controller.isClosed) controller.close();
+        },
       );
       controller.onCancel = () => sub.cancel();
     }
@@ -73,9 +78,17 @@ class AuthService {
     final name = await _storage.read(key: 'user_name');
     final photoUrl = await _storage.read(key: 'user_photo_url');
     final createdAtRaw = await _storage.read(key: 'user_created_at');
-    final createdAt = createdAtRaw != null ? DateTime.tryParse(createdAtRaw) : null;
+    final createdAt = createdAtRaw != null
+        ? DateTime.tryParse(createdAtRaw)
+        : null;
     if (id != null && email != null) {
-      _currentUser = UserInfo(id: id, email: email, name: name ?? '', photoUrl: photoUrl, createdAt: createdAt);
+      _currentUser = UserInfo(
+        id: id,
+        email: email,
+        name: name ?? '',
+        photoUrl: photoUrl,
+        createdAt: createdAt,
+      );
     }
   }
 
@@ -111,7 +124,10 @@ class AuthService {
       await _storage.delete(key: 'user_photo_url');
     }
     if (createdAt != null) {
-      await _storage.write(key: 'user_created_at', value: createdAt.toIso8601String());
+      await _storage.write(
+        key: 'user_created_at',
+        value: createdAt.toIso8601String(),
+      );
     }
 
     _authStateController.add(true);
@@ -142,10 +158,10 @@ class AuthService {
     final idToken = credential.identityToken;
     if (idToken == null) throw Exception('Failed to get Apple ID token');
 
-    final nameParts = [credential.givenName, credential.familyName]
-        .whereType<String>()
-        .where((s) => s.isNotEmpty)
-        .toList();
+    final nameParts = [
+      credential.givenName,
+      credential.familyName,
+    ].whereType<String>().where((s) => s.isNotEmpty).toList();
 
     final body = <String, String>{'id_token': idToken};
     if (nameParts.isNotEmpty) body['name'] = nameParts.join(' ');

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:web_socket_channel/web_socket_channel.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/auth_service.dart';
 
@@ -22,28 +21,24 @@ class ApiService {
     AuthService().addSignOutListener(reset);
   }
 
-  static const String _baseUrl = 'http://localhost:3000';
-  static const String _wsUrl = 'ws://localhost:3000/cable';
-  static const String _cableIdentifier = '{"channel":"MoodsChannel"}';
-
+  static const String _baseUrl = String.fromEnvironment('API_BASE_URL');
   final _moodsController = StreamController<List<Mood>>.broadcast();
   List<Mood> _moods = [];
-  WebSocketChannel? _channel;
   bool _initialized = false;
 
   Stream<List<Mood>> getMoods() {
     if (!_initialized) {
       _initialized = true;
       _loadMoods();
-      _connectWebSocket();
     }
     return _moodsController.stream;
   }
 
   Stream<List<Mood>> getMoodsForMonth(int month, int year) {
     return getMoods().map(
-      (moods) =>
-          moods.where((m) => m.day.month == month && m.day.year == year).toList(),
+      (moods) => moods
+          .where((m) => m.day.month == month && m.day.year == year)
+          .toList(),
     );
   }
 
@@ -64,7 +59,9 @@ class ApiService {
       );
       if (response.statusCode == 200) {
         final List<dynamic> data = jsonDecode(response.body);
-        _moods = data.map((m) => Mood.fromJson(m as Map<String, dynamic>)).toList();
+        _moods = data
+            .map((m) => Mood.fromJson(m as Map<String, dynamic>))
+            .toList();
         _moodsController.add(List.from(_moods));
       } else if (response.statusCode == 401) {
         await AuthService().signOut();
@@ -76,63 +73,6 @@ class ApiService {
     }
   }
 
-  Future<void> _connectWebSocket() async {
-    try {
-      final token = await AuthService().getToken();
-      if (token == null) return;
-
-      _channel = WebSocketChannel.connect(
-        Uri.parse('$_wsUrl?token=${Uri.encodeComponent(token)}'),
-      );
-
-      await _channel!.ready;
-
-      _channel!.sink.add(jsonEncode({
-        'command': 'subscribe',
-        'identifier': _cableIdentifier,
-      }));
-
-      _channel!.stream.listen(
-        (data) {
-          final message = jsonDecode(data as String) as Map<String, dynamic>;
-
-          // Skip control messages: welcome, ping, confirm_subscription, disconnect
-          if (message.containsKey('type')) return;
-
-          final msg = message['message'] as Map<String, dynamic>?;
-          if (msg == null) return;
-
-          final action = msg['action'] as String?;
-          final moodData = msg['mood'] as Map<String, dynamic>?;
-          if (action == null || moodData == null) return;
-
-          final mood = Mood.fromJson(moodData);
-
-          switch (action) {
-            case 'created':
-              _moods.add(mood);
-            case 'updated':
-              final idx = _moods.indexWhere((m) => m.id == mood.id);
-              if (idx != -1) _moods[idx] = mood;
-            case 'deleted':
-              _moods.removeWhere((m) => m.id == mood.id);
-          }
-
-          _moodsController.add(List.from(_moods));
-        },
-        onError: (_) => _scheduleReconnect(),
-        onDone: () => _scheduleReconnect(),
-      );
-    } catch (_) {
-      _scheduleReconnect();
-    }
-  }
-
-  void _scheduleReconnect() {
-    Future.delayed(const Duration(seconds: 4), () {
-      if (_initialized) _connectWebSocket();
-    });
-  }
 
   Future<void> addMood(DateTime day, String score, String notes) async {
     final headers = await _authHeaders();
@@ -140,14 +80,15 @@ class ApiService {
       Uri.parse('$_baseUrl/moods'),
       headers: headers,
       body: jsonEncode({
-        'mood': {
-          'day': _formatDate(day),
-          'score': score,
-          'notes': notes,
-        },
+        'mood': {'day': _formatDate(day), 'score': score, 'notes': notes},
       }),
     );
     _handleResponse(response, expected: 201);
+    final mood = Mood.fromJson(
+      jsonDecode(response.body) as Map<String, dynamic>,
+    );
+    _moods.add(mood);
+    _moodsController.add(List.from(_moods));
   }
 
   Future<void> updateMood(String id, String notes, String score) async {
@@ -156,13 +97,16 @@ class ApiService {
       Uri.parse('$_baseUrl/moods/$id'),
       headers: headers,
       body: jsonEncode({
-        'mood': {
-          'notes': notes,
-          'score': score,
-        },
+        'mood': {'notes': notes, 'score': score},
       }),
     );
     _handleResponse(response);
+    final mood = Mood.fromJson(
+      jsonDecode(response.body) as Map<String, dynamic>,
+    );
+    final idx = _moods.indexWhere((m) => m.id == id);
+    if (idx != -1) _moods[idx] = mood;
+    _moodsController.add(List.from(_moods));
   }
 
   Future<void> deleteMood(String id) async {
@@ -172,6 +116,8 @@ class ApiService {
       headers: headers,
     );
     if (response.statusCode != 204) _handleResponse(response);
+    _moods.removeWhere((m) => m.id == id);
+    _moodsController.add(List.from(_moods));
   }
 
   Future<void> deleteAllMoods() async {
@@ -185,7 +131,9 @@ class ApiService {
       return;
     }
     final List<dynamic> data = jsonDecode(response.body);
-    final ids = data.map((m) => (m as Map<String, dynamic>)['id'] as String).toList();
+    final ids = data
+        .map((m) => (m as Map<String, dynamic>)['id'] as String)
+        .toList();
     for (final id in ids) {
       await deleteMood(id);
     }
@@ -200,7 +148,10 @@ class ApiService {
         throw ApiException(errors, statusCode: response.statusCode);
       }
       if (body.containsKey('error')) {
-        throw ApiException(body['error'] as String, statusCode: response.statusCode);
+        throw ApiException(
+          body['error'] as String,
+          statusCode: response.statusCode,
+        );
       }
     } on ApiException {
       rethrow;
@@ -216,8 +167,6 @@ class ApiService {
   }
 
   void reset() {
-    _channel?.sink.close();
-    _channel = null;
     _moods = [];
     _initialized = false;
   }
