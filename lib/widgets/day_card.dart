@@ -48,32 +48,38 @@ class DayCard extends StatelessWidget {
               color: Theme.of(context).colorScheme.cardBackground,
               borderRadius: BorderRadius.circular(25),
             ),
+            clipBehavior: Clip.hardEdge,
             child: Padding(
               padding: EdgeInsets.all(padding),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  MoodooText(
-                    MoodService.weekdayName(l10n, date.weekday),
-                    variant: MoodooTextVariant.titleSmall,
+                  Flexible(
+                    child: MoodooText(
+                      MoodService.weekdayName(l10n, date.weekday),
+                      variant: MoodooTextVariant.titleSmall,
+                    ),
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      MoodooText(
-                        '${date.day}',
-                        variant: MoodooTextVariant.displaySmall,
-                        fontSize: dateFontSize,
-                        color: Theme.of(context).textTheme.displayLarge!.color!,
-                      ),
-                      GradeCard(
-                        grade: mood?.score,
-                        size: gradeSize,
-                        borderRadius: gradeSize * 0.3,
-                        fontSize: gradeSize * 0.5,
-                      ),
-                    ],
+                  Flexible(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        MoodooText(
+                          '${date.day}',
+                          variant: MoodooTextVariant.displaySmall,
+                          fontSize: dateFontSize,
+                          color:
+                              Theme.of(context).textTheme.displayLarge!.color!,
+                        ),
+                        GradeCard(
+                          grade: mood?.score,
+                          size: gradeSize,
+                          borderRadius: gradeSize * 0.3,
+                          fontSize: gradeSize * 0.5,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
