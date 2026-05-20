@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:moodoo/config.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/auth_service.dart';
 
@@ -21,7 +22,7 @@ class ApiService {
     AuthService().addSignOutListener(reset);
   }
 
-  static const String _baseUrl = String.fromEnvironment('API_BASE_URL');
+  static const String _baseUrl = apiBaseUrl;
   final _moodsController = StreamController<List<Mood>>.broadcast();
   List<Mood> _moods = [];
   bool _initialized = false;

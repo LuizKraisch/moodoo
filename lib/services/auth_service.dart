@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:moodoo/config.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:http/http.dart' as http;
 
@@ -26,7 +27,7 @@ class AuthService {
   factory AuthService() => _instance;
   AuthService._internal();
 
-  static const String _baseUrl = String.fromEnvironment('API_BASE_URL');
+  static const String _baseUrl = apiBaseUrl;
   static const _storage = FlutterSecureStorage();
 
   UserInfo? _currentUser;
