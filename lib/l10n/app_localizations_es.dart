@@ -317,4 +317,13 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get privacyPolicy => 'política de privacidad';
+
+  @override
+  String get externalPrivacyPolicy => 'ver en línea';
+
+  @override
+  String get support => 'soporte';
+
+  @override
+  String get getSupport => 'obtener soporte';
 }

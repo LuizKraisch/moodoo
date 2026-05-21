@@ -316,4 +316,13 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get privacyPolicy => 'política de privacidade';
+
+  @override
+  String get externalPrivacyPolicy => 'ver online';
+
+  @override
+  String get support => 'suporte';
+
+  @override
+  String get getSupport => 'obter suporte';
 }

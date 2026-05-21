@@ -146,5 +146,8 @@
   "onboardingPage3Description": "in settings you can easily set up a daily reminder to log your mood and keep your mood calendar up to date.",
 
   "legal": "legal",
-  "privacyPolicy": "privacy policy"
+  "privacyPolicy": "privacy policy",
+  "externalPrivacyPolicy": "view online",
+  "support": "support",
+  "getSupport": "get support"
 }

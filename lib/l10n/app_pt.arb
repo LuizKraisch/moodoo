@@ -106,5 +106,8 @@
   "onboardingPage3Description": "nas configurações você pode facilmente configurar um lembrete diário para registrar seu mood e manter seu calendário sempre atualizado.",
 
   "legal": "legal",
-  "privacyPolicy": "política de privacidade"
+  "privacyPolicy": "política de privacidade",
+  "externalPrivacyPolicy": "ver online",
+  "support": "suporte",
+  "getSupport": "obter suporte"
 }

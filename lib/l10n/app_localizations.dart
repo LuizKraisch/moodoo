@@ -667,6 +667,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'privacy policy'**
   String get privacyPolicy;
+
+  /// No description provided for @externalPrivacyPolicy.
+  ///
+  /// In en, this message translates to:
+  /// **'view online'**
+  String get externalPrivacyPolicy;
+
+  /// No description provided for @support.
+  ///
+  /// In en, this message translates to:
+  /// **'support'**
+  String get support;
+
+  /// No description provided for @getSupport.
+  ///
+  /// In en, this message translates to:
+  /// **'get support'**
+  String get getSupport;
 }
 
 class _AppLocalizationsDelegate

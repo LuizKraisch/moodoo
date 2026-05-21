@@ -321,4 +321,13 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get privacyPolicy => 'datenschutzrichtlinie';
+
+  @override
+  String get externalPrivacyPolicy => 'online ansehen';
+
+  @override
+  String get support => 'support';
+
+  @override
+  String get getSupport => 'support erhalten';
 }

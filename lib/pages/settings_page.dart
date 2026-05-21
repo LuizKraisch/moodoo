@@ -13,7 +13,10 @@ import 'package:moodoo/widgets/sheets/time_picker_sheet.dart';
 import 'package:moodoo/widgets/shared/moodoo_modal.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
 import 'package:moodoo/widgets/danger_zone.dart';
+import 'package:moodoo/config.dart'
+    show privacyPolicyUrl, supportUrl, appVersion;
 import 'package:moodoo/services/auth_service.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class _SignOutSheet extends StatelessWidget {
   const _SignOutSheet();
@@ -145,6 +148,15 @@ class SettingsPage extends StatelessWidget {
                 l10n.loggedAs(AuthService().userEmail ?? ''),
                 variant: MoodooTextVariant.titleMedium,
                 fontSize: 13,
+              ),
+              const SizedBox(height: 4),
+              MoodooText(
+                'moodoo app $appVersion',
+                variant: MoodooTextVariant.titleMedium,
+                fontSize: 11,
+                color: Theme.of(
+                  context,
+                ).textTheme.titleMedium!.color!.withValues(alpha: 0.3),
               ),
             ],
           ),
@@ -388,6 +400,57 @@ class SettingsPage extends StatelessWidget {
                       ),
                     );
                   },
+                ),
+                const SizedBox(height: 10),
+                GestureDetector(
+                  onTap: () => launchUrl(
+                    Uri.parse(privacyPolicyUrl),
+                    mode: LaunchMode.externalApplication,
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      MoodooText(
+                        l10n.externalPrivacyPolicy,
+                        variant: MoodooTextVariant.titleMedium,
+                        fontSize: 12,
+                        color: Theme.of(
+                          context,
+                        ).textTheme.titleMedium!.color!.withValues(alpha: 0.4),
+                      ),
+                      const SizedBox(width: 5),
+                      Icon(
+                        Icons.open_in_new_rounded,
+                        size: 13,
+                        color: Theme.of(
+                          context,
+                        ).textTheme.titleMedium!.color!.withValues(alpha: 0.4),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 20),
+                MoodooText(
+                  l10n.support,
+                  variant: MoodooTextVariant.headlineMedium,
+                ),
+                const SizedBox(height: 10),
+                MoodooButton(
+                  text: l10n.getSupport,
+                  fullWidth: false,
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 24,
+                    vertical: 10,
+                  ),
+                  bouncePeakScale: 1.04,
+                  backgroundColor: Theme.of(
+                    context,
+                  ).textTheme.displayLarge!.color!,
+                  foregroundColor: Theme.of(context).colorScheme.surface,
+                  onTap: () => launchUrl(
+                    Uri.parse(supportUrl),
+                    mode: LaunchMode.externalApplication,
+                  ),
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),

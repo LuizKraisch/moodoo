@@ -106,5 +106,8 @@
   "onboardingPage3Description": "in den einstellungen kannst du ganz einfach eine tägliche erinnerung einrichten, um deine stimmung einzutragen und deinen kalender aktuell zu halten.",
 
   "legal": "rechtliches",
-  "privacyPolicy": "datenschutzrichtlinie"
+  "privacyPolicy": "datenschutzrichtlinie",
+  "externalPrivacyPolicy": "online ansehen",
+  "support": "support",
+  "getSupport": "support erhalten"
 }

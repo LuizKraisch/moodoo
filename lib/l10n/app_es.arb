@@ -106,5 +106,8 @@
   "onboardingPage3Description": "en configuración puedes configurar fácilmente un recordatorio diario para registrar tu mood y mantener tu calendario actualizado.",
 
   "legal": "legal",
-  "privacyPolicy": "política de privacidad"
+  "privacyPolicy": "política de privacidad",
+  "externalPrivacyPolicy": "ver en línea",
+  "support": "soporte",
+  "getSupport": "obtener soporte"
 }
