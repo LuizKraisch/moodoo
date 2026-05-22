@@ -3,6 +3,7 @@
 
   "loginSubtitle": "suivez vos jours, créez votre propre calendrier d'humeur",
   "loginWithGoogle": "se connecter avec Google",
+  "loginWithApple": "continuer avec Apple",
 
   "hiUser": "salut, {name}!",
   "moodOverview": "voici votre aperçu d'humeur",
@@ -29,7 +30,7 @@
   "spanish": "espagnol",
   "loggedAs": "connecté en tant que {email}",
 
-  "averageMood": "humeur moyenne",
+  "averageMood": "moyenne",
 
   "howAreYouFeelingToday": "comment vous sentez-vous aujourd'hui?",
   "howDidYouFeelThatDay": "comment vous sentiez-vous ce jour-là?",
@@ -105,5 +106,8 @@
   "onboardingPage3Description": "dans les paramètres, vous pouvez facilement configurer un rappel quotidien pour enregistrer votre humeur et maintenir votre calendrier à jour.",
 
   "legal": "légal",
-  "privacyPolicy": "politique de confidentialité"
+  "privacyPolicy": "politique de confidentialité",
+  "externalPrivacyPolicy": "voir en ligne",
+  "support": "assistance",
+  "getSupport": "obtenir de l'aide"
 }

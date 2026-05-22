@@ -103,7 +103,7 @@ class DayExpandedPanel extends StatelessWidget {
                             MoodooText(
                               MoodService.formatDateTime(
                                 l10n,
-                                mood!.createdAt.toDate(),
+                                mood!.createdAt,
                               ),
                               variant: MoodooTextVariant.bodySmall,
                               fontSize: 12,

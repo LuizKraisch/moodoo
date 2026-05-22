@@ -8,8 +8,6 @@ import 'package:moodoo/onboarding_preferences.dart';
 import 'package:moodoo/pages/auth_gate.dart';
 import 'package:moodoo/services/notification_service.dart';
 import 'package:moodoo/theme_preferences.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
@@ -19,12 +17,6 @@ void main() async {
   await loadLocale();
   await loadNotificationPrefs();
   await loadOnboardingPrefs();
-
-  try {
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-  } catch (_) {}
 
   await NotificationService.initialize();
   await NotificationService.rescheduleFromPrefs();

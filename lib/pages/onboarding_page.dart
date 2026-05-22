@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/onboarding_preferences.dart';
+import 'package:moodoo/services/api_service.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
 
@@ -36,6 +37,7 @@ class _OnboardingPageState extends State<OnboardingPage> {
 
   Future<void> _finish() async {
     await saveOnboardingFinished();
+    ApiService().updateAccount(onboardingCompleted: true).catchError((_) {});
   }
 
   void _next() {

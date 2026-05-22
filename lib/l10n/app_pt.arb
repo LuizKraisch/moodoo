@@ -3,6 +3,7 @@
 
   "loginSubtitle": "registre seus dias, crie seu próprio calendário de moods",
   "loginWithGoogle": "entrar com Google",
+  "loginWithApple": "continuar com Apple",
 
   "hiUser": "oi, {name}!",
   "moodOverview": "aqui está o seu resumo",
@@ -29,7 +30,7 @@
   "spanish": "espanhol",
   "loggedAs": "conectado como {email}",
 
-  "averageMood": "média do mês",
+  "averageMood": "média",
 
   "howAreYouFeelingToday": "como você está se sentindo hoje?",
   "howDidYouFeelThatDay": "como você se sentiu neste dia?",
@@ -105,5 +106,8 @@
   "onboardingPage3Description": "nas configurações você pode facilmente configurar um lembrete diário para registrar seu mood e manter seu calendário sempre atualizado.",
 
   "legal": "legal",
-  "privacyPolicy": "política de privacidade"
+  "privacyPolicy": "política de privacidade",
+  "externalPrivacyPolicy": "ver online",
+  "support": "suporte",
+  "getSupport": "obter suporte"
 }

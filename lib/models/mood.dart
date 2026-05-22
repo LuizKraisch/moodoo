@@ -1,40 +1,39 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-
 class Mood {
   final String id;
-  final String userId;
-  final Timestamp day;
-  final Timestamp createdAt;
+  final DateTime day;
+  final DateTime createdAt;
+  final DateTime updatedAt;
   final String notes;
   final String score;
 
   Mood({
     required this.id,
-    required this.userId,
     required this.day,
     required this.createdAt,
+    required this.updatedAt,
     required this.notes,
     required this.score,
   });
 
-  factory Mood.fromMap(String id, Map<String, dynamic> data) {
+  factory Mood.fromJson(Map<String, dynamic> data) {
     return Mood(
-      id: id,
-      userId: data['userId'] as String? ?? '',
-      day: data['day'] as Timestamp,
-      createdAt: data['createdAt'] as Timestamp,
+      id: data['id'] as String,
+      day: DateTime.parse(data['day'] as String),
+      createdAt: DateTime.parse(data['created_at'] as String),
+      updatedAt: DateTime.parse(data['updated_at'] as String),
       notes: data['notes'] as String? ?? '',
-      score: data['score'] as String? ?? '',
+      score: data['score'] as String,
     );
   }
 
-  Map<String, dynamic> toMap() {
+  Map<String, dynamic> toJson() {
     return {
-      'userId': userId,
-      'day': day,
-      'createdAt': createdAt,
+      'id': id,
+      'day': '${day.year}-${day.month.toString().padLeft(2, '0')}-${day.day.toString().padLeft(2, '0')}',
       'notes': notes,
       'score': score,
+      'created_at': createdAt.toIso8601String(),
+      'updated_at': updatedAt.toIso8601String(),
     };
   }
 }

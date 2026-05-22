@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/pages/calendar_page.dart';
 import 'package:moodoo/routes/card_expand_route.dart';
-import 'package:moodoo/services/firebase_service.dart';
+import 'package:moodoo/services/api_service.dart';
 import 'package:moodoo/services/mood_service.dart';
 import 'package:moodoo/widgets/footers/home_page_footer.dart';
 import 'package:moodoo/widgets/headers/home_page_header.dart';
@@ -18,13 +18,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  // One stable key per calendar month (index = month - 1).
   final _cardKeys = List.generate(12, (_) => GlobalKey());
   final _scrollController = ScrollController();
-  final _firebaseService = FirebaseService();
+  final _apiService = ApiService();
   bool _headerVisible = true;
   double _lastScrollOffset = 0;
-
-  static const int _currentYear = 2026;
 
   @override
   void initState() {
@@ -51,9 +50,10 @@ class _HomePageState extends State<HomePage> {
     super.dispose();
   }
 
-  void _onMonthTap(BuildContext context, int index, MonthSummary summary) {
+  void _onMonthTap(BuildContext context, MonthSummary summary) {
     final renderBox =
-        _cardKeys[index].currentContext?.findRenderObject() as RenderBox?;
+        _cardKeys[summary.month - 1].currentContext?.findRenderObject()
+            as RenderBox?;
     if (renderBox == null) return;
     final rect = renderBox.localToGlobal(Offset.zero) & renderBox.size;
     Navigator.push(
@@ -70,20 +70,24 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: StreamBuilder<List<Mood>>(
-        stream: _firebaseService.getMoods(),
+        stream: _apiService.getMoods(),
         builder: (context, snapshot) {
           final moods = snapshot.data ?? [];
+          final now = DateTime.now();
           final summaries = snapshot.hasData
-              ? MoodService.buildMonthSummaries(moods, _currentYear)
+              ? MoodService.buildMonthSummaries(moods, now.year)
               : null;
 
-          final now = DateTime.now();
           final todayMood = moods.where((m) {
-            final d = m.day.toDate();
-            return d.year == now.year &&
-                d.month == now.month &&
-                d.day == now.day;
+            return m.day.year == now.year &&
+                m.day.month == now.month &&
+                m.day.day == now.day;
           }).firstOrNull;
+
+          // Show current + future months, plus past months that have records.
+          final displaySummaries = summaries
+              ?.where((s) => s.month >= now.month || s.moods.isNotEmpty)
+              .toList();
 
           return Stack(
             children: [
@@ -98,30 +102,25 @@ class _HomePageState extends State<HomePage> {
                         crossAxisCount: 2,
                         crossAxisSpacing: 16,
                         mainAxisSpacing: 16,
-                        children: List.generate(12, (index) {
-                          if (summaries == null) {
-                            return Container(
-                              key: _cardKeys[index],
-                              child: const MonthCardSkeleton(),
-                            );
-                          }
-                          final summary = summaries[index];
-                          final isFuture =
-                              summary.year > now.year ||
-                              (summary.year == now.year &&
-                                  summary.month > now.month);
-                          return Container(
-                            key: _cardKeys[index],
-                            child: isFuture
-                                ? MonthCard(summary: summary, isFuture: true)
-                                : TapBounce(
-                                    peakScale: 1.06,
-                                    onTap: () =>
-                                        _onMonthTap(context, index, summary),
-                                    child: MonthCard(summary: summary),
-                                  ),
-                          );
-                        }),
+                        children: displaySummaries == null
+                            ? List.generate(
+                                4, (_) => const MonthCardSkeleton())
+                            : List.generate(displaySummaries.length, (i) {
+                                final summary = displaySummaries[i];
+                                final isFuture = summary.month > now.month;
+                                return Container(
+                                  key: _cardKeys[summary.month - 1],
+                                  child: isFuture
+                                      ? MonthCard(
+                                          summary: summary, isFuture: true)
+                                      : TapBounce(
+                                          peakScale: 1.06,
+                                          onTap: () => _onMonthTap(
+                                              context, summary),
+                                          child: MonthCard(summary: summary),
+                                        ),
+                                );
+                              }),
                       ),
                     ),
                   ],

@@ -3,6 +3,7 @@
 
   "loginSubtitle": "track your days, create your own mood calendar",
   "loginWithGoogle": "log in with Google",
+  "loginWithApple": "continue with Apple",
 
   "hiUser": "hi, {name}!",
   "@hiUser": {
@@ -39,7 +40,7 @@
     }
   },
 
-  "averageMood": "average mood",
+  "averageMood": "average",
 
   "howAreYouFeelingToday": "how are you feeling today?",
   "howDidYouFeelThatDay": "how did you feel that day?",
@@ -145,5 +146,8 @@
   "onboardingPage3Description": "in settings you can easily set up a daily reminder to log your mood and keep your mood calendar up to date.",
 
   "legal": "legal",
-  "privacyPolicy": "privacy policy"
+  "privacyPolicy": "privacy policy",
+  "externalPrivacyPolicy": "view online",
+  "support": "support",
+  "getSupport": "get support"
 }

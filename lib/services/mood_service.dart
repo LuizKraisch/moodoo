@@ -34,8 +34,7 @@ class MoodService {
     return List.generate(12, (i) {
       final month = i + 1;
       final monthMoods = moods.where((m) {
-        final d = m.day.toDate();
-        return d.year == year && d.month == month;
+        return m.day.year == year && m.day.month == month;
       }).toList()..sort((a, b) => a.day.compareTo(b.day));
       return MonthSummary(
         month: month,

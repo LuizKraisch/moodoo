@@ -3,6 +3,7 @@
 
   "loginSubtitle": "registra tus días, crea tu propio calendario de estado de ánimo",
   "loginWithGoogle": "iniciar sesión con Google",
+  "loginWithApple": "continuar con Apple",
 
   "hiUser": "hola, {name}!",
   "moodOverview": "aquí está tu resumen",
@@ -29,7 +30,7 @@
   "spanish": "español",
   "loggedAs": "conectado como {email}",
 
-  "averageMood": "estado de ánimo promedio",
+  "averageMood": "promedio",
 
   "howAreYouFeelingToday": "¿cómo te sientes hoy?",
   "howDidYouFeelThatDay": "¿cómo te sentiste ese día?",
@@ -105,5 +106,8 @@
   "onboardingPage3Description": "en configuración puedes configurar fácilmente un recordatorio diario para registrar tu mood y mantener tu calendario actualizado.",
 
   "legal": "legal",
-  "privacyPolicy": "política de privacidad"
+  "privacyPolicy": "política de privacidad",
+  "externalPrivacyPolicy": "ver en línea",
+  "support": "soporte",
+  "getSupport": "obtener soporte"
 }

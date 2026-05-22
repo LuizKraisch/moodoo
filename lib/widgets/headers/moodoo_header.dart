@@ -40,7 +40,7 @@ class MoodooHeader extends StatelessWidget {
               ),
               padding: const EdgeInsets.all(14),
               child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   TapBounce(
                     onTap: () => Navigator.of(context).pop(),

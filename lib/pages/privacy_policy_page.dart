@@ -41,28 +41,30 @@ class _PrivacyPolicyContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _Section(
-          title: 'Last updated: May 13, 2025',
+          title: 'Last updated: May 20, 2025',
           body:
               'LoeSoft ("we", "us", "our") is committed to protecting your privacy. This policy explains what information we collect, how we use it, and your rights regarding your personal data.',
         ),
         _Section(
           title: 'Information We Collect',
           body:
-              '• Account information: When you sign in with Google, we receive your name and email address from that provider.\n\n'
+              '• Account information: When you sign in with Google or Apple, we receive your name and email address from those providers.\n\n'
               '• Mood data: The mood scores (S–F) and optional notes you enter in the app.\n\n'
+              '• Authentication token: A secure token issued by our backend is stored locally on your device to keep you signed in between sessions.\n\n'
               'We do not collect device identifiers, precise location, health data, or any information beyond what is described above.',
         ),
         _Section(
           title: 'How We Use Your Information',
           body:
+              '• To authenticate your identity and keep your session secure.\n\n'
               '• To provide and sync your mood calendar across devices.\n\n'
-              '• To identify your account and associate your mood entries with it.\n\n'
+              '• To associate your mood entries with your account.\n\n'
               'We do not sell, rent, or share your personal information with third parties for advertising or marketing purposes.',
         ),
         _Section(
           title: 'Data Storage',
           body:
-              'Your data is stored securely using Google Firebase (Cloud Firestore). Firebase complies with major privacy and security standards including GDPR, CCPA, ISO 27001, and SOC 2/3. Data is encrypted in transit and at rest.',
+              'Your mood data is stored securely on our backend servers. Authentication tokens are stored locally on your device using encrypted storage (iOS Keychain / Android Keystore). All data is encrypted in transit over HTTPS.',
         ),
         _Section(
           title: 'Data Deletion',
@@ -74,7 +76,7 @@ class _PrivacyPolicyContent extends StatelessWidget {
           body:
               'Moodoo uses the following third-party services, each governed by their own privacy policies:\n\n'
               '• Google Sign-In — policies.google.com/privacy\n'
-              '• Google Firebase — firebase.google.com/support/privacy',
+              '• Apple Sign In — apple.com/legal/privacy',
         ),
         _Section(
           title: "Children's Privacy",

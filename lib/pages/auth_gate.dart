@@ -2,20 +2,36 @@ import 'package:moodoo/onboarding_preferences.dart';
 import 'package:moodoo/pages/login_page.dart';
 import 'package:moodoo/pages/home_page.dart';
 import 'package:moodoo/pages/onboarding_page.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:moodoo/services/auth_service.dart';
 import 'package:flutter/material.dart';
 
-class AuthGate extends StatelessWidget {
-  final Stream<User?>? authStream;
-  const AuthGate({super.key, this.authStream});
+class AuthGate extends StatefulWidget {
+  const AuthGate({super.key});
+
+  @override
+  State<AuthGate> createState() => _AuthGateState();
+}
+
+class _AuthGateState extends State<AuthGate> {
+  late final Stream<bool> _authStream;
+
+  @override
+  void initState() {
+    super.initState();
+    _authStream = AuthService().authStateChanges();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StreamBuilder(
-        stream: authStream ?? FirebaseAuth.instance.authStateChanges(),
+      body: StreamBuilder<bool>(
+        stream: _authStream,
         builder: (context, snapshot) {
-          if (snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const SizedBox.shrink();
+          }
+
+          if (snapshot.data == true) {
             return ValueListenableBuilder<bool>(
               valueListenable: onboardingFinishedNotifier,
               builder: (context, finished, _) {
@@ -52,9 +68,9 @@ class AuthGate extends StatelessWidget {
                 );
               },
             );
-          } else {
-            return LoginPage();
           }
+
+          return const LoginPage();
         },
       ),
     );

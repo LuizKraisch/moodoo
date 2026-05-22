@@ -1,38 +1,220 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:async';
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:moodoo/config.dart';
+import 'package:moodoo/notification_preferences.dart';
+import 'package:moodoo/onboarding_preferences.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
+import 'package:http/http.dart' as http;
+
+class UserInfo {
+  final String id;
+  final String email;
+  final String name;
+  final String? photoUrl;
+  final DateTime? createdAt;
+  final bool onboardingCompleted;
+  final bool notificationEnabled;
+  final String notificationTime;
+
+  const UserInfo({
+    required this.id,
+    required this.email,
+    required this.name,
+    this.photoUrl,
+    this.createdAt,
+    this.onboardingCompleted = false,
+    this.notificationEnabled = false,
+    this.notificationTime = '20:00',
+  });
+}
 
 class AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  static final AuthService _instance = AuthService._internal();
+  factory AuthService() => _instance;
+  AuthService._internal();
 
-  User? getCurrentUser() {
-    return _auth.currentUser;
+  static const String _baseUrl = apiBaseUrl;
+  static const _storage = FlutterSecureStorage();
+
+  UserInfo? _currentUser;
+  final _authStateController = StreamController<bool>.broadcast();
+  final List<void Function()> _signOutListeners = [];
+
+  void addSignOutListener(void Function() listener) {
+    _signOutListeners.add(listener);
   }
 
-  Future<UserCredential> signInWithGoogle() async {
-    final GoogleSignInAccount googleUser = await GoogleSignIn.instance
-        .authenticate();
+  UserInfo? getCurrentUser() => _currentUser;
+  String? get userEmail => _currentUser?.email;
+  String? get userName {
+    final name = _currentUser?.name;
+    return (name != null && name.isNotEmpty) ? name : null;
+  }
 
-    final String? idToken = googleUser.authentication.idToken;
+  String? get userPhotoUrl => _currentUser?.photoUrl;
+  DateTime? get userCreatedAt => _currentUser?.createdAt;
 
-    final AuthCredential credential = GoogleAuthProvider.credential(
-      idToken: idToken,
+  Future<String?> getToken() => _storage.read(key: 'jwt_token');
+
+  Stream<bool> authStateChanges() {
+    final controller = StreamController<bool>();
+
+    Future<void> init() async {
+      final token = await _storage.read(key: 'jwt_token');
+      if (token != null) await _loadCachedUser();
+      if (!controller.isClosed) controller.add(token != null);
+
+      final sub = _authStateController.stream.listen(
+        (value) {
+          if (!controller.isClosed) controller.add(value);
+        },
+        onDone: () {
+          if (!controller.isClosed) controller.close();
+        },
+      );
+      controller.onCancel = () => sub.cancel();
+    }
+
+    init();
+    return controller.stream;
+  }
+
+  Future<void> _loadCachedUser() async {
+    final id = await _storage.read(key: 'user_id');
+    final email = await _storage.read(key: 'user_email');
+    final name = await _storage.read(key: 'user_name');
+    final photoUrl = await _storage.read(key: 'user_photo_url');
+    final createdAtRaw = await _storage.read(key: 'user_created_at');
+    final createdAt = createdAtRaw != null
+        ? DateTime.tryParse(createdAtRaw)
+        : null;
+    if (id != null && email != null) {
+      _currentUser = UserInfo(
+        id: id,
+        email: email,
+        name: name ?? '',
+        photoUrl: photoUrl,
+        createdAt: createdAt,
+      );
+    }
+  }
+
+  Future<void> _handleAuthResponse(http.Response response) async {
+    if (response.statusCode != 200) {
+      final body = jsonDecode(response.body) as Map<String, dynamic>;
+      throw Exception(body['error'] ?? 'Authentication failed');
+    }
+
+    final data = jsonDecode(response.body) as Map<String, dynamic>;
+    final token = data['token'] as String;
+    final user = data['user'] as Map<String, dynamic>;
+    final photoUrl = user['photo_url'] as String?;
+    final createdAt = user['created_at'] != null
+        ? DateTime.tryParse(user['created_at'] as String)
+        : null;
+    final onboardingCompleted = user['onboarding_completed'] as bool? ?? false;
+    final notificationEnabled = user['daily_reminder_enabled'] as bool? ?? false;
+    final notificationTime = user['daily_reminder_time'] as String? ?? '20:00';
+
+    _currentUser = UserInfo(
+      id: user['id'] as String,
+      email: user['email'] as String,
+      name: user['name'] as String? ?? '',
+      photoUrl: photoUrl,
+      createdAt: createdAt,
+      onboardingCompleted: onboardingCompleted,
+      notificationEnabled: notificationEnabled,
+      notificationTime: notificationTime,
     );
 
-    return await _auth.signInWithCredential(credential);
+    // Seed in-memory notifiers from server values
+    onboardingFinishedNotifier.value = onboardingCompleted;
+    notificationEnabledNotifier.value = notificationEnabled;
+    final timeParts = notificationTime.split(':');
+    notificationTimeNotifier.value = TimeOfDay(
+      hour: int.tryParse(timeParts.first) ?? 20,
+      minute: int.tryParse(timeParts.last) ?? 0,
+    );
+    // Update SharedPreferences cache so rescheduleFromPrefs works on next startup
+    await saveNotificationPrefs(
+      enabled: notificationEnabled,
+      time: notificationTimeNotifier.value,
+    );
+
+    await _storage.write(key: 'jwt_token', value: token);
+    await _storage.write(key: 'user_id', value: _currentUser!.id);
+    await _storage.write(key: 'user_email', value: _currentUser!.email);
+    await _storage.write(key: 'user_name', value: _currentUser!.name);
+    if (photoUrl != null) {
+      await _storage.write(key: 'user_photo_url', value: photoUrl);
+    } else {
+      await _storage.delete(key: 'user_photo_url');
+    }
+    if (createdAt != null) {
+      await _storage.write(
+        key: 'user_created_at',
+        value: createdAt.toIso8601String(),
+      );
+    }
+
+    _authStateController.add(true);
   }
 
-  Future<void> signOutFromGoogle() async {
-    await GoogleSignIn.instance.signOut();
-    await _auth.signOut();
-  }
-
-  Future<void> deleteUser() async {
+  Future<void> signInWithGoogle() async {
     final googleUser = await GoogleSignIn.instance.authenticate();
-    final credential = GoogleAuthProvider.credential(
-      idToken: googleUser.authentication.idToken,
+    final idToken = googleUser.authentication.idToken;
+    if (idToken == null) throw Exception('Failed to get Google ID token');
+
+    final response = await http.post(
+      Uri.parse('$_baseUrl/auth/google'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'id_token': idToken}),
     );
-    await _auth.currentUser!.reauthenticateWithCredential(credential);
-    await _auth.currentUser!.delete();
-    await GoogleSignIn.instance.signOut();
+
+    await _handleAuthResponse(response);
+  }
+
+  Future<void> signInWithApple() async {
+    final credential = await SignInWithApple.getAppleIDCredential(
+      scopes: [
+        AppleIDAuthorizationScopes.email,
+        AppleIDAuthorizationScopes.fullName,
+      ],
+    );
+
+    final idToken = credential.identityToken;
+    if (idToken == null) throw Exception('Failed to get Apple ID token');
+
+    final nameParts = [
+      credential.givenName,
+      credential.familyName,
+    ].whereType<String>().where((s) => s.isNotEmpty).toList();
+
+    final body = <String, String>{'id_token': idToken};
+    if (nameParts.isNotEmpty) body['name'] = nameParts.join(' ');
+    if (credential.email != null) body['email'] = credential.email!;
+
+    final response = await http.post(
+      Uri.parse('$_baseUrl/auth/apple'),
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode(body),
+    );
+
+    await _handleAuthResponse(response);
+  }
+
+  Future<void> signOut() async {
+    for (final listener in _signOutListeners) {
+      listener();
+    }
+    try {
+      await GoogleSignIn.instance.signOut();
+    } catch (_) {}
+    await _storage.deleteAll();
+    _currentUser = null;
+    _authStateController.add(false);
   }
 }

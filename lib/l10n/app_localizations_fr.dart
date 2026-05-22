@@ -16,6 +16,9 @@ class AppLocalizationsFr extends AppLocalizations {
   String get loginWithGoogle => 'se connecter avec Google';
 
   @override
+  String get loginWithApple => 'continuer avec Apple';
+
+  @override
   String hiUser(String name) {
     return 'salut, $name!';
   }
@@ -87,7 +90,7 @@ class AppLocalizationsFr extends AppLocalizations {
   }
 
   @override
-  String get averageMood => 'humeur moyenne';
+  String get averageMood => 'moyenne';
 
   @override
   String get howAreYouFeelingToday => 'comment vous sentez-vous aujourd\'hui?';
@@ -317,4 +320,13 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get privacyPolicy => 'politique de confidentialité';
+
+  @override
+  String get externalPrivacyPolicy => 'voir en ligne';
+
+  @override
+  String get support => 'assistance';
+
+  @override
+  String get getSupport => 'obtenir de l\'aide';
 }
