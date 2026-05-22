@@ -257,7 +257,7 @@ abstract class AppLocalizations {
   /// No description provided for @averageMood.
   ///
   /// In en, this message translates to:
-  /// **'average mood'**
+  /// **'average'**
   String get averageMood;
 
   /// No description provided for @howAreYouFeelingToday.

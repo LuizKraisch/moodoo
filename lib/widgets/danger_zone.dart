@@ -88,8 +88,10 @@ class DangerZone extends StatefulWidget {
 
 class _DangerZoneState extends State<DangerZone> {
   bool _expanded = false;
+  bool _isDeleting = false;
+  bool _isDeletingAccount = false;
 
-  void _deleteAllMoods(BuildContext context) async {
+  Future<void> _deleteAllMoods() async {
     final l10n = AppLocalizations.of(context)!;
     final confirmed = await showMoodooModal<bool>(
       context,
@@ -98,19 +100,21 @@ class _DangerZoneState extends State<DangerZone> {
       child: const _DeleteAllMoodsSheet(),
     );
 
-    if (confirmed != true) return;
+    if (confirmed != true || !mounted) return;
 
+    setState(() => _isDeleting = true);
     try {
       await ApiService().deleteAllMoods();
-      // ignore: use_build_context_synchronously
+      if (!mounted) return;
       Navigator.of(context).popUntil((route) => route.isFirst);
     } catch (e) {
-      // ignore: use_build_context_synchronously
+      if (!mounted) return;
+      setState(() => _isDeleting = false);
       showMoodooErrorSheet(context, e);
     }
   }
 
-  void _deleteAccount(BuildContext context) async {
+  Future<void> _deleteAccount() async {
     final l10n = AppLocalizations.of(context)!;
     final confirmed = await showMoodooModal<bool>(
       context,
@@ -119,15 +123,17 @@ class _DangerZoneState extends State<DangerZone> {
       child: const _DeleteAccountSheet(),
     );
 
-    if (confirmed != true) return;
+    if (confirmed != true || !mounted) return;
 
+    setState(() => _isDeletingAccount = true);
     try {
-      await ApiService().deleteAllMoods();
+      await ApiService().deleteAccount();
       await AuthService().signOut();
-      // ignore: use_build_context_synchronously
+      if (!mounted) return;
       Navigator.of(context).popUntil((route) => route.isFirst);
     } catch (e) {
-      // ignore: use_build_context_synchronously
+      if (!mounted) return;
+      setState(() => _isDeletingAccount = false);
       showMoodooErrorSheet(context, e);
     }
   }
@@ -179,7 +185,8 @@ class _DangerZoneState extends State<DangerZone> {
                     const SizedBox(height: 14),
                     MoodooButton(
                       text: l10n.deleteAllMoods,
-                      onTap: () => _deleteAllMoods(context),
+                      onTap: _isDeleting ? null : _deleteAllMoods,
+                      isLoading: _isDeleting,
                       backgroundColor: Colors.red.withValues(alpha: 0.25),
                       foregroundColor: Colors.red,
                       bouncePeakScale: 1.04,
@@ -193,7 +200,8 @@ class _DangerZoneState extends State<DangerZone> {
                     const SizedBox(height: 14),
                     MoodooButton(
                       text: l10n.deleteAccount,
-                      onTap: () => _deleteAccount(context),
+                      onTap: _isDeletingAccount ? null : _deleteAccount,
+                      isLoading: _isDeletingAccount,
                       backgroundColor: Colors.red.withValues(alpha: 0.25),
                       foregroundColor: Colors.red,
                       bouncePeakScale: 1.04,

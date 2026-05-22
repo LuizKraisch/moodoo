@@ -123,21 +123,42 @@ class ApiService {
 
   Future<void> deleteAllMoods() async {
     final headers = await _authHeaders();
-    final response = await http.get(
+    final response = await http.delete(
       Uri.parse('$_baseUrl/moods'),
       headers: headers,
     );
-    if (response.statusCode != 200) {
-      _handleResponse(response);
-      return;
-    }
-    final List<dynamic> data = jsonDecode(response.body);
-    final ids = data
-        .map((m) => (m as Map<String, dynamic>)['id'] as String)
-        .toList();
-    for (final id in ids) {
-      await deleteMood(id);
-    }
+    if (response.statusCode != 204) _handleResponse(response);
+    _moods.clear();
+    _moodsController.add(List.from(_moods));
+  }
+
+  Future<void> updateAccount({
+    bool? onboardingCompleted,
+    bool? notificationEnabled,
+    String? notificationTime,
+  }) async {
+    final body = <String, dynamic>{};
+    if (onboardingCompleted != null) body['onboarding_completed'] = onboardingCompleted;
+    if (notificationEnabled != null) body['daily_reminder_enabled'] = notificationEnabled;
+    if (notificationTime != null) body['daily_reminder_time'] = notificationTime;
+    if (body.isEmpty) return;
+
+    final headers = await _authHeaders();
+    final response = await http.patch(
+      Uri.parse('$_baseUrl/account'),
+      headers: headers,
+      body: jsonEncode(body),
+    );
+    if (response.statusCode != 204) _handleResponse(response);
+  }
+
+  Future<void> deleteAccount() async {
+    final headers = await _authHeaders();
+    final response = await http.delete(
+      Uri.parse('$_baseUrl/account'),
+      headers: headers,
+    );
+    if (response.statusCode != 204) _handleResponse(response);
   }
 
   void _handleResponse(http.Response response, {int expected = 200}) {

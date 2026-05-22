@@ -24,13 +24,10 @@ class _CalendarPageState extends State<CalendarPage>
   late final CurvedAnimation _sizeCurve;
   late final CurvedAnimation _fadeCurve;
   final _scrollController = ScrollController();
-  bool _headerVisible = true;
-  double _lastScrollOffset = 0;
   late final Stream<List<Mood>> _moodsStream;
 
   static const int _crossAxisCount = 3;
 
-  // Days in the month, e.g. DateTime(2026, 2+1, 0).day == 28
   int get _daysInMonth =>
       DateTime(widget.summary.year, widget.summary.month + 1, 0).day;
 
@@ -41,7 +38,6 @@ class _CalendarPageState extends State<CalendarPage>
       widget.summary.month,
       widget.summary.year,
     );
-    _scrollController.addListener(_onScroll);
     _expandController = AnimationController(
       duration: const Duration(milliseconds: 380),
       vsync: this,
@@ -58,21 +54,8 @@ class _CalendarPageState extends State<CalendarPage>
     );
   }
 
-  void _onScroll() {
-    final offset = _scrollController.offset;
-    final isScrollingDown = offset > _lastScrollOffset;
-    _lastScrollOffset = offset;
-
-    if (isScrollingDown && _headerVisible && offset > 10) {
-      setState(() => _headerVisible = false);
-    } else if (!isScrollingDown && !_headerVisible) {
-      setState(() => _headerVisible = true);
-    }
-  }
-
   @override
   void dispose() {
-    _scrollController.removeListener(_onScroll);
     _scrollController.dispose();
     _expandController.dispose();
     _sizeCurve.dispose();
@@ -126,9 +109,7 @@ class _CalendarPageState extends State<CalendarPage>
         stream: _moodsStream,
         builder: (context, snapshot) {
           final moods = snapshot.data ?? widget.summary.moods;
-          final moodByDay = {
-            for (final mood in moods) mood.day.day: mood,
-          };
+          final moodByDay = {for (final mood in moods) mood.day.day: mood};
           final liveSummary = MonthSummary(
             month: widget.summary.month,
             year: widget.summary.year,
@@ -143,11 +124,7 @@ class _CalendarPageState extends State<CalendarPage>
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    AnimatedContainer(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeInOut,
-                      height: _headerVisible ? 140 : 0,
-                    ),
+                    const SizedBox(height: 120),
                     Expanded(
                       child: SingleChildScrollView(
                         controller: _scrollController,
@@ -229,16 +206,20 @@ class _CalendarPageState extends State<CalendarPage>
                 top: 0,
                 left: 0,
                 right: 0,
-                child: AnimatedSlide(
-                  offset: _headerVisible ? Offset.zero : const Offset(0, -1),
-                  duration: const Duration(milliseconds: 300),
-                  curve: Curves.easeInOut,
-                  child: AnimatedOpacity(
-                    opacity: _headerVisible ? 1.0 : 0.0,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                    child: CalendarPageHeader(summary: liveSummary),
-                  ),
+                child: CalendarPageHeader(summary: liveSummary),
+              ),
+              Positioned(
+                left: 0,
+                top: 0,
+                bottom: 0,
+                width: 24,
+                child: GestureDetector(
+                  behavior: HitTestBehavior.translucent,
+                  onHorizontalDragEnd: (details) {
+                    if ((details.primaryVelocity ?? 0) > 200) {
+                      Navigator.of(context).pop();
+                    }
+                  },
                 ),
               ),
             ],

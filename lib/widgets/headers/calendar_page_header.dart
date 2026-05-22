@@ -42,7 +42,7 @@ class CalendarPageHeader extends StatelessWidget {
                 ).colorScheme.pillBackground.withValues(alpha: 0.55),
                 borderRadius: BorderRadius.circular(28),
               ),
-              padding: const EdgeInsets.fromLTRB(20, 20, 20, 16),
+              padding: const EdgeInsets.fromLTRB(20, 20, 20, 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -77,19 +77,19 @@ class CalendarPageHeader extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Column(
+                  Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      GradeCard(
-                        grade: summary.averageScore,
-                        size: 60,
-                        borderRadius: 18,
-                        fontSize: 20,
-                      ),
-                      const SizedBox(height: 4),
                       MoodooText(
                         l10n.averageMood,
                         variant: MoodooTextVariant.titleSmall,
+                      ),
+                      const SizedBox(width: 10),
+                      GradeCard(
+                        grade: summary.averageScore,
+                        size: 60,
+                        borderRadius: 20,
+                        fontSize: 20,
                       ),
                     ],
                   ),

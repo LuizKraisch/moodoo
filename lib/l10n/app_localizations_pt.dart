@@ -90,7 +90,7 @@ class AppLocalizationsPt extends AppLocalizations {
   }
 
   @override
-  String get averageMood => 'média do mês';
+  String get averageMood => 'média';
 
   @override
   String get howAreYouFeelingToday => 'como você está se sentindo hoje?';

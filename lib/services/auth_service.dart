@@ -1,8 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:moodoo/config.dart';
+import 'package:moodoo/notification_preferences.dart';
+import 'package:moodoo/onboarding_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:http/http.dart' as http;
 
@@ -12,6 +15,9 @@ class UserInfo {
   final String name;
   final String? photoUrl;
   final DateTime? createdAt;
+  final bool onboardingCompleted;
+  final bool notificationEnabled;
+  final String notificationTime;
 
   const UserInfo({
     required this.id,
@@ -19,6 +25,9 @@ class UserInfo {
     required this.name,
     this.photoUrl,
     this.createdAt,
+    this.onboardingCompleted = false,
+    this.notificationEnabled = false,
+    this.notificationTime = '20:00',
   });
 }
 
@@ -106,6 +115,9 @@ class AuthService {
     final createdAt = user['created_at'] != null
         ? DateTime.tryParse(user['created_at'] as String)
         : null;
+    final onboardingCompleted = user['onboarding_completed'] as bool? ?? false;
+    final notificationEnabled = user['daily_reminder_enabled'] as bool? ?? false;
+    final notificationTime = user['daily_reminder_time'] as String? ?? '20:00';
 
     _currentUser = UserInfo(
       id: user['id'] as String,
@@ -113,6 +125,23 @@ class AuthService {
       name: user['name'] as String? ?? '',
       photoUrl: photoUrl,
       createdAt: createdAt,
+      onboardingCompleted: onboardingCompleted,
+      notificationEnabled: notificationEnabled,
+      notificationTime: notificationTime,
+    );
+
+    // Seed in-memory notifiers from server values
+    onboardingFinishedNotifier.value = onboardingCompleted;
+    notificationEnabledNotifier.value = notificationEnabled;
+    final timeParts = notificationTime.split(':');
+    notificationTimeNotifier.value = TimeOfDay(
+      hour: int.tryParse(timeParts.first) ?? 20,
+      minute: int.tryParse(timeParts.last) ?? 0,
+    );
+    // Update SharedPreferences cache so rescheduleFromPrefs works on next startup
+    await saveNotificationPrefs(
+      enabled: notificationEnabled,
+      time: notificationTimeNotifier.value,
     );
 
     await _storage.write(key: 'jwt_token', value: token);

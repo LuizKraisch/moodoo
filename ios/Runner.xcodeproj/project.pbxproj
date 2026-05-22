@@ -287,13 +287,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -316,6 +312,24 @@
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin";
 		};
+		4CAF773708DA46148510FD76 /* Fix Simulator Slices */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Fix Simulator Slices";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Skip on simulator builds\n[ \"$PLATFORM_NAME\" = \"iphonesimulator\" ] && exit 0\n# Fix frameworks with simulator-tagged arm64 slices (e.g. objective_c.framework)\nfind \"${CODESIGNING_FOLDER_PATH}/Frameworks\" -name \"*.framework\" -type d 2>/dev/null | while read -r fw; do\n    binary=\"${fw}/$(basename \"${fw}\" .framework)\"\n    [ -f \"${binary}\" ] || continue\n    if xcrun vtool -show-build \"${binary}\" 2>/dev/null | grep -qi \"iossimulator\"; then\n        echo \"Retagging simulator slice in ${binary}\"\n        xcrun vtool -set-build-version ios 15.0 15.0 -replace -output \"${binary}\" \"${binary}\"\n    fi\ndone\n";
+		};
 		63BCD925CFF1ECF7829F5DD1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -324,13 +338,9 @@
 			inputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
-			inputPaths = (
-			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-Runner/Pods-Runner-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -395,24 +405,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
-		};
-		4CAF773708DA46148510FD76 /* Fix Simulator Slices */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Fix Simulator Slices";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Fix frameworks with simulator-tagged arm64 slices (e.g. objective_c.framework)\nfind \"${CODESIGNING_FOLDER_PATH}/Frameworks\" -name \"*.framework\" -type d 2>/dev/null | while read -r fw; do\n    binary=\"${fw}/$(basename \"${fw}\" .framework)\"\n    [ -f \"${binary}\" ] || continue\n    if xcrun vtool -show-build \"${binary}\" 2>/dev/null | grep -qi \"iossimulator\"; then\n        echo \"Retagging simulator slice in ${binary}\"\n        xcrun vtool -set-build-version ios 15.0 15.0 -replace -output \"${binary}\" \"${binary}\"\n    fi\ndone\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -514,7 +506,6 @@
 				SUPPORTED_PLATFORMS = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 			};
 			name = Profile;
 		};
@@ -545,7 +536,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 			};
 			name = Profile;
 		};
@@ -709,7 +699,6 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 			};
 			name = Release;
 		};
@@ -771,7 +760,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 			};
 			name = Release;
 		};

@@ -15,6 +15,7 @@ import 'package:moodoo/widgets/shared/moodoo_text.dart';
 import 'package:moodoo/widgets/danger_zone.dart';
 import 'package:moodoo/config.dart'
     show privacyPolicyUrl, supportUrl, appVersion;
+import 'package:moodoo/services/api_service.dart';
 import 'package:moodoo/services/auth_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -275,6 +276,11 @@ class SettingsPage extends StatelessWidget {
                                     enabled: value,
                                     time: time,
                                   );
+                                  ApiService().updateAccount(
+                                    notificationEnabled: value,
+                                    notificationTime:
+                                        '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}',
+                                  ).catchError((_) {});
                                   if (value) {
                                     await NotificationService.scheduleDailyReminder(
                                       hour: time.hour,
@@ -318,6 +324,10 @@ class SettingsPage extends StatelessWidget {
                                           enabled: true,
                                           time: picked,
                                         );
+                                        ApiService().updateAccount(
+                                          notificationTime:
+                                              '${picked.hour.toString().padLeft(2, '0')}:${picked.minute.toString().padLeft(2, '0')}',
+                                        ).catchError((_) {});
 
                                         // ignore: use_build_context_synchronously
                                         await NotificationService.scheduleDailyReminder(

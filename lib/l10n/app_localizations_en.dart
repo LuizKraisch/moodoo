@@ -89,7 +89,7 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get averageMood => 'average mood';
+  String get averageMood => 'average';
 
   @override
   String get howAreYouFeelingToday => 'how are you feeling today?';
