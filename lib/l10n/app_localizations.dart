@@ -272,6 +272,24 @@ abstract class AppLocalizations {
   /// **'how did you feel that day?'**
   String get howDidYouFeelThatDay;
 
+  /// No description provided for @addPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'add photo'**
+  String get addPhoto;
+
+  /// No description provided for @takePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'take photo'**
+  String get takePhoto;
+
+  /// No description provided for @chooseFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'choose from gallery'**
+  String get chooseFromGallery;
+
   /// No description provided for @writeNotes.
   ///
   /// In en, this message translates to:

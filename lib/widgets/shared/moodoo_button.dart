@@ -12,10 +12,13 @@ class MoodooButton extends StatelessWidget {
     this.disabledBackgroundColor,
     this.textStyle,
     this.leading,
+    this.verticalLeading = false,
+    this.shape,
     this.fullWidth = true,
     this.padding = const EdgeInsets.symmetric(horizontal: 24, vertical: 14),
     this.bouncePeakScale = 1.22,
     this.isLoading = false,
+    this.height,
   });
 
   final String text;
@@ -25,10 +28,13 @@ class MoodooButton extends StatelessWidget {
   final Color? disabledBackgroundColor;
   final TextStyle? textStyle;
   final Widget? leading;
+  final bool verticalLeading;
+  final OutlinedBorder? shape;
   final bool fullWidth;
   final EdgeInsetsGeometry padding;
   final double bouncePeakScale;
   final bool isLoading;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {
@@ -38,24 +44,31 @@ class MoodooButton extends StatelessWidget {
       child: FilledButton(
         onPressed: onTap == null ? null : () {},
         style: FilledButton.styleFrom(
-          shape: const StadiumBorder(),
+          shape: shape ?? const StadiumBorder(),
           backgroundColor: backgroundColor,
           foregroundColor: foregroundColor,
           disabledBackgroundColor: disabledBackgroundColor,
           textStyle: textStyle ?? TextTheme.of(context).headlineSmall,
-          minimumSize: fullWidth ? const Size(double.infinity, 0) : null,
+          minimumSize: height != null
+              ? Size(fullWidth ? double.infinity : 0, height!)
+              : (fullWidth ? const Size(double.infinity, 0) : null),
           padding: padding,
         ),
         child: isLoading
             ? SizedBox(
                 height: 20,
                 width: 20,
-                child: LoadingAnimationWidget.threeRotatingDots(
+                child: LoadingAnimationWidget.waveDots(
                   color:
                       foregroundColor ??
                       Theme.of(context).colorScheme.onPrimary,
                   size: 25,
                 ),
+              )
+            : leading != null && verticalLeading
+            ? Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [leading!, const SizedBox(height: 4), Text(text)],
               )
             : leading != null
             ? Row(

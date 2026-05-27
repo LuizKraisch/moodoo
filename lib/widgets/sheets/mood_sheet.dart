@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/api_service.dart';
 import 'package:moodoo/services/mood_service.dart';
+import 'package:moodoo/services/native_image_picker.dart';
 import 'package:moodoo/widgets/sheets/moodoo_error_sheet.dart';
 import 'package:moodoo/widgets/shared/grade_card.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
@@ -57,6 +59,8 @@ class _MoodSheetState extends State<MoodSheet> {
   final _controller = TextEditingController();
   final _apiService = ApiService();
   bool _isLoading = false;
+  File? _imageFile;
+  bool _removePhoto = false;
 
   static const _grades = ['S', 'A', 'B', 'C', 'D', 'F'];
 
@@ -65,7 +69,9 @@ class _MoodSheetState extends State<MoodSheet> {
   bool get _hasChanges {
     if (!_isEditing) return true;
     return _selected != widget.mood!.score ||
-        _controller.text != widget.mood!.notes;
+        _controller.text != widget.mood!.notes ||
+        _imageFile != null ||
+        _removePhoto;
   }
 
   @override
@@ -84,21 +90,80 @@ class _MoodSheetState extends State<MoodSheet> {
     super.dispose();
   }
 
+  void _removeImage() {
+    setState(() {
+      _imageFile = null;
+      _removePhoto = true;
+    });
+  }
+
+  Future<void> _pickImage({required bool fromCamera}) async {
+    final file = fromCamera
+        ? await NativeImagePicker.pickFromCamera()
+        : await NativeImagePicker.pickFromGallery();
+    if (file != null && mounted) {
+      setState(() {
+        _imageFile = file;
+        _removePhoto = false;
+      });
+    }
+  }
+
+  Future<void> _showImageSourcePicker() async {
+    final l10n = AppLocalizations.of(context)!;
+    final source = await showMoodooModal<String>(
+      context,
+      title: l10n.addPhoto,
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(0, 24, 0, 40),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            MoodooButton(
+              text: l10n.takePhoto,
+              onTap: () => Navigator.of(context).pop('camera'),
+              backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
+              foregroundColor: Theme.of(context).colorScheme.surface,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              bouncePeakScale: 1.04,
+            ),
+            const SizedBox(height: 10),
+            MoodooButton(
+              text: l10n.chooseFromGallery,
+              onTap: () => Navigator.of(context).pop('gallery'),
+              backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
+              foregroundColor: Theme.of(context).colorScheme.surface,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              bouncePeakScale: 1.04,
+            ),
+          ],
+        ),
+      ),
+    );
+    if (!mounted) return;
+    if (source == 'camera') _pickImage(fromCamera: true);
+    if (source == 'gallery') _pickImage(fromCamera: false);
+  }
+
   Future<void> _save() async {
     if (_selected == null) return;
     setState(() => _isLoading = true);
     try {
+      final imageFile = _imageFile;
       if (_isEditing) {
         await _apiService.updateMood(
           widget.mood!.id,
           _controller.text,
           _selected!,
+          image: imageFile,
+          removePhoto: _removePhoto,
         );
       } else {
         await _apiService.addMood(
           widget.date,
           _selected!,
           _controller.text,
+          image: imageFile,
         );
       }
       if (mounted) Navigator.pop(context);
@@ -131,6 +196,84 @@ class _MoodSheetState extends State<MoodSheet> {
         showMoodooErrorSheet(context, e);
       }
     }
+  }
+
+  Widget _buildImageArea(BuildContext context) {
+    final existingUrl = widget.mood?.photoUrl;
+    final hasExisting = existingUrl != null && existingUrl.isNotEmpty;
+
+    if ((_imageFile != null || hasExisting) && !_removePhoto) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            _imageFile != null
+                ? Image.file(_imageFile!, fit: BoxFit.cover)
+                : Image.network(
+                    existingUrl!,
+                    fit: BoxFit.cover,
+                    loadingBuilder: (_, child, progress) {
+                      if (progress == null) return child;
+                      return Container(
+                        color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.55),
+                        child: Center(
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: Theme.of(context).textTheme.displayLarge!.color,
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+            Positioned(
+              top: 6,
+              right: 6,
+              child: GestureDetector(
+                onTap: _showImageSourcePicker,
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.55),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.edit, color: Colors.white, size: 14),
+                ),
+              ),
+            ),
+            Positioned(
+              top: 6,
+              left: 6,
+              child: GestureDetector(
+                onTap: _removeImage,
+                child: Container(
+                  padding: const EdgeInsets.all(4),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withValues(alpha: 0.55),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(Icons.close, color: Colors.white, size: 14),
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    }
+
+    final l10n = AppLocalizations.of(context)!;
+    return MoodooButton(
+      text: l10n.addPhoto,
+      onTap: _showImageSourcePicker,
+      backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
+      foregroundColor: Theme.of(context).colorScheme.surface,
+      leading: const Icon(Icons.add_photo_alternate_outlined, size: 26),
+      verticalLeading: true,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      textStyle: Theme.of(context).textTheme.bodySmall,
+      padding: EdgeInsets.zero,
+      bouncePeakScale: 1.04,
+    );
   }
 
   @override
@@ -187,23 +330,45 @@ class _MoodSheetState extends State<MoodSheet> {
             variant: MoodooTextVariant.titleSmall,
           ),
           const SizedBox(height: 20),
-          TextField(
-            controller: _controller,
-            maxLines: 3,
-            style: Theme.of(context).textTheme.titleSmall,
-            decoration: InputDecoration(
-              hintText: l10n.writeNotes,
-              hintStyle: Theme.of(context).textTheme.titleSmall,
-              filled: true,
-              fillColor: Theme.of(
-                context,
-              ).colorScheme.secondary.withValues(alpha: 0.55),
-              border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide.none,
-              ),
-              contentPadding: const EdgeInsets.all(16),
-            ),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final hasImage = _imageFile != null ||
+                  (widget.mood?.photoUrl?.isNotEmpty == true && !_removePhoto);
+              final imageH = hasImage ? (constraints.maxWidth - 8) * 3 / 10 : null;
+
+              final row = Row(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Expanded(
+                    flex: 7,
+                    child: TextField(
+                      controller: _controller,
+                      maxLines: imageH != null ? null : 3,
+                      expands: imageH != null,
+                      textAlignVertical: TextAlignVertical.top,
+                      style: Theme.of(context).textTheme.titleSmall,
+                      decoration: InputDecoration(
+                        hintText: l10n.writeNotes,
+                        hintStyle: Theme.of(context).textTheme.titleSmall,
+                        filled: true,
+                        fillColor: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.55),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                          borderSide: BorderSide.none,
+                        ),
+                        contentPadding: const EdgeInsets.all(16),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(flex: 3, child: _buildImageArea(context)),
+                ],
+              );
+
+              return imageH != null
+                  ? SizedBox(height: imageH, child: row)
+                  : IntrinsicHeight(child: row);
+            },
           ),
           const SizedBox(height: 16),
           MoodooButton(

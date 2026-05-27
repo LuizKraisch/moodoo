@@ -78,6 +78,32 @@ class DayExpandedPanel extends StatelessWidget {
               Column(
                 children: [
                   const SizedBox(height: 15),
+                  if (mood!.photoUrl != null && mood!.photoUrl!.isNotEmpty) ...[
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.network(
+                        mood!.photoUrl!,
+                        width: double.infinity,
+                        height: 180,
+                        fit: BoxFit.cover,
+                        loadingBuilder: (_, child, progress) {
+                          if (progress == null) return child;
+                          return Container(
+                            height: 180,
+                            color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3),
+                            child: Center(
+                              child: CircularProgressIndicator(
+                                strokeWidth: 2,
+                                color: Theme.of(context).textTheme.displayLarge!.color,
+                              ),
+                            ),
+                          );
+                        },
+                        errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                  ],
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,

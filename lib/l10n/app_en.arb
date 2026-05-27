@@ -44,6 +44,9 @@
 
   "howAreYouFeelingToday": "how are you feeling today?",
   "howDidYouFeelThatDay": "how did you feel that day?",
+  "addPhoto": "add photo",
+  "takePhoto": "take photo",
+  "chooseFromGallery": "choose from gallery",
   "writeNotes": "write something about it... (optional)",
   "saveChanges": "save changes",
   "saveMood": "save mood",

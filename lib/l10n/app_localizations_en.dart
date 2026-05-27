@@ -98,6 +98,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get howDidYouFeelThatDay => 'how did you feel that day?';
 
   @override
+  String get addPhoto => 'add photo';
+
+  @override
+  String get takePhoto => 'take photo';
+
+  @override
+  String get chooseFromGallery => 'choose from gallery';
+
+  @override
   String get writeNotes => 'write something about it... (optional)';
 
   @override

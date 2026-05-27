@@ -34,6 +34,9 @@
 
   "howAreYouFeelingToday": "wie fühlst du dich heute?",
   "howDidYouFeelThatDay": "wie hast du dich an diesem tag gefühlt?",
+  "addPhoto": "foto hinzufügen",
+  "takePhoto": "foto aufnehmen",
+  "chooseFromGallery": "aus galerie auswählen",
   "writeNotes": "schreibe etwas darüber... (optional)",
   "saveChanges": "änderungen speichern",
   "saveMood": "stimmung speichern",
