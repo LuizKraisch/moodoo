@@ -4,7 +4,9 @@ import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/preferences/onboarding_preferences.dart';
 import 'package:moodoo/services/api_service.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
+import 'package:moodoo/widgets/shared/moodoo_modal.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
+import 'package:moodoo/widgets/shared/reminder_settings_section.dart';
 
 class OnboardingPage extends StatefulWidget {
   const OnboardingPage({super.key});
@@ -88,6 +90,31 @@ class _OnboardingPageState extends State<OnboardingPage> {
               inactiveColor: scheme.primary,
             ),
             const SizedBox(height: 24),
+            ClipRect(
+              child: AnimatedAlign(
+                alignment: Alignment.bottomCenter,
+                heightFactor: isLast ? 1.0 : 0.0,
+                duration: const Duration(milliseconds: 200),
+                curve: Curves.easeOut,
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(24, 0, 24, 12),
+                  child: MoodooButton(
+                    text: l10n.configureNow,
+                    onTap: () => showMoodooModal<void>(
+                      context,
+                      title: l10n.notifications,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 16, 0, 40),
+                        child: const ReminderSettingsSection(),
+                      ),
+                    ),
+                    backgroundColor: scheme.onPrimary,
+                    foregroundColor: scheme.onSurface,
+                    bouncePeakScale: 1.08,
+                  ),
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 0, 24, 10),
               child: Row(

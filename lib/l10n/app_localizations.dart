@@ -709,6 +709,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'get support'**
   String get getSupport;
+
+  /// No description provided for @configureNow.
+  ///
+  /// In en, this message translates to:
+  /// **'configure now'**
+  String get configureNow;
 }
 
 class _AppLocalizationsDelegate

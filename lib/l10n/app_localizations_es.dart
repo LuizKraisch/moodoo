@@ -339,4 +339,7 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get getSupport => 'obtener soporte';
+
+  @override
+  String get configureNow => 'configurar ahora';
 }

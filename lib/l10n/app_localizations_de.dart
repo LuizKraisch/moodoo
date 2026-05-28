@@ -343,4 +343,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get getSupport => 'support erhalten';
+
+  @override
+  String get configureNow => 'jetzt konfigurieren';
 }

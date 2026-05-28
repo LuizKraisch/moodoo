@@ -338,4 +338,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get getSupport => 'obter suporte';
+
+  @override
+  String get configureNow => 'configurar agora';
 }

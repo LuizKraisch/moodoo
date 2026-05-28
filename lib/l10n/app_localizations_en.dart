@@ -337,4 +337,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get getSupport => 'get support';
+
+  @override
+  String get configureNow => 'configure now';
 }

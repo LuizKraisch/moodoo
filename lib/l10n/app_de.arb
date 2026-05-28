@@ -113,5 +113,6 @@
   "privacyPolicy": "datenschutzrichtlinie",
   "externalPrivacyPolicy": "online ansehen",
   "support": "support",
-  "getSupport": "support erhalten"
+  "getSupport": "support erhalten",
+  "configureNow": "jetzt konfigurieren"
 }

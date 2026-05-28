@@ -342,4 +342,7 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get getSupport => 'obtenir de l\'aide';
+
+  @override
+  String get configureNow => 'configurer maintenant';
 }

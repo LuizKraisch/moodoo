@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/api_service.dart';
@@ -98,7 +99,17 @@ class _MoodSheetState extends State<MoodSheet> {
   }
 
   static const _allowedExtensions = {
-    'jpg', 'jpeg', 'png', 'webp', 'heic', 'heif', 'avif', 'gif', 'tiff', 'tif', 'bmp'
+    'jpg',
+    'jpeg',
+    'png',
+    'webp',
+    'heic',
+    'heif',
+    'avif',
+    'gif',
+    'tiff',
+    'tif',
+    'bmp',
   };
 
   Future<void> _pickImage({required bool fromCamera}) async {
@@ -226,11 +237,13 @@ class _MoodSheetState extends State<MoodSheet> {
                     loadingBuilder: (_, child, progress) {
                       if (progress == null) return child;
                       return Container(
-                        color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.55),
+                        color: Theme.of(
+                          context,
+                        ).colorScheme.secondary.withValues(alpha: 0.55),
                         child: Center(
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            color: Theme.of(context).textTheme.displayLarge!.color,
+                          child: LoadingAnimationWidget.waveDots(
+                            color: Theme.of(context).colorScheme.onPrimary,
+                            size: 25,
                           ),
                         ),
                       );
@@ -272,11 +285,10 @@ class _MoodSheetState extends State<MoodSheet> {
     }
 
     final l10n = AppLocalizations.of(context)!;
+
     return MoodooButton(
       text: l10n.addPhoto,
       onTap: _showImageSourcePicker,
-      backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
-      foregroundColor: Theme.of(context).colorScheme.surface,
       leading: const Icon(Icons.add_photo_alternate_outlined, size: 26),
       verticalLeading: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
@@ -342,9 +354,12 @@ class _MoodSheetState extends State<MoodSheet> {
           const SizedBox(height: 20),
           LayoutBuilder(
             builder: (context, constraints) {
-              final hasImage = _imageFile != null ||
+              final hasImage =
+                  _imageFile != null ||
                   (widget.mood?.photoUrl?.isNotEmpty == true && !_removePhoto);
-              final imageH = hasImage ? (constraints.maxWidth - 8) * 3 / 10 : null;
+              final imageH = hasImage
+                  ? (constraints.maxWidth - 8) * 3 / 10
+                  : null;
 
               final row = Row(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -361,7 +376,9 @@ class _MoodSheetState extends State<MoodSheet> {
                         hintText: l10n.writeNotes,
                         hintStyle: Theme.of(context).textTheme.titleSmall,
                         filled: true,
-                        fillColor: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.55),
+                        fillColor: Theme.of(
+                          context,
+                        ).colorScheme.secondary.withValues(alpha: 0.55),
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(16),
                           borderSide: BorderSide.none,

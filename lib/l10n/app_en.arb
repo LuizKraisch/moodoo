@@ -153,5 +153,6 @@
   "privacyPolicy": "privacy policy",
   "externalPrivacyPolicy": "view online",
   "support": "support",
-  "getSupport": "get support"
+  "getSupport": "get support",
+  "configureNow": "configure now"
 }
