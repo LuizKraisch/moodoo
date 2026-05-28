@@ -272,6 +272,24 @@ abstract class AppLocalizations {
   /// **'how did you feel that day?'**
   String get howDidYouFeelThatDay;
 
+  /// No description provided for @addPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'add photo'**
+  String get addPhoto;
+
+  /// No description provided for @takePhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'take photo'**
+  String get takePhoto;
+
+  /// No description provided for @chooseFromGallery.
+  ///
+  /// In en, this message translates to:
+  /// **'choose from gallery'**
+  String get chooseFromGallery;
+
   /// No description provided for @writeNotes.
   ///
   /// In en, this message translates to:
@@ -559,6 +577,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'something went wrong. please try again.'**
   String get errorGeneric;
+
+  /// No description provided for @errorInvalidImageFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'invalid image format, please try again.'**
+  String get errorInvalidImageFormat;
 
   /// No description provided for @notifications.
   ///

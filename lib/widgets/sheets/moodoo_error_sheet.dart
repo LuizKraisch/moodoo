@@ -7,6 +7,8 @@ import 'package:moodoo/widgets/shared/moodoo_modal.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 String _humanizeError(AppLocalizations l10n, Object e) {
+  if (e is InvalidImageFormatException) return l10n.errorInvalidImageFormat;
+
   if (e is ApiException) {
     if (e.statusCode == 401) return l10n.errorInvalidCredential;
     if (e.statusCode == 404) return l10n.errorNotFound;

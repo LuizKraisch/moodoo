@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:moodoo/config.dart';
-import 'package:moodoo/notification_preferences.dart';
-import 'package:moodoo/onboarding_preferences.dart';
+import 'package:moodoo/preferences/notification_preferences.dart';
+import 'package:moodoo/preferences/onboarding_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:http/http.dart' as http;
 
@@ -116,7 +116,8 @@ class AuthService {
         ? DateTime.tryParse(user['created_at'] as String)
         : null;
     final onboardingCompleted = user['onboarding_completed'] as bool? ?? false;
-    final notificationEnabled = user['daily_reminder_enabled'] as bool? ?? false;
+    final notificationEnabled =
+        user['daily_reminder_enabled'] as bool? ?? false;
     final notificationTime = user['daily_reminder_time'] as String? ?? '20:00';
 
     _currentUser = UserInfo(

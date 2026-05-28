@@ -99,6 +99,15 @@ class AppLocalizationsEs extends AppLocalizations {
   String get howDidYouFeelThatDay => '¿cómo te sentiste ese día?';
 
   @override
+  String get addPhoto => 'añadir foto';
+
+  @override
+  String get takePhoto => 'tomar foto';
+
+  @override
+  String get chooseFromGallery => 'elegir de la galería';
+
+  @override
   String get writeNotes => 'escribe algo sobre ello... (opcional)';
 
   @override
@@ -258,6 +267,10 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get errorGeneric => 'algo salió mal. por favor, inténtalo de nuevo.';
+
+  @override
+  String get errorInvalidImageFormat =>
+      'formato de imagen no válido, por favor inténtalo de nuevo.';
 
   @override
   String get notifications => 'notificaciones';

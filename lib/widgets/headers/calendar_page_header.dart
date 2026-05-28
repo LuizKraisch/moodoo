@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:moodoo/app_theme.dart';
+import 'package:moodoo/theme/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/services/mood_service.dart';
 import 'package:moodoo/widgets/shared/grade_card.dart';

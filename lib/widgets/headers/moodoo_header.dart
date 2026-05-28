@@ -1,5 +1,5 @@
 import 'dart:ui';
-import 'package:moodoo/app_theme.dart';
+import 'package:moodoo/theme/app_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
 import 'package:moodoo/widgets/shared/tap_bounce.dart';

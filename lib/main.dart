@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
-import 'package:moodoo/app_theme.dart' show lightTheme, darkTheme;
-import 'package:moodoo/locale_preferences.dart';
-import 'package:moodoo/notification_preferences.dart';
-import 'package:moodoo/onboarding_preferences.dart';
+import 'package:moodoo/theme/app_theme.dart' show lightTheme, darkTheme;
+import 'package:moodoo/preferences/locale_preferences.dart';
+import 'package:moodoo/preferences/notification_preferences.dart';
+import 'package:moodoo/preferences/onboarding_preferences.dart';
 import 'package:moodoo/pages/auth_gate.dart';
 import 'package:moodoo/services/notification_service.dart';
-import 'package:moodoo/theme_preferences.dart';
+import 'package:moodoo/preferences/theme_preferences.dart';
 
 void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

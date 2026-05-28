@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moodoo/app_theme.dart';
+import 'package:moodoo/theme/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/mood_service.dart';
@@ -69,8 +69,9 @@ class DayCard extends StatelessWidget {
                           '${date.day}',
                           variant: MoodooTextVariant.displaySmall,
                           fontSize: dateFontSize,
-                          color:
-                              Theme.of(context).textTheme.displayLarge!.color!,
+                          color: Theme.of(
+                            context,
+                          ).textTheme.displayLarge!.color!,
                         ),
                         GradeCard(
                           grade: mood?.score,

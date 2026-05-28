@@ -1,4 +1,4 @@
-import 'package:moodoo/onboarding_preferences.dart';
+import 'package:moodoo/preferences/onboarding_preferences.dart';
 import 'package:moodoo/pages/login_page.dart';
 import 'package:moodoo/pages/home_page.dart';
 import 'package:moodoo/pages/onboarding_page.dart';
@@ -40,15 +40,16 @@ class _AuthGateState extends State<AuthGate> {
                   transitionBuilder: (child, animation) {
                     if (child.key == const ValueKey('home')) {
                       return SlideTransition(
-                        position: Tween<Offset>(
-                          begin: const Offset(1, 0),
-                          end: Offset.zero,
-                        ).animate(
-                          CurvedAnimation(
-                            parent: animation,
-                            curve: Curves.elasticOut,
-                          ),
-                        ),
+                        position:
+                            Tween<Offset>(
+                              begin: const Offset(1, 0),
+                              end: Offset.zero,
+                            ).animate(
+                              CurvedAnimation(
+                                parent: animation,
+                                curve: Curves.elasticOut,
+                              ),
+                            ),
                         child: child,
                       );
                     }
@@ -56,10 +57,7 @@ class _AuthGateState extends State<AuthGate> {
                   },
                   layoutBuilder: (currentChild, previousChildren) {
                     return Stack(
-                      children: [
-                        ...previousChildren,
-                        ?currentChild,
-                      ],
+                      children: [...previousChildren, ?currentChild],
                     );
                   },
                   child: finished

@@ -34,6 +34,9 @@
 
   "howAreYouFeelingToday": "¿cómo te sientes hoy?",
   "howDidYouFeelThatDay": "¿cómo te sentiste ese día?",
+  "addPhoto": "añadir foto",
+  "takePhoto": "tomar foto",
+  "chooseFromGallery": "elegir de la galería",
   "writeNotes": "escribe algo sobre ello... (opcional)",
   "saveChanges": "guardar cambios",
   "saveMood": "guardar estado de ánimo",
@@ -86,6 +89,7 @@
   "errorDeadlineExceeded": "la solicitud ha caducado. por favor, inténtalo de nuevo.",
   "errorResourceExhausted": "demasiadas solicitudes. por favor, inténtalo más tarde.",
   "errorGeneric": "algo salió mal. por favor, inténtalo de nuevo.",
+  "errorInvalidImageFormat": "formato de imagen no válido, por favor inténtalo de nuevo.",
 
   "notifications": "notificaciones",
   "dailyReminder": "recordatorio diario",

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
-import 'package:moodoo/onboarding_preferences.dart';
+import 'package:moodoo/preferences/onboarding_preferences.dart';
 import 'package:moodoo/services/api_service.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
