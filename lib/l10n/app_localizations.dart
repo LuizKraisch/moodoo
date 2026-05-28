@@ -578,6 +578,12 @@ abstract class AppLocalizations {
   /// **'something went wrong. please try again.'**
   String get errorGeneric;
 
+  /// No description provided for @errorInvalidImageFormat.
+  ///
+  /// In en, this message translates to:
+  /// **'invalid image format, please try again.'**
+  String get errorInvalidImageFormat;
+
   /// No description provided for @notifications.
   ///
   /// In en, this message translates to:

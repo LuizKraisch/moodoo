@@ -271,6 +271,10 @@ class AppLocalizationsFr extends AppLocalizations {
       'quelque chose s\'est mal passé. veuillez réessayer.';
 
   @override
+  String get errorInvalidImageFormat =>
+      'format d\'image invalide, veuillez réessayer.';
+
+  @override
   String get notifications => 'notifications';
 
   @override

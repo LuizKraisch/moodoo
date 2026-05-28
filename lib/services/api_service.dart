@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import 'package:moodoo/config.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/auth_service.dart';
@@ -14,6 +15,21 @@ class ApiException implements Exception {
 
   @override
   String toString() => message;
+}
+
+class InvalidImageFormatException implements Exception {}
+
+MediaType _mediaTypeForPath(String path) {
+  const map = {
+    'jpg': 'image/jpeg', 'jpeg': 'image/jpeg',
+    'png': 'image/png', 'webp': 'image/webp',
+    'heic': 'image/heic', 'heif': 'image/heif',
+    'avif': 'image/avif', 'gif': 'image/gif',
+    'tiff': 'image/tiff', 'tif': 'image/tiff',
+    'bmp': 'image/bmp',
+  };
+  final ext = path.split('.').last.toLowerCase();
+  return MediaType.parse(map[ext] ?? 'application/octet-stream');
 }
 
 class ApiService {
@@ -91,7 +107,7 @@ class ApiService {
         ..fields['mood[day]'] = _formatDate(day)
         ..fields['mood[score]'] = score
         ..fields['mood[notes]'] = notes
-        ..files.add(await http.MultipartFile.fromPath('mood[image]', image.path));
+        ..files.add(await http.MultipartFile.fromPath('mood[image]', image.path, contentType: _mediaTypeForPath(image.path)));
       response = await http.Response.fromStream(await request.send());
     } else {
       response = await http.post(
@@ -122,7 +138,7 @@ class ApiService {
         ..headers['Authorization'] = 'Bearer $token'
         ..fields['mood[notes]'] = notes
         ..fields['mood[score]'] = score
-        ..files.add(await http.MultipartFile.fromPath('mood[image]', image.path));
+        ..files.add(await http.MultipartFile.fromPath('mood[image]', image.path, contentType: _mediaTypeForPath(image.path)));
       response = await http.Response.fromStream(await request.send());
     } else {
       response = await http.patch(

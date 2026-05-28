@@ -89,6 +89,7 @@
   "errorDeadlineExceeded": "die anfrage hat das zeitlimit überschritten. bitte versuche es erneut.",
   "errorResourceExhausted": "zu viele anfragen. bitte versuche es später erneut.",
   "errorGeneric": "etwas ist schiefgelaufen. bitte versuche es erneut.",
+  "errorInvalidImageFormat": "ungültiges bildformat, bitte versuche es erneut.",
 
   "notifications": "benachrichtigungen",
   "dailyReminder": "tägliche erinnerung",

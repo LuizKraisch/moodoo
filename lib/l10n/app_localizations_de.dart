@@ -271,6 +271,10 @@ class AppLocalizationsDe extends AppLocalizations {
       'etwas ist schiefgelaufen. bitte versuche es erneut.';
 
   @override
+  String get errorInvalidImageFormat =>
+      'ungültiges bildformat, bitte versuche es erneut.';
+
+  @override
   String get notifications => 'benachrichtigungen';
 
   @override

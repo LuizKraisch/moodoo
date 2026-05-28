@@ -97,11 +97,21 @@ class _MoodSheetState extends State<MoodSheet> {
     });
   }
 
+  static const _allowedExtensions = {
+    'jpg', 'jpeg', 'png', 'webp', 'heic', 'heif', 'avif', 'gif', 'tiff', 'tif', 'bmp'
+  };
+
   Future<void> _pickImage({required bool fromCamera}) async {
     final file = fromCamera
         ? await NativeImagePicker.pickFromCamera()
         : await NativeImagePicker.pickFromGallery();
-    if (file != null && mounted) {
+    if (file == null) return;
+    final ext = file.path.split('.').last.toLowerCase();
+    if (!_allowedExtensions.contains(ext)) {
+      if (mounted) showMoodooErrorSheet(context, InvalidImageFormatException());
+      return;
+    }
+    if (mounted) {
       setState(() {
         _imageFile = file;
         _removePhoto = false;

@@ -269,6 +269,10 @@ class AppLocalizationsEs extends AppLocalizations {
   String get errorGeneric => 'algo salió mal. por favor, inténtalo de nuevo.';
 
   @override
+  String get errorInvalidImageFormat =>
+      'formato de imagen no válido, por favor inténtalo de nuevo.';
+
+  @override
   String get notifications => 'notificaciones';
 
   @override

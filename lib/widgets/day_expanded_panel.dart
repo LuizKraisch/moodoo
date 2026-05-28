@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:moodoo/theme/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
@@ -14,6 +15,64 @@ class DayExpandedPanel extends StatelessWidget {
   final Mood? mood;
 
   const DayExpandedPanel({super.key, required this.date, this.mood});
+
+  void _showFullScreenPhoto(BuildContext context, String photoUrl) {
+    Navigator.of(context).push(
+      PageRouteBuilder(
+        opaque: false,
+        transitionDuration: const Duration(milliseconds: 350),
+        reverseTransitionDuration: const Duration(milliseconds: 300),
+        pageBuilder: (_, _, _) => Scaffold(
+          backgroundColor: Colors.black87,
+          body: GestureDetector(
+            onTap: () => Navigator.of(context).pop(),
+            child: Stack(
+              children: [
+                Center(
+                  child: InteractiveViewer(
+                    child: Hero(
+                      tag: 'mood-photo-$photoUrl',
+                      child: Image.network(
+                        photoUrl,
+                        fit: BoxFit.contain,
+                        errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                      ),
+                    ),
+                  ),
+                ),
+                SafeArea(
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(12),
+                      child: GestureDetector(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                            color: Colors.black54,
+                            shape: BoxShape.circle,
+                          ),
+                          padding: const EdgeInsets.all(8),
+                          child: const Icon(
+                            Icons.close,
+                            color: Colors.white,
+                            size: 22,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        transitionsBuilder: (_, animation, _, child) {
+          return FadeTransition(opacity: animation, child: child);
+        },
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -79,31 +138,38 @@ class DayExpandedPanel extends StatelessWidget {
                 children: [
                   const SizedBox(height: 15),
                   if (mood!.photoUrl != null && mood!.photoUrl!.isNotEmpty) ...[
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(16),
-                      child: Image.network(
-                        mood!.photoUrl!,
-                        width: double.infinity,
-                        height: 180,
-                        fit: BoxFit.cover,
-                        loadingBuilder: (_, child, progress) {
-                          if (progress == null) return child;
-                          return Container(
+                    GestureDetector(
+                      onTap: () =>
+                          _showFullScreenPhoto(context, mood!.photoUrl!),
+                      child: Hero(
+                        tag: 'mood-photo-${mood!.photoUrl!}',
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(16),
+                          child: Image.network(
+                            mood!.photoUrl!,
+                            width: double.infinity,
                             height: 180,
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.secondary.withValues(alpha: 0.3),
-                            child: Center(
-                              child: CircularProgressIndicator(
-                                strokeWidth: 2,
+                            fit: BoxFit.cover,
+                            loadingBuilder: (_, child, progress) {
+                              if (progress == null) return child;
+                              return Container(
+                                height: 180,
                                 color: Theme.of(
                                   context,
-                                ).textTheme.displayLarge!.color,
-                              ),
-                            ),
-                          );
-                        },
-                        errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                                ).colorScheme.secondary.withValues(alpha: 0.3),
+                                child: Center(
+                                  child: LoadingAnimationWidget.waveDots(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onPrimary,
+                                    size: 25,
+                                  ),
+                                ),
+                              );
+                            },
+                            errorBuilder: (_, _, _) => const SizedBox.shrink(),
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 12),

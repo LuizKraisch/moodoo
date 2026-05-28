@@ -89,6 +89,7 @@
   "errorDeadlineExceeded": "la solicitud ha caducado. por favor, inténtalo de nuevo.",
   "errorResourceExhausted": "demasiadas solicitudes. por favor, inténtalo más tarde.",
   "errorGeneric": "algo salió mal. por favor, inténtalo de nuevo.",
+  "errorInvalidImageFormat": "formato de imagen no válido, por favor inténtalo de nuevo.",
 
   "notifications": "notificaciones",
   "dailyReminder": "recordatorio diario",

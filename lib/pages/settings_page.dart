@@ -478,6 +478,21 @@ class SettingsPage extends StatelessWidget {
                   ),
                 ),
                 const DangerZone(),
+                const SizedBox(height: 20),
+                GestureDetector(
+                  onTap: () => launchUrl(
+                    Uri.parse('https://www.flaticon.com/free-icons'),
+                    mode: LaunchMode.externalApplication,
+                  ),
+                  child: MoodooText(
+                    'Icons created by Freepik - Flaticon',
+                    variant: MoodooTextVariant.titleMedium,
+                    fontSize: 11,
+                    color: Theme.of(
+                      context,
+                    ).textTheme.titleMedium!.color!.withValues(alpha: 0.3),
+                  ),
+                ),
                 const SizedBox(height: 10),
               ],
             ),

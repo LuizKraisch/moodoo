@@ -129,6 +129,7 @@
   "errorDeadlineExceeded": "the request timed out. please try again.",
   "errorResourceExhausted": "too many requests. please try again later.",
   "errorGeneric": "something went wrong. please try again.",
+  "errorInvalidImageFormat": "invalid image format, please try again.",
 
   "notifications": "notifications",
   "dailyReminder": "daily reminder",
