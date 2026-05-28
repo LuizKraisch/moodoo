@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:moodoo/app_theme.dart';
+import 'package:moodoo/theme/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/services/auth_service.dart';
-import 'package:moodoo/theme_preferences.dart'
+import 'package:moodoo/preferences/theme_preferences.dart'
     show themeModeNotifier, saveTheme;
 import 'package:moodoo/widgets/login_page_presentation.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';

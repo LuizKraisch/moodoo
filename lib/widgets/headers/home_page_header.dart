@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:moodoo/app_theme.dart';
+import 'package:moodoo/theme/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/pages/settings_page.dart';
 import 'package:moodoo/services/auth_service.dart';
@@ -15,7 +15,10 @@ class HomePageHeader extends StatelessWidget {
     final l10n = AppLocalizations.of(context)!;
     final topPadding = MediaQuery.of(context).padding.top;
     final auth = AuthService();
-    final firstName = (auth.userName ?? auth.userEmail ?? '').split(' ').first.toLowerCase();
+    final firstName = (auth.userName ?? auth.userEmail ?? '')
+        .split(' ')
+        .first
+        .toLowerCase();
     final photoUrl = auth.userPhotoUrl;
 
     return Container(
@@ -38,7 +41,9 @@ class HomePageHeader extends StatelessWidget {
             filter: ImageFilter.blur(sigmaX: 24, sigmaY: 24),
             child: Container(
               decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.pillBackground.withValues(alpha: 0.55),
+                color: Theme.of(
+                  context,
+                ).colorScheme.pillBackground.withValues(alpha: 0.55),
                 borderRadius: BorderRadius.circular(100),
               ),
               padding: const EdgeInsets.fromLTRB(14, 14, 14, 14),

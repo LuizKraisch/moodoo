@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:moodoo/app_theme.dart';
+import 'package:moodoo/theme/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
 import 'package:moodoo/services/mood_service.dart';
@@ -90,11 +90,15 @@ class DayExpandedPanel extends StatelessWidget {
                           if (progress == null) return child;
                           return Container(
                             height: 180,
-                            color: Theme.of(context).colorScheme.secondary.withValues(alpha: 0.3),
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.secondary.withValues(alpha: 0.3),
                             child: Center(
                               child: CircularProgressIndicator(
                                 strokeWidth: 2,
-                                color: Theme.of(context).textTheme.displayLarge!.color,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.displayLarge!.color,
                               ),
                             ),
                           );
@@ -127,10 +131,7 @@ class DayExpandedPanel extends StatelessWidget {
                               fontSize: 12,
                             ),
                             MoodooText(
-                              MoodService.formatDateTime(
-                                l10n,
-                                mood!.createdAt,
-                              ),
+                              MoodService.formatDateTime(l10n, mood!.createdAt),
                               variant: MoodooTextVariant.bodySmall,
                               fontSize: 12,
                             ),

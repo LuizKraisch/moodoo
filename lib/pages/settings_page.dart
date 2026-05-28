@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
-import 'package:moodoo/locale_preferences.dart';
-import 'package:moodoo/notification_preferences.dart';
+import 'package:moodoo/preferences/locale_preferences.dart';
+import 'package:moodoo/preferences/notification_preferences.dart';
 import 'package:moodoo/pages/privacy_policy_page.dart';
 import 'package:moodoo/services/notification_service.dart';
-import 'package:moodoo/theme_preferences.dart'
+import 'package:moodoo/preferences/theme_preferences.dart'
     show themeModeNotifier, saveTheme;
 import 'package:moodoo/widgets/headers/moodoo_header.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
@@ -276,11 +276,13 @@ class SettingsPage extends StatelessWidget {
                                     enabled: value,
                                     time: time,
                                   );
-                                  ApiService().updateAccount(
-                                    notificationEnabled: value,
-                                    notificationTime:
-                                        '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}',
-                                  ).catchError((_) {});
+                                  ApiService()
+                                      .updateAccount(
+                                        notificationEnabled: value,
+                                        notificationTime:
+                                            '${time.hour.toString().padLeft(2, '0')}:${time.minute.toString().padLeft(2, '0')}',
+                                      )
+                                      .catchError((_) {});
                                   if (value) {
                                     await NotificationService.scheduleDailyReminder(
                                       hour: time.hour,
@@ -324,10 +326,12 @@ class SettingsPage extends StatelessWidget {
                                           enabled: true,
                                           time: picked,
                                         );
-                                        ApiService().updateAccount(
-                                          notificationTime:
-                                              '${picked.hour.toString().padLeft(2, '0')}:${picked.minute.toString().padLeft(2, '0')}',
-                                        ).catchError((_) {});
+                                        ApiService()
+                                            .updateAccount(
+                                              notificationTime:
+                                                  '${picked.hour.toString().padLeft(2, '0')}:${picked.minute.toString().padLeft(2, '0')}',
+                                            )
+                                            .catchError((_) {});
 
                                         // ignore: use_build_context_synchronously
                                         await NotificationService.scheduleDailyReminder(
