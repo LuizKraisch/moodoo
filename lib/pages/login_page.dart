@@ -73,7 +73,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               const LoginPagePresentation(),
               Container(
-                color: Theme.of(context).colorScheme.surface,
+                color: darkTheme.colorScheme.surface,
                 padding: const EdgeInsets.fromLTRB(30, 24, 30, 40),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
