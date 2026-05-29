@@ -336,7 +336,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get privacyPolicy => 'datenschutzrichtlinie';
 
   @override
-  String get externalPrivacyPolicy => 'online ansehen';
+  String get viewOnline => 'online ansehen';
 
   @override
   String get support => 'support';
@@ -346,4 +346,10 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get configureNow => 'jetzt konfigurieren';
+
+  @override
+  String get termsOfUse => 'nutzungsbedingungen';
+
+  @override
+  String get agreeToTerms => 'durch das fortfahren stimmst du unseren';
 }

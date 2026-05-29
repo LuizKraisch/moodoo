@@ -692,11 +692,11 @@ abstract class AppLocalizations {
   /// **'privacy policy'**
   String get privacyPolicy;
 
-  /// No description provided for @externalPrivacyPolicy.
+  /// No description provided for @viewOnline.
   ///
   /// In en, this message translates to:
   /// **'view online'**
-  String get externalPrivacyPolicy;
+  String get viewOnline;
 
   /// No description provided for @support.
   ///
@@ -715,6 +715,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'configure now'**
   String get configureNow;
+
+  /// No description provided for @termsOfUse.
+  ///
+  /// In en, this message translates to:
+  /// **'terms of use'**
+  String get termsOfUse;
+
+  /// No description provided for @agreeToTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'by continuing, you agree to our'**
+  String get agreeToTerms;
 }
 
 class _AppLocalizationsDelegate

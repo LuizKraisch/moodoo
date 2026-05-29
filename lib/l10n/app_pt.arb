@@ -111,8 +111,11 @@
 
   "legal": "legal",
   "privacyPolicy": "política de privacidade",
-  "externalPrivacyPolicy": "ver online",
+  "viewOnline": "ver online",
   "support": "suporte",
   "getSupport": "obter suporte",
-  "configureNow": "configurar agora"
+  "configureNow": "configurar agora",
+
+  "termsOfUse": "termos de uso",
+  "agreeToTerms": "ao continuar, você concorda com os nossos"
 }

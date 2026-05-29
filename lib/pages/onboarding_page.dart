@@ -1,6 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
+import 'package:moodoo/pages/privacy_policy_page.dart';
+import 'package:moodoo/pages/terms_of_use_page.dart';
 import 'package:moodoo/preferences/onboarding_preferences.dart';
 import 'package:moodoo/services/api_service.dart';
 import 'package:moodoo/theme/app_theme.dart' show darkTheme;
@@ -158,6 +161,29 @@ class _OnboardingPageState extends State<OnboardingPage> {
                   ],
                 ),
               ),
+              ClipRect(
+                child: AnimatedAlign(
+                  alignment: Alignment.bottomCenter,
+                  heightFactor: isFirst ? 1.0 : 0.0,
+                  duration: const Duration(milliseconds: 200),
+                  curve: Curves.easeOut,
+                  child: _LegalFooter(
+                    agreeText: l10n.agreeToTerms,
+                    termsLabel: l10n.termsOfUse,
+                    privacyLabel: l10n.privacyPolicy,
+                    linkColor: scheme.onPrimary,
+                    textColor: scheme.onPrimary.withValues(alpha: 0.4),
+                    onTerms: () => Navigator.of(context).push(
+                      MaterialPageRoute(builder: (_) => const TermsOfUsePage()),
+                    ),
+                    onPrivacy: () => Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (_) => const PrivacyPolicyPage(),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
         ),
@@ -269,6 +295,65 @@ class _DotsIndicator extends StatelessWidget {
           ),
         );
       }),
+    );
+  }
+}
+
+class _LegalFooter extends StatelessWidget {
+  const _LegalFooter({
+    required this.agreeText,
+    required this.termsLabel,
+    required this.privacyLabel,
+    required this.linkColor,
+    required this.textColor,
+    required this.onTerms,
+    required this.onPrivacy,
+  });
+
+  final String agreeText;
+  final String termsLabel;
+  final String privacyLabel;
+  final Color linkColor;
+  final Color textColor;
+  final VoidCallback onTerms;
+  final VoidCallback onPrivacy;
+
+  @override
+  Widget build(BuildContext context) {
+    final baseStyle = TextStyle(
+      fontSize: 11,
+      color: textColor,
+      fontFamily: 'FunnelDisplay',
+      fontWeight: FontWeight.w600,
+    );
+    final linkStyle = baseStyle.copyWith(
+      color: linkColor,
+      decoration: TextDecoration.underline,
+      decorationColor: linkColor,
+    );
+
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(32, 0, 32, 16),
+      child: Text.rich(
+        TextSpan(
+          style: baseStyle,
+          children: [
+            TextSpan(text: '$agreeText '),
+            TextSpan(
+              text: termsLabel,
+              style: linkStyle,
+              recognizer: TapGestureRecognizer()..onTap = onTerms,
+            ),
+            const TextSpan(text: ' & '),
+            TextSpan(
+              text: privacyLabel,
+              style: linkStyle,
+              recognizer: TapGestureRecognizer()..onTap = onPrivacy,
+            ),
+          ],
+        ),
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }

@@ -11,8 +11,9 @@ import 'package:moodoo/widgets/shared/moodoo_modal.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
 import 'package:moodoo/widgets/shared/reminder_settings_section.dart';
 import 'package:moodoo/widgets/danger_zone.dart';
+import 'package:moodoo/pages/terms_of_use_page.dart';
 import 'package:moodoo/config.dart'
-    show privacyPolicyUrl, supportUrl, appVersion;
+    show privacyPolicyUrl, termsOfUseUrl, supportUrl, appVersion;
 import 'package:moodoo/services/auth_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -249,53 +250,129 @@ class SettingsPage extends StatelessWidget {
                   variant: MoodooTextVariant.headlineMedium,
                 ),
                 const SizedBox(height: 10),
-                MoodooButton(
-                  text: l10n.privacyPolicy,
-                  fullWidth: false,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 24,
-                    vertical: 10,
-                  ),
-                  bouncePeakScale: 1.04,
-                  backgroundColor: Theme.of(
-                    context,
-                  ).textTheme.displayLarge!.color!,
-                  foregroundColor: Theme.of(context).colorScheme.surface,
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (_) => const PrivacyPolicyPage(),
-                      ),
-                    );
-                  },
-                ),
-                const SizedBox(height: 10),
-                GestureDetector(
-                  onTap: () => launchUrl(
-                    Uri.parse(privacyPolicyUrl),
-                    mode: LaunchMode.externalApplication,
-                  ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      MoodooText(
-                        l10n.externalPrivacyPolicy,
-                        variant: MoodooTextVariant.titleMedium,
-                        fontSize: 12,
-                        color: Theme.of(
-                          context,
-                        ).textTheme.titleMedium!.color!.withValues(alpha: 0.4),
-                      ),
-                      const SizedBox(width: 5),
-                      Icon(
-                        Icons.open_in_new_rounded,
-                        size: 13,
-                        color: Theme.of(
-                          context,
-                        ).textTheme.titleMedium!.color!.withValues(alpha: 0.4),
-                      ),
-                    ],
-                  ),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MoodooButton(
+                          text: l10n.termsOfUse,
+                          fullWidth: false,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 10,
+                          ),
+                          bouncePeakScale: 1.04,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).textTheme.displayLarge!.color!,
+                          foregroundColor: Theme.of(
+                            context,
+                          ).colorScheme.surface,
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const TermsOfUsePage(),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 5),
+                        GestureDetector(
+                          onTap: () => launchUrl(
+                            Uri.parse(termsOfUseUrl),
+                            mode: LaunchMode.externalApplication,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              MoodooText(
+                                l10n.viewOnline,
+                                variant: MoodooTextVariant.titleMedium,
+                                fontSize: 12,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .color!
+                                    .withValues(alpha: 0.4),
+                              ),
+                              const SizedBox(width: 5),
+                              Icon(
+                                Icons.open_in_new_rounded,
+                                size: 13,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .color!
+                                    .withValues(alpha: 0.4),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 10),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        MoodooButton(
+                          text: l10n.privacyPolicy,
+                          fullWidth: false,
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 24,
+                            vertical: 10,
+                          ),
+                          bouncePeakScale: 1.04,
+                          backgroundColor: Theme.of(
+                            context,
+                          ).textTheme.displayLarge!.color!,
+                          foregroundColor: Theme.of(
+                            context,
+                          ).colorScheme.surface,
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (_) => const PrivacyPolicyPage(),
+                              ),
+                            );
+                          },
+                        ),
+                        const SizedBox(height: 5),
+                        GestureDetector(
+                          onTap: () => launchUrl(
+                            Uri.parse(privacyPolicyUrl),
+                            mode: LaunchMode.externalApplication,
+                          ),
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              MoodooText(
+                                l10n.viewOnline,
+                                variant: MoodooTextVariant.titleMedium,
+                                fontSize: 12,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .color!
+                                    .withValues(alpha: 0.4),
+                              ),
+                              const SizedBox(width: 5),
+                              Icon(
+                                Icons.open_in_new_rounded,
+                                size: 13,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium!
+                                    .color!
+                                    .withValues(alpha: 0.4),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
                 const SizedBox(height: 20),
                 MoodooText(

@@ -335,7 +335,7 @@ class AppLocalizationsFr extends AppLocalizations {
   String get privacyPolicy => 'politique de confidentialité';
 
   @override
-  String get externalPrivacyPolicy => 'voir en ligne';
+  String get viewOnline => 'voir en ligne';
 
   @override
   String get support => 'assistance';
@@ -345,4 +345,10 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get configureNow => 'configurer maintenant';
+
+  @override
+  String get termsOfUse => 'conditions d\'utilisation';
+
+  @override
+  String get agreeToTerms => 'en continuant, vous acceptez nos';
 }
