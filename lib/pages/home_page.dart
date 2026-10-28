@@ -85,9 +85,19 @@ class _HomePageState extends State<HomePage> {
           }).firstOrNull;
 
           // Show current + future months, plus past months that have records.
+          // Current month first, then past months newest → oldest, with
+          // future month placeholders at the end.
           final displaySummaries = summaries
               ?.where((s) => s.month >= now.month || s.moods.isNotEmpty)
-              .toList();
+              .toList()
+            ?..sort((a, b) {
+              final aFuture = a.month > now.month;
+              final bFuture = b.month > now.month;
+              if (aFuture != bFuture) return aFuture ? 1 : -1;
+              return aFuture
+                  ? a.month.compareTo(b.month)
+                  : b.month.compareTo(a.month);
+            });
 
           return Stack(
             children: [

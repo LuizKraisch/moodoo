@@ -78,20 +78,29 @@ class MonthCard extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    MoodooText(
-                      '${summary.year}',
-                      variant: MoodooTextVariant.titleSmall,
-                    ),
-                    MoodooText(
-                      MoodService.monthName(l10n, summary.month),
-                      variant: MoodooTextVariant.displaySmall,
-                      color: Theme.of(context).textTheme.displayLarge!.color!,
-                    ),
-                  ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      MoodooText(
+                        '${summary.year}',
+                        variant: MoodooTextVariant.titleSmall,
+                      ),
+                      // Scale down long month names (e.g. "September") to fit
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        alignment: Alignment.centerLeft,
+                        child: MoodooText(
+                          MoodService.monthName(l10n, summary.month),
+                          variant: MoodooTextVariant.displaySmall,
+                          color:
+                              Theme.of(context).textTheme.displayLarge!.color!,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(width: 8),
                 GradeCard(grade: summary.averageScore),
               ],
             ),
