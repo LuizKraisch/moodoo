@@ -31,7 +31,7 @@ class _SignOutSheet extends StatelessWidget {
         children: [
           MoodooButton(
             text: l10n.signOut,
-            onTap: () => Navigator.of(context).pop(true),
+            onTap: () => closeMoodooModal(context, true),
             backgroundColor: Colors.red.withValues(alpha: 0.15),
             foregroundColor: Colors.red,
             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -40,7 +40,7 @@ class _SignOutSheet extends StatelessWidget {
           const SizedBox(height: 12),
           MoodooButton(
             text: l10n.cancel,
-            onTap: () => Navigator.of(context).pop(false),
+            onTap: () => closeMoodooModal(context, false),
             backgroundColor: Theme.of(
               context,
             ).colorScheme.secondary.withValues(alpha: 0.15),
@@ -85,7 +85,7 @@ class _LanguageSheet extends StatelessWidget {
               onTap: () {
                 localeNotifier.value = Locale(e.key);
                 saveLocale(e.key);
-                Navigator.of(context).pop();
+                closeMoodooModal(context);
               },
             ),
           );

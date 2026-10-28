@@ -24,7 +24,7 @@ class _DeleteConfirmSheet extends StatelessWidget {
         children: [
           MoodooButton(
             text: l10n.deleteMood,
-            onTap: () => Navigator.of(context).pop(true),
+            onTap: () => closeMoodooModal(context, true),
             backgroundColor: Colors.red.withValues(alpha: 0.15),
             foregroundColor: Colors.red,
             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -33,7 +33,7 @@ class _DeleteConfirmSheet extends StatelessWidget {
           const SizedBox(height: 10),
           MoodooButton(
             text: l10n.cancel,
-            onTap: () => Navigator.of(context).pop(false),
+            onTap: () => closeMoodooModal(context, false),
             backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
             foregroundColor: Theme.of(context).colorScheme.surface,
             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -135,29 +135,35 @@ class _MoodSheetState extends State<MoodSheet> {
     final source = await showMoodooModal<String>(
       context,
       title: l10n.addPhoto,
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(0, 24, 0, 40),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            MoodooButton(
-              text: l10n.takePhoto,
-              onTap: () => Navigator.of(context).pop('camera'),
-              backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
-              foregroundColor: Theme.of(context).colorScheme.surface,
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              bouncePeakScale: 1.04,
-            ),
-            const SizedBox(height: 10),
-            MoodooButton(
-              text: l10n.chooseFromGallery,
-              onTap: () => Navigator.of(context).pop('gallery'),
-              backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
-              foregroundColor: Theme.of(context).colorScheme.surface,
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              bouncePeakScale: 1.04,
-            ),
-          ],
+      child: Builder(
+        builder: (sheetContext) => Padding(
+          padding: const EdgeInsets.fromLTRB(0, 24, 0, 40),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              MoodooButton(
+                text: l10n.takePhoto,
+                onTap: () => closeMoodooModal(sheetContext, 'camera'),
+                backgroundColor: Theme.of(
+                  context,
+                ).textTheme.displayLarge!.color!,
+                foregroundColor: Theme.of(context).colorScheme.surface,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                bouncePeakScale: 1.04,
+              ),
+              const SizedBox(height: 10),
+              MoodooButton(
+                text: l10n.chooseFromGallery,
+                onTap: () => closeMoodooModal(sheetContext, 'gallery'),
+                backgroundColor: Theme.of(
+                  context,
+                ).textTheme.displayLarge!.color!,
+                foregroundColor: Theme.of(context).colorScheme.surface,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                bouncePeakScale: 1.04,
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -187,7 +193,7 @@ class _MoodSheetState extends State<MoodSheet> {
           image: imageFile,
         );
       }
-      if (mounted) Navigator.pop(context);
+      if (mounted) closeMoodooModal(context);
     } catch (e) {
       if (mounted) {
         setState(() => _isLoading = false);
@@ -209,7 +215,7 @@ class _MoodSheetState extends State<MoodSheet> {
     setState(() => _isLoading = true);
     try {
       await _apiService.deleteMood(widget.mood!.id);
-      if (mounted) Navigator.pop(context);
+      if (mounted) closeMoodooModal(context);
     } catch (e) {
       if (mounted) {
         setState(() => _isLoading = false);

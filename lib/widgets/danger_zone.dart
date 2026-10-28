@@ -20,7 +20,7 @@ class _DeleteAllMoodsSheet extends StatelessWidget {
         children: [
           MoodooButton(
             text: l10n.deleteAllMoods,
-            onTap: () => Navigator.of(context).pop(true),
+            onTap: () => closeMoodooModal(context, true),
             backgroundColor: Colors.red.withValues(alpha: 0.15),
             foregroundColor: Colors.red,
             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -29,7 +29,7 @@ class _DeleteAllMoodsSheet extends StatelessWidget {
           const SizedBox(height: 12),
           MoodooButton(
             text: l10n.cancel,
-            onTap: () => Navigator.of(context).pop(false),
+            onTap: () => closeMoodooModal(context, false),
             backgroundColor: Theme.of(
               context,
             ).colorScheme.secondary.withValues(alpha: 0.15),
@@ -56,7 +56,7 @@ class _DeleteAccountSheet extends StatelessWidget {
         children: [
           MoodooButton(
             text: l10n.deleteAccount,
-            onTap: () => Navigator.of(context).pop(true),
+            onTap: () => closeMoodooModal(context, true),
             backgroundColor: Colors.red.withValues(alpha: 0.15),
             foregroundColor: Colors.red,
             padding: const EdgeInsets.symmetric(vertical: 16),
@@ -65,7 +65,7 @@ class _DeleteAccountSheet extends StatelessWidget {
           const SizedBox(height: 12),
           MoodooButton(
             text: l10n.cancel,
-            onTap: () => Navigator.of(context).pop(false),
+            onTap: () => closeMoodooModal(context, false),
             backgroundColor: Theme.of(
               context,
             ).colorScheme.secondary.withValues(alpha: 0.15),

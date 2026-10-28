@@ -10,6 +10,8 @@ Future<T?> showMoodooModal<T>(
   return showModalBottomSheet<T>(
     context: context,
     isScrollControlled: true,
+    isDismissible: true,
+    enableDrag: true,
     useSafeArea: true,
     backgroundColor: Colors.transparent,
     builder: (_) => TweenAnimationBuilder<double>(
@@ -32,17 +34,14 @@ Future<T?> showMoodooModal<T>(
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                GestureDetector(
-                  onTap: () => Navigator.of(context).pop(),
-                  child: Container(
-                    width: 40,
-                    height: 4,
-                    decoration: BoxDecoration(
-                      color: Theme.of(
-                        context,
-                      ).textTheme.titleMedium?.color?.withValues(alpha: 0.3),
-                      borderRadius: BorderRadius.circular(2),
-                    ),
+                Container(
+                  width: 40,
+                  height: 4,
+                  decoration: BoxDecoration(
+                    color: Theme.of(
+                      context,
+                    ).textTheme.titleMedium?.color?.withValues(alpha: 0.3),
+                    borderRadius: BorderRadius.circular(2),
                   ),
                 ),
                 const SizedBox(height: 20),
@@ -68,4 +67,16 @@ Future<T?> showMoodooModal<T>(
       ),
     ),
   );
+}
+
+void closeMoodooModal<T>(BuildContext context, [T? result]) {
+  final route = ModalRoute.of(context);
+
+  if (route == null || !route.isActive) return;
+  final navigator = Navigator.of(context);
+  if (route.isCurrent) {
+    navigator.pop<T>(result);
+  } else {
+    navigator.removeRoute(route, result);
+  }
 }

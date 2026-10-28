@@ -89,7 +89,7 @@ class _CupertinoTimeSheetContentState
             text: widget.doneLabel,
             bouncePeakScale: 1.04,
             padding: const EdgeInsets.symmetric(vertical: 16),
-            onTap: () => Navigator.of(context).pop(_picked),
+            onTap: () => closeMoodooModal(context, _picked),
             backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
             foregroundColor: Theme.of(context).colorScheme.surface,
           ),

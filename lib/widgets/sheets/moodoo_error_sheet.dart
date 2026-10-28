@@ -43,15 +43,17 @@ void showMoodooErrorSheet(BuildContext context, Object error) {
     context,
     title: l10n.errorTitle,
     subtitle: _humanizeError(l10n, error),
-    child: Padding(
-      padding: const EdgeInsets.fromLTRB(0, 24, 0, 40),
-      child: MoodooButton(
-        text: l10n.ok,
-        onTap: () => Navigator.of(context).pop(),
-        backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
-        foregroundColor: Theme.of(context).colorScheme.surface,
-        padding: const EdgeInsets.symmetric(vertical: 16),
-        bouncePeakScale: 1.04,
+    child: Builder(
+      builder: (sheetContext) => Padding(
+        padding: const EdgeInsets.fromLTRB(0, 24, 0, 40),
+        child: MoodooButton(
+          text: l10n.ok,
+          onTap: () => closeMoodooModal(sheetContext),
+          backgroundColor: Theme.of(context).textTheme.displayLarge!.color!,
+          foregroundColor: Theme.of(context).colorScheme.surface,
+          padding: const EdgeInsets.symmetric(vertical: 16),
+          bouncePeakScale: 1.04,
+        ),
       ),
     ),
   );
