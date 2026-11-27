@@ -207,7 +207,7 @@ class _SongRow extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 4),
           child: Row(
             children: [
-              SongCover(song: song, size: 46),
+              SongCover(song: song, size: 46, playable: true),
               const SizedBox(width: 12),
               Expanded(
                 child: Column(
@@ -229,8 +229,6 @@ class _SongRow extends StatelessWidget {
                   ],
                 ),
               ),
-              const SizedBox(width: 8),
-              if (song.hasPreview) SongPreviewButton(song: song),
             ],
           ),
         ),

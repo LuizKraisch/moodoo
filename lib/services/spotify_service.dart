@@ -78,6 +78,20 @@ class SpotifyService {
     '$_baseUrl/spotify/search?q=${Uri.encodeQueryComponent(query)}',
   );
 
+  Future<String?> previewUrl(Song song) async {
+    final headers = await _authHeaders();
+    final uri = Uri.parse(
+      '$_baseUrl/spotify/tracks/${Uri.encodeComponent(song.spotifyId)}/preview',
+    ).replace(
+      queryParameters: song.isrc == null ? null : {'isrc': song.isrc!},
+    );
+    final response = await http.get(uri, headers: headers);
+    if (response.statusCode == 404) return null;
+    handleApiResponse(response);
+    final data = jsonDecode(response.body) as Map<String, dynamic>;
+    return data['preview_url'] as String?;
+  }
+
   Future<List<Song>> _getSongs(String url) async {
     final headers = await _authHeaders();
     final response = await http.get(Uri.parse(url), headers: headers);

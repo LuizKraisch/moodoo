@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/song.dart';
 import 'package:moodoo/services/song_preview_player.dart';
@@ -7,10 +8,16 @@ import 'package:moodoo/widgets/shared/spotify_icon.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class SongCover extends StatelessWidget {
-  const SongCover({super.key, required this.song, this.size = 52});
+  const SongCover({
+    super.key,
+    required this.song,
+    this.size = 52,
+    this.playable = false,
+  });
 
   final Song song;
   final double size;
+  final bool playable;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +31,7 @@ class SongCover extends StatelessWidget {
       ),
     );
 
-    return ClipRRect(
+    final cover = ClipRRect(
       borderRadius: BorderRadius.circular(4),
       child: song.coverUrl == null
           ? placeholder
@@ -36,54 +43,113 @@ class SongCover extends StatelessWidget {
               errorBuilder: (_, _, _) => placeholder,
             ),
     );
+
+    if (!playable) return cover;
+
+    return SizedBox(
+      width: size,
+      height: size,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          cover,
+          _CoverPreviewButton(song: song, size: size * 0.55),
+        ],
+      ),
+    );
   }
 }
 
-class SongPreviewButton extends StatelessWidget {
-  const SongPreviewButton({super.key, required this.song});
+class _CoverPreviewButton extends StatelessWidget {
+  const _CoverPreviewButton({required this.song, required this.size});
+
+  final Song song;
+  final double size;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final player = SongPreviewPlayer();
+    final iconSize = size * 0.62;
+
+    return ListenableBuilder(
+      listenable: player,
+      builder: (context, _) {
+        final status = player.statusFor(song);
+        final unavailable = status == PreviewStatus.unavailable;
+
+        final Widget child = switch (status) {
+          PreviewStatus.loading => LoadingAnimationWidget.threeArchedCircle(
+            color: Colors.white,
+            size: iconSize,
+          ),
+          PreviewStatus.playing => Icon(
+            Icons.pause_rounded,
+            color: Colors.white,
+            size: iconSize,
+          ),
+          PreviewStatus.unavailable => Icon(
+            Icons.music_off_rounded,
+            color: Colors.white.withValues(alpha: 0.7),
+            size: iconSize * 0.85,
+          ),
+          _ => Icon(
+            Icons.play_arrow_rounded,
+            color: Colors.white,
+            size: iconSize,
+          ),
+        };
+
+        final label = switch (status) {
+          PreviewStatus.playing => l10n.pausePreview,
+          PreviewStatus.unavailable => l10n.previewUnavailable,
+          _ => l10n.playPreview,
+        };
+
+        return Semantics(
+          button: !unavailable,
+          label: label,
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: unavailable ? null : () => player.toggle(song),
+            child: Container(
+              width: size,
+              height: size,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: unavailable ? 0.35 : 0.55),
+                shape: BoxShape.circle,
+              ),
+              child: child,
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class SpotifyOpenButton extends StatelessWidget {
+  const SpotifyOpenButton({super.key, required this.song});
 
   final Song song;
 
   @override
   Widget build(BuildContext context) {
-    final player = SongPreviewPlayer();
-    final color = Theme.of(context).textTheme.displayLarge!.color!;
-
-    if (!song.hasPreview) {
-      if (song.spotifyUrl == null) return const SizedBox.shrink();
-      return Semantics(
-        button: true,
-        label: AppLocalizations.of(context)!.openInSpotify,
-        child: GestureDetector(
-          onTap: () => launchUrl(
-            Uri.parse(song.spotifyUrl!),
-            mode: LaunchMode.externalApplication,
-          ),
-          child: const Padding(
-            padding: EdgeInsets.all(6),
-            child: SpotifyIcon(size: 24),
-          ),
+    if (song.spotifyUrl == null) return const SizedBox.shrink();
+    return Semantics(
+      button: true,
+      label: AppLocalizations.of(context)!.openInSpotify,
+      child: GestureDetector(
+        onTap: () => launchUrl(
+          Uri.parse(song.spotifyUrl!),
+          mode: LaunchMode.externalApplication,
         ),
-      );
-    }
-
-    return ValueListenableBuilder<String?>(
-      valueListenable: player.playingId,
-      builder: (context, playingId, _) {
-        final isPlaying = playingId == song.spotifyId;
-        return GestureDetector(
-          onTap: () => player.toggle(song),
-          child: Container(
-            padding: const EdgeInsets.all(6),
-            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
-            child: Icon(
-              isPlaying ? Icons.pause_rounded : Icons.play_arrow_rounded,
-              size: 20,
-              color: Theme.of(context).colorScheme.surface,
-            ),
-          ),
-        );
-      },
+        child: const Padding(
+          padding: EdgeInsets.all(6),
+          child: SpotifyIcon(size: 24),
+        ),
+      ),
     );
   }
 }
@@ -141,7 +207,7 @@ class SongField extends StatelessWidget {
       ),
       child: Row(
         children: [
-          SongCover(song: current),
+          SongCover(song: current, playable: true),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -165,7 +231,7 @@ class SongField extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 8),
-          SongPreviewButton(song: current),
+          SpotifyOpenButton(song: current),
           if (onPick != null) ...[
             const SizedBox(width: 10),
             _circleButton(Icons.edit, onPick!),

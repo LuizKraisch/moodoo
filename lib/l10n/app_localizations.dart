@@ -806,6 +806,24 @@ abstract class AppLocalizations {
   /// **'open in spotify'**
   String get openInSpotify;
 
+  /// No description provided for @playPreview.
+  ///
+  /// In en, this message translates to:
+  /// **'play preview'**
+  String get playPreview;
+
+  /// No description provided for @pausePreview.
+  ///
+  /// In en, this message translates to:
+  /// **'pause preview'**
+  String get pausePreview;
+
+  /// No description provided for @previewUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'preview not available'**
+  String get previewUnavailable;
+
   /// No description provided for @errorSpotifyNotConnected.
   ///
   /// In en, this message translates to:

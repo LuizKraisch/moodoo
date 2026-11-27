@@ -132,5 +132,8 @@
   "yourTopTracks": "suas mais ouvidas",
   "noSongsFound": "nenhuma música encontrada",
   "openInSpotify": "abrir no spotify",
+  "playPreview": "tocar prévia",
+  "pausePreview": "pausar prévia",
+  "previewUnavailable": "prévia indisponível",
   "errorSpotifyNotConnected": "sua conexão com o spotify expirou. conecte novamente."
 }

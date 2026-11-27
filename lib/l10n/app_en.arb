@@ -177,5 +177,8 @@
   "yourTopTracks": "your top tracks",
   "noSongsFound": "no songs found",
   "openInSpotify": "open in spotify",
+  "playPreview": "play preview",
+  "pausePreview": "pause preview",
+  "previewUnavailable": "preview not available",
   "errorSpotifyNotConnected": "your spotify connection expired. please connect again."
 }

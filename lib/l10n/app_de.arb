@@ -132,5 +132,8 @@
   "yourTopTracks": "deine top-songs",
   "noSongsFound": "keine songs gefunden",
   "openInSpotify": "in spotify öffnen",
+  "playPreview": "vorschau abspielen",
+  "pausePreview": "vorschau pausieren",
+  "previewUnavailable": "vorschau nicht verfügbar",
   "errorSpotifyNotConnected": "deine spotify-verbindung ist abgelaufen. bitte verbinde dich erneut."
 }

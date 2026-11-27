@@ -241,7 +241,7 @@ class _PanelSong extends StatefulWidget {
 class _PanelSongState extends State<_PanelSong> {
   @override
   void dispose() {
-    if (SongPreviewPlayer().playingId.value == widget.song.spotifyId) {
+    if (SongPreviewPlayer().currentId == widget.song.spotifyId) {
       SongPreviewPlayer().stop();
     }
     super.dispose();

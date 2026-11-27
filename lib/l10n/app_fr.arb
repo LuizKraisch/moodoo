@@ -132,5 +132,8 @@
   "yourTopTracks": "tes titres les plus écoutés",
   "noSongsFound": "aucune chanson trouvée",
   "openInSpotify": "ouvrir dans spotify",
+  "playPreview": "écouter l'extrait",
+  "pausePreview": "mettre l'extrait en pause",
+  "previewUnavailable": "extrait indisponible",
   "errorSpotifyNotConnected": "ta connexion spotify a expiré. reconnecte-toi, s'il te plaît."
 }

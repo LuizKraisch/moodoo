@@ -132,5 +132,8 @@
   "yourTopTracks": "tus más escuchadas",
   "noSongsFound": "no se encontraron canciones",
   "openInSpotify": "abrir en spotify",
+  "playPreview": "reproducir avance",
+  "pausePreview": "pausar avance",
+  "previewUnavailable": "avance no disponible",
   "errorSpotifyNotConnected": "tu conexión con spotify expiró. por favor, conéctate de nuevo."
 }

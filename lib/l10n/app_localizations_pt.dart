@@ -392,6 +392,15 @@ class AppLocalizationsPt extends AppLocalizations {
   String get openInSpotify => 'abrir no spotify';
 
   @override
+  String get playPreview => 'tocar prévia';
+
+  @override
+  String get pausePreview => 'pausar prévia';
+
+  @override
+  String get previewUnavailable => 'prévia indisponível';
+
+  @override
   String get errorSpotifyNotConnected =>
       'sua conexão com o spotify expirou. conecte novamente.';
 }
