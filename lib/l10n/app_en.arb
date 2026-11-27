@@ -157,5 +157,25 @@
   "configureNow": "configure now",
 
   "termsOfUse": "terms of use",
-  "agreeToTerms": "by continuing, you agree to our"
+  "agreeToTerms": "by continuing, you agree to our",
+
+  "spotify": "spotify",
+  "connect": "connect",
+  "connectSpotify": "connect spotify",
+  "disconnectSpotify": "disconnect",
+  "spotifyBannerText": "connect spotify to add a song to your days",
+  "spotifyConnectedAs": "connected as {name}",
+  "@spotifyConnectedAs": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "spotifySettingsDescription": "connect your spotify account to add a song of the day to your moods.",
+  "addSongForDay": "add a song for this day",
+  "chooseSong": "choose a song",
+  "searchSongs": "search songs",
+  "yourTopTracks": "your top tracks",
+  "noSongsFound": "no songs found",
+  "openInSpotify": "open in spotify",
+  "errorSpotifyNotConnected": "your spotify connection expired. please connect again."
 }

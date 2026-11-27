@@ -1,3 +1,5 @@
+import 'package:moodoo/models/song.dart';
+
 class Mood {
   final String id;
   final DateTime day;
@@ -6,6 +8,7 @@ class Mood {
   final String notes;
   final String score;
   final String? photoUrl;
+  final Song? song;
 
   Mood({
     required this.id,
@@ -15,6 +18,7 @@ class Mood {
     required this.notes,
     required this.score,
     this.photoUrl,
+    this.song,
   });
 
   factory Mood.fromJson(Map<String, dynamic> data) {
@@ -26,6 +30,9 @@ class Mood {
       notes: data['notes'] as String? ?? '',
       score: data['score'] as String,
       photoUrl: data['photo_url'] as String?,
+      song: data['song'] is Map<String, dynamic>
+          ? Song.fromJson(data['song'] as Map<String, dynamic>)
+          : null,
     );
   }
 
@@ -36,6 +43,7 @@ class Mood {
       'notes': notes,
       'score': score,
       'photo_url': photoUrl,
+      'song': song?.toJson(),
       'created_at': createdAt.toIso8601String(),
       'updated_at': updatedAt.toIso8601String(),
     };

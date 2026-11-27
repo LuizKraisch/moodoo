@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     _scrollController.addListener(_onScroll);
+    _apiService.refreshAccount().catchError((_) {});
   }
 
   void _onScroll() {

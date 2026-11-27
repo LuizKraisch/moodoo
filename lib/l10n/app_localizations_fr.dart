@@ -351,4 +351,51 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get agreeToTerms => 'en continuant, vous acceptez nos';
+
+  @override
+  String get spotify => 'spotify';
+
+  @override
+  String get connect => 'connecter';
+
+  @override
+  String get connectSpotify => 'connecter spotify';
+
+  @override
+  String get disconnectSpotify => 'déconnecter';
+
+  @override
+  String get spotifyBannerText =>
+      'connecte spotify pour ajouter une chanson à tes journées';
+
+  @override
+  String spotifyConnectedAs(String name) {
+    return 'connecté en tant que $name';
+  }
+
+  @override
+  String get spotifySettingsDescription =>
+      'connecte ton compte spotify pour ajouter la chanson du jour à tes humeurs.';
+
+  @override
+  String get addSongForDay => 'ajouter une chanson pour ce jour';
+
+  @override
+  String get chooseSong => 'choisis une chanson';
+
+  @override
+  String get searchSongs => 'rechercher des chansons';
+
+  @override
+  String get yourTopTracks => 'tes titres les plus écoutés';
+
+  @override
+  String get noSongsFound => 'aucune chanson trouvée';
+
+  @override
+  String get openInSpotify => 'ouvrir dans spotify';
+
+  @override
+  String get errorSpotifyNotConnected =>
+      'ta connexion spotify a expiré. reconnecte-toi, s\'il te plaît.';
 }

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:moodoo/config.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/theme/app_theme.dart' show lightTheme, darkTheme;
 import 'package:moodoo/preferences/locale_preferences.dart';
 import 'package:moodoo/preferences/notification_preferences.dart';
 import 'package:moodoo/preferences/onboarding_preferences.dart';
+import 'package:moodoo/preferences/spotify_preferences.dart';
 import 'package:moodoo/pages/auth_gate.dart';
 import 'package:moodoo/services/notification_service.dart';
 import 'package:moodoo/preferences/theme_preferences.dart';
@@ -13,10 +16,13 @@ void main() async {
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
+  await GoogleSignIn.instance.initialize(serverClientId: googleServerClientId);
+
   await loadTheme();
   await loadLocale();
   await loadNotificationPrefs();
   await loadOnboardingPrefs();
+  await loadSpotifyPrefs();
 
   await NotificationService.initialize();
   await NotificationService.rescheduleFromPrefs();

@@ -10,6 +10,7 @@ import 'package:moodoo/widgets/sheets/moodoo_error_sheet.dart';
 import 'package:moodoo/widgets/shared/moodoo_modal.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
 import 'package:moodoo/widgets/shared/reminder_settings_section.dart';
+import 'package:moodoo/widgets/shared/spotify_settings_section.dart';
 import 'package:moodoo/widgets/danger_zone.dart';
 import 'package:moodoo/pages/terms_of_use_page.dart';
 import 'package:moodoo/config.dart'
@@ -244,6 +245,13 @@ class SettingsPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 const ReminderSettingsSection(),
+                const SizedBox(height: 20),
+                MoodooText(
+                  l10n.spotify,
+                  variant: MoodooTextVariant.headlineMedium,
+                ),
+                const SizedBox(height: 5),
+                const SpotifySettingsSection(),
                 const SizedBox(height: 20),
                 MoodooText(
                   l10n.legal,

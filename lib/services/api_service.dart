@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:moodoo/config.dart';
 import 'package:moodoo/models/mood.dart';
+import 'package:moodoo/preferences/spotify_preferences.dart';
 import 'package:moodoo/services/auth_service.dart';
 
 class ApiException implements Exception {
@@ -30,6 +31,34 @@ MediaType _mediaTypeForPath(String path) {
   };
   final ext = path.split('.').last.toLowerCase();
   return MediaType.parse(map[ext] ?? 'application/octet-stream');
+}
+
+class SpotifyNotConnectedException implements Exception {}
+
+void handleApiResponse(http.Response response, {int expected = 200}) {
+  if (response.statusCode == expected) return;
+  try {
+    final body = jsonDecode(response.body) as Map<String, dynamic>;
+    if (response.statusCode == 409 && body['error'] == 'spotify_not_connected') {
+      saveSpotifyConnection(connected: false);
+      throw SpotifyNotConnectedException();
+    }
+    if (body.containsKey('errors')) {
+      final errors = (body['errors'] as List).join(', ');
+      throw ApiException(errors, statusCode: response.statusCode);
+    }
+    if (body.containsKey('error')) {
+      throw ApiException(
+        body['error'] as String,
+        statusCode: response.statusCode,
+      );
+    }
+  } on ApiException {
+    rethrow;
+  } on SpotifyNotConnectedException {
+    rethrow;
+  } catch (_) {}
+  throw ApiException('Request failed', statusCode: response.statusCode);
 }
 
 class ApiService {
@@ -97,6 +126,7 @@ class ApiService {
     String score,
     String notes, {
     File? image,
+    String? spotifyTrackId,
   }) async {
     final token = await AuthService().getToken();
     http.Response response;
@@ -108,12 +138,20 @@ class ApiService {
         ..fields['mood[score]'] = score
         ..fields['mood[notes]'] = notes
         ..files.add(await http.MultipartFile.fromPath('mood[image]', image.path, contentType: _mediaTypeForPath(image.path)));
+      if (spotifyTrackId != null) request.fields['mood[spotify_track_id]'] = spotifyTrackId;
       response = await http.Response.fromStream(await request.send());
     } else {
       response = await http.post(
         Uri.parse('$_baseUrl/moods'),
         headers: {'Authorization': 'Bearer $token', 'Content-Type': 'application/json'},
-        body: jsonEncode({'mood': {'day': _formatDate(day), 'score': score, 'notes': notes}}),
+        body: jsonEncode({
+          'mood': {
+            'day': _formatDate(day),
+            'score': score,
+            'notes': notes,
+            'spotify_track_id': ?spotifyTrackId,
+          },
+        }),
       );
     }
 
@@ -129,6 +167,8 @@ class ApiService {
     String score, {
     File? image,
     bool removePhoto = false,
+    String? spotifyTrackId,
+    bool removeSong = false,
   }) async {
     final token = await AuthService().getToken();
     http.Response response;
@@ -139,6 +179,8 @@ class ApiService {
         ..fields['mood[notes]'] = notes
         ..fields['mood[score]'] = score
         ..files.add(await http.MultipartFile.fromPath('mood[image]', image.path, contentType: _mediaTypeForPath(image.path)));
+      if (spotifyTrackId != null) request.fields['mood[spotify_track_id]'] = spotifyTrackId;
+      if (removeSong) request.fields['mood[remove_song]'] = 'true';
       response = await http.Response.fromStream(await request.send());
     } else {
       response = await http.patch(
@@ -149,6 +191,8 @@ class ApiService {
             'notes': notes,
             'score': score,
             if (removePhoto) 'remove_photo': true,
+            'spotify_track_id': ?spotifyTrackId,
+            if (removeSong) 'remove_song': true,
           },
         }),
       );
@@ -187,11 +231,13 @@ class ApiService {
     bool? onboardingCompleted,
     bool? notificationEnabled,
     String? notificationTime,
+    bool? spotifyBannerDismissed,
   }) async {
     final body = <String, dynamic>{};
     if (onboardingCompleted != null) body['onboarding_completed'] = onboardingCompleted;
     if (notificationEnabled != null) body['daily_reminder_enabled'] = notificationEnabled;
     if (notificationTime != null) body['daily_reminder_time'] = notificationTime;
+    if (spotifyBannerDismissed != null) body['spotify_banner_dismissed'] = spotifyBannerDismissed;
     if (body.isEmpty) return;
 
     final headers = await _authHeaders();
@@ -201,6 +247,21 @@ class ApiService {
       body: jsonEncode(body),
     );
     if (response.statusCode != 204) _handleResponse(response);
+  }
+
+  Future<void> refreshAccount() async {
+    final headers = await _authHeaders();
+    final response = await http.get(
+      Uri.parse('$_baseUrl/account'),
+      headers: headers,
+    );
+    if (response.statusCode == 401) {
+      await AuthService().signOut();
+      return;
+    }
+    _handleResponse(response);
+    final data = jsonDecode(response.body) as Map<String, dynamic>;
+    await applySpotifyUserJson(data['user'] as Map<String, dynamic>);
   }
 
   Future<void> deleteAccount() async {
@@ -213,23 +274,7 @@ class ApiService {
   }
 
   void _handleResponse(http.Response response, {int expected = 200}) {
-    if (response.statusCode == expected) return;
-    try {
-      final body = jsonDecode(response.body) as Map<String, dynamic>;
-      if (body.containsKey('errors')) {
-        final errors = (body['errors'] as List).join(', ');
-        throw ApiException(errors, statusCode: response.statusCode);
-      }
-      if (body.containsKey('error')) {
-        throw ApiException(
-          body['error'] as String,
-          statusCode: response.statusCode,
-        );
-      }
-    } on ApiException {
-      rethrow;
-    } catch (_) {}
-    throw ApiException('Request failed', statusCode: response.statusCode);
+    handleApiResponse(response, expected: expected);
   }
 
   String _formatDate(DateTime date) {

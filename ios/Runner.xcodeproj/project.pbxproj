@@ -206,6 +206,7 @@
 				63BCD925CFF1ECF7829F5DD1 /* [CP] Embed Pods Frameworks */,
 				13BECD4D4991E657D4A16E19 /* [CP] Copy Pods Resources */,
 				4CAF773708DA46148510FD76 /* Fix Simulator Slices */,
+				5D1E2A7F2C0B4E9A00D5F001 /* Generate Framework dSYMs */,
 			);
 			buildRules = (
 			);
@@ -329,6 +330,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Skip on simulator builds\n[ \"$PLATFORM_NAME\" = \"iphonesimulator\" ] && exit 0\n# Fix frameworks with simulator-tagged arm64 slices (e.g. objective_c.framework)\nfind \"${CODESIGNING_FOLDER_PATH}/Frameworks\" -name \"*.framework\" -type d 2>/dev/null | while read -r fw; do\n    binary=\"${fw}/$(basename \"${fw}\" .framework)\"\n    [ -f \"${binary}\" ] || continue\n    if xcrun vtool -show-build \"${binary}\" 2>/dev/null | grep -qi \"iossimulator\"; then\n        echo \"Retagging simulator slice in ${binary}\"\n        xcrun vtool -set-build-version ios 15.0 15.0 -replace -output \"${binary}\" \"${binary}\"\n    fi\ndone\n";
+		};
+		5D1E2A7F2C0B4E9A00D5F001 /* Generate Framework dSYMs */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate Framework dSYMs";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "[ \"$DEBUG_INFORMATION_FORMAT\" = \"dwarf-with-dsym\" ] || exit 0\n[ \"$PLATFORM_NAME\" = \"iphonesimulator\" ] && exit 0\nfind \"${CODESIGNING_FOLDER_PATH}/Frameworks\" -maxdepth 1 -name \"*.framework\" -type d 2>/dev/null | while read -r fw; do\n    name=\"$(basename \"${fw}\" .framework)\"\n    binary=\"${fw}/${name}\"\n    dsym=\"${DWARF_DSYM_FOLDER_PATH}/${name}.framework.dSYM\"\n    [ -f \"${binary}\" ] || continue\n    [ -d \"${dsym}\" ] && continue\n    echo \"Generating dSYM for ${name}.framework\"\n    xcrun dsymutil \"${binary}\" -o \"${dsym}\" || true\ndone\n";
 		};
 		63BCD925CFF1ECF7829F5DD1 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;

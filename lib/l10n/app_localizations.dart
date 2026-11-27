@@ -727,6 +727,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'by continuing, you agree to our'**
   String get agreeToTerms;
+
+  /// No description provided for @spotify.
+  ///
+  /// In en, this message translates to:
+  /// **'spotify'**
+  String get spotify;
+
+  /// No description provided for @connect.
+  ///
+  /// In en, this message translates to:
+  /// **'connect'**
+  String get connect;
+
+  /// No description provided for @connectSpotify.
+  ///
+  /// In en, this message translates to:
+  /// **'connect spotify'**
+  String get connectSpotify;
+
+  /// No description provided for @disconnectSpotify.
+  ///
+  /// In en, this message translates to:
+  /// **'disconnect'**
+  String get disconnectSpotify;
+
+  /// No description provided for @spotifyBannerText.
+  ///
+  /// In en, this message translates to:
+  /// **'connect spotify to add a song to your days'**
+  String get spotifyBannerText;
+
+  /// No description provided for @spotifyConnectedAs.
+  ///
+  /// In en, this message translates to:
+  /// **'connected as {name}'**
+  String spotifyConnectedAs(String name);
+
+  /// No description provided for @spotifySettingsDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'connect your spotify account to add a song of the day to your moods.'**
+  String get spotifySettingsDescription;
+
+  /// No description provided for @addSongForDay.
+  ///
+  /// In en, this message translates to:
+  /// **'add a song for this day'**
+  String get addSongForDay;
+
+  /// No description provided for @chooseSong.
+  ///
+  /// In en, this message translates to:
+  /// **'choose a song'**
+  String get chooseSong;
+
+  /// No description provided for @searchSongs.
+  ///
+  /// In en, this message translates to:
+  /// **'search songs'**
+  String get searchSongs;
+
+  /// No description provided for @yourTopTracks.
+  ///
+  /// In en, this message translates to:
+  /// **'your top tracks'**
+  String get yourTopTracks;
+
+  /// No description provided for @noSongsFound.
+  ///
+  /// In en, this message translates to:
+  /// **'no songs found'**
+  String get noSongsFound;
+
+  /// No description provided for @openInSpotify.
+  ///
+  /// In en, this message translates to:
+  /// **'open in spotify'**
+  String get openInSpotify;
+
+  /// No description provided for @errorSpotifyNotConnected.
+  ///
+  /// In en, this message translates to:
+  /// **'your spotify connection expired. please connect again.'**
+  String get errorSpotifyNotConnected;
 }
 
 class _AppLocalizationsDelegate
