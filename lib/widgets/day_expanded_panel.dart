@@ -3,7 +3,10 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:moodoo/theme/app_theme.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
+import 'package:moodoo/models/song.dart';
 import 'package:moodoo/services/mood_service.dart';
+import 'package:moodoo/services/song_preview_player.dart';
+import 'package:moodoo/widgets/mood/song_field.dart';
 import 'package:moodoo/widgets/sheets/mood_sheet.dart';
 import 'package:moodoo/widgets/shared/grade_card.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
@@ -174,6 +177,10 @@ class DayExpandedPanel extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                   ],
+                  if (mood!.song != null) ...[
+                    _PanelSong(song: mood!.song!),
+                    const SizedBox(height: 12),
+                  ],
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.end,
@@ -220,4 +227,26 @@ class DayExpandedPanel extends StatelessWidget {
       ),
     );
   }
+}
+
+class _PanelSong extends StatefulWidget {
+  const _PanelSong({required this.song});
+
+  final Song song;
+
+  @override
+  State<_PanelSong> createState() => _PanelSongState();
+}
+
+class _PanelSongState extends State<_PanelSong> {
+  @override
+  void dispose() {
+    if (SongPreviewPlayer().currentId == widget.song.spotifyId) {
+      SongPreviewPlayer().stop();
+    }
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) => SongField(song: widget.song);
 }

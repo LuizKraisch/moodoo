@@ -6,6 +6,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:moodoo/config.dart';
 import 'package:moodoo/preferences/notification_preferences.dart';
 import 'package:moodoo/preferences/onboarding_preferences.dart';
+import 'package:moodoo/preferences/spotify_preferences.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 import 'package:http/http.dart' as http;
 
@@ -144,6 +145,7 @@ class AuthService {
       enabled: notificationEnabled,
       time: notificationTimeNotifier.value,
     );
+    await applySpotifyUserJson(user);
 
     await _storage.write(key: 'jwt_token', value: token);
     await _storage.write(key: 'user_id', value: _currentUser!.id);
@@ -215,6 +217,7 @@ class AuthService {
       await GoogleSignIn.instance.signOut();
     } catch (_) {}
     await _storage.deleteAll();
+    await clearSpotifyPrefs();
     _currentUser = null;
     _authStateController.add(false);
   }

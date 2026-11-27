@@ -117,5 +117,23 @@
   "configureNow": "jetzt konfigurieren",
 
   "termsOfUse": "nutzungsbedingungen",
-  "agreeToTerms": "durch das fortfahren stimmst du unseren"
+  "agreeToTerms": "durch das fortfahren stimmst du unseren",
+
+  "spotify": "spotify",
+  "connect": "verbinden",
+  "connectSpotify": "spotify verbinden",
+  "disconnectSpotify": "trennen",
+  "spotifyBannerText": "verbinde spotify, um deinen tagen einen song hinzuzufügen",
+  "spotifyConnectedAs": "verbunden als {name}",
+  "spotifySettingsDescription": "verbinde dein spotify-konto, um deinen stimmungen einen song des tages hinzuzufügen.",
+  "addSongForDay": "einen song für diesen tag hinzufügen",
+  "chooseSong": "wähle einen song",
+  "searchSongs": "songs suchen",
+  "yourTopTracks": "deine top-songs",
+  "noSongsFound": "keine songs gefunden",
+  "openInSpotify": "in spotify öffnen",
+  "playPreview": "vorschau abspielen",
+  "pausePreview": "vorschau pausieren",
+  "previewUnavailable": "vorschau nicht verfügbar",
+  "errorSpotifyNotConnected": "deine spotify-verbindung ist abgelaufen. bitte verbinde dich erneut."
 }

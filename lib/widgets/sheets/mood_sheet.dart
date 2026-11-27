@@ -3,14 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:moodoo/l10n/app_localizations.dart';
 import 'package:moodoo/models/mood.dart';
+import 'package:moodoo/models/song.dart';
+import 'package:moodoo/preferences/spotify_preferences.dart';
 import 'package:moodoo/services/api_service.dart';
 import 'package:moodoo/services/mood_service.dart';
 import 'package:moodoo/services/native_image_picker.dart';
+import 'package:moodoo/services/song_preview_player.dart';
+import 'package:moodoo/widgets/mood/song_field.dart';
+import 'package:moodoo/widgets/sheets/song_picker_sheet.dart';
 import 'package:moodoo/widgets/sheets/moodoo_error_sheet.dart';
 import 'package:moodoo/widgets/shared/grade_card.dart';
 import 'package:moodoo/widgets/shared/moodoo_button.dart';
 import 'package:moodoo/widgets/shared/moodoo_text.dart';
 import 'package:moodoo/widgets/shared/moodoo_modal.dart';
+import 'package:moodoo/widgets/shared/spotify_connect_banner.dart';
 import 'package:moodoo/widgets/shared/tap_bounce.dart';
 
 class _DeleteConfirmSheet extends StatelessWidget {
@@ -62,6 +68,8 @@ class _MoodSheetState extends State<MoodSheet> {
   bool _isLoading = false;
   File? _imageFile;
   bool _removePhoto = false;
+  Song? _song;
+  bool _removeSong = false;
 
   static const _grades = ['S', 'A', 'B', 'C', 'D', 'F'];
 
@@ -72,8 +80,12 @@ class _MoodSheetState extends State<MoodSheet> {
     return _selected != widget.mood!.score ||
         _controller.text != widget.mood!.notes ||
         _imageFile != null ||
-        _removePhoto;
+        _removePhoto ||
+        (_song != null && _song!.spotifyId != widget.mood!.song?.spotifyId) ||
+        (_removeSong && widget.mood!.song != null);
   }
+
+  Song? get _currentSong => _removeSong ? null : (_song ?? widget.mood?.song);
 
   @override
   void initState() {
@@ -87,6 +99,7 @@ class _MoodSheetState extends State<MoodSheet> {
 
   @override
   void dispose() {
+    SongPreviewPlayer().stop();
     _controller.dispose();
     super.dispose();
   }
@@ -96,6 +109,55 @@ class _MoodSheetState extends State<MoodSheet> {
       _imageFile = null;
       _removePhoto = true;
     });
+  }
+
+  Future<void> _pickSong() async {
+    final song = await showSongPickerSheet(context);
+    if (song == null || !mounted) return;
+    setState(() {
+      _song = song;
+      _removeSong = false;
+    });
+  }
+
+  void _clearSong() {
+    SongPreviewPlayer().stop();
+    setState(() {
+      _song = null;
+      _removeSong = true;
+    });
+  }
+
+  Widget _buildSongArea() {
+    return ValueListenableBuilder<bool>(
+      valueListenable: spotifyConnectedNotifier,
+      builder: (context, connected, _) {
+        return ValueListenableBuilder<bool>(
+          valueListenable: spotifyBannerDismissedNotifier,
+          builder: (context, dismissed, _) {
+            final song = _currentSong;
+            final Widget child;
+            if (connected) {
+              child = SongField(
+                song: song,
+                onPick: _pickSong,
+                onRemove: _clearSong,
+              );
+            } else if (song != null) {
+              child = SongField(song: song, onRemove: _clearSong);
+            } else if (!dismissed) {
+              child = const SpotifyConnectBanner();
+            } else {
+              return const SizedBox.shrink();
+            }
+            return Padding(
+              padding: const EdgeInsets.only(top: 10),
+              child: child,
+            );
+          },
+        );
+      },
+    );
   }
 
   static const _allowedExtensions = {
@@ -184,6 +246,8 @@ class _MoodSheetState extends State<MoodSheet> {
           _selected!,
           image: imageFile,
           removePhoto: _removePhoto,
+          spotifyTrackId: _removeSong ? null : _song?.spotifyId,
+          removeSong: _removeSong && widget.mood!.song != null,
         );
       } else {
         await _apiService.addMood(
@@ -191,6 +255,7 @@ class _MoodSheetState extends State<MoodSheet> {
           _selected!,
           _controller.text,
           image: imageFile,
+          spotifyTrackId: _removeSong ? null : _song?.spotifyId,
         );
       }
       if (mounted) closeMoodooModal(context);
@@ -403,6 +468,7 @@ class _MoodSheetState extends State<MoodSheet> {
                   : IntrinsicHeight(child: row);
             },
           ),
+          _buildSongArea(),
           const SizedBox(height: 16),
           MoodooButton(
             text: _isEditing ? l10n.saveChanges : l10n.saveMood,

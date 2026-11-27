@@ -117,5 +117,23 @@
   "configureNow": "configurer maintenant",
 
   "termsOfUse": "conditions d'utilisation",
-  "agreeToTerms": "en continuant, vous acceptez nos"
+  "agreeToTerms": "en continuant, vous acceptez nos",
+
+  "spotify": "spotify",
+  "connect": "connecter",
+  "connectSpotify": "connecter spotify",
+  "disconnectSpotify": "déconnecter",
+  "spotifyBannerText": "connecte spotify pour ajouter une chanson à tes journées",
+  "spotifyConnectedAs": "connecté en tant que {name}",
+  "spotifySettingsDescription": "connecte ton compte spotify pour ajouter la chanson du jour à tes humeurs.",
+  "addSongForDay": "ajouter une chanson pour ce jour",
+  "chooseSong": "choisis une chanson",
+  "searchSongs": "rechercher des chansons",
+  "yourTopTracks": "tes titres les plus écoutés",
+  "noSongsFound": "aucune chanson trouvée",
+  "openInSpotify": "ouvrir dans spotify",
+  "playPreview": "écouter l'extrait",
+  "pausePreview": "mettre l'extrait en pause",
+  "previewUnavailable": "extrait indisponible",
+  "errorSpotifyNotConnected": "ta connexion spotify a expiré. reconnecte-toi, s'il te plaît."
 }

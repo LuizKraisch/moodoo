@@ -8,6 +8,7 @@ import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 String _humanizeError(AppLocalizations l10n, Object e) {
   if (e is InvalidImageFormatException) return l10n.errorInvalidImageFormat;
+  if (e is SpotifyNotConnectedException) return l10n.errorSpotifyNotConnected;
 
   if (e is ApiException) {
     if (e.statusCode == 401) return l10n.errorInvalidCredential;
@@ -37,9 +38,9 @@ String _humanizeError(AppLocalizations l10n, Object e) {
   return l10n.errorGeneric;
 }
 
-void showMoodooErrorSheet(BuildContext context, Object error) {
+Future<void> showMoodooErrorSheet(BuildContext context, Object error) {
   final l10n = AppLocalizations.of(context)!;
-  showMoodooModal<void>(
+  return showMoodooModal<void>(
     context,
     title: l10n.errorTitle,
     subtitle: _humanizeError(l10n, error),
